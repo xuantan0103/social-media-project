@@ -2,7 +2,7 @@
 import DefaultLayout from "../components/Layout/DefaultLayout";
 
 //Pages
-import Login from "../pages/Home";
+import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Home from "../pages/Home";
 
