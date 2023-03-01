@@ -1,0 +1,43 @@
+@import "normalize.css";
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+:root {
+  --default-header-background-color: #fff;
+
+  --font-size-base: 14px;
+  --default-header-height: 50px;
+  --default-search-width: 250px;
+  --default-search-height: 40px;
+  --default-image-height: 50px;
+  --default-background-color: #ecf3ff;
+  --default-color: #4ea1d3;
+  --default-dark-color: #6474e5;
+  --default-text-color: #1a1a1a;
+
+  --default-font-size: 1.6rem;
+  --default-light-height-dark: 1.4;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 100%;
+}
+
+body {
+  font-size: 1.6rem;
+  font-family: "Segoe UI", sans-serif;
+  overflow-x: auto;
+  overflow-y: scroll;
+  height: 100%;
+}
+
+button,
+input,
+[tabindex] {
+  outline: none;
+  border: none;
+}
