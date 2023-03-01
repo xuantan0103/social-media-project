@@ -1,5 +1,5 @@
 .container {
-  margin: 0px 50px;
+  margin: 0;
   .header {
     position: fixed;
     top: 0;
@@ -11,8 +11,18 @@
     width: 100%;
     display: block;
     height: var(--default-header-height);
+    .header-wrapper {
+      padding: 0px 50px;
+      z-index: 99;
+      background-color: var(--default-header-background-color);
+    }
   }
   .content {
+    height: 1000px;
+    background-color: var(--default-background-color);
     margin-top: var(--default-header-height);
+  }
+  .content-wrapper {
+    margin: 0px 50px;
   }
 }

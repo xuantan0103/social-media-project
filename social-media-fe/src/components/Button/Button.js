@@ -13,7 +13,6 @@ function Button({
   circle = false,
   item = false,
   text = false,
-  cart = false,
   disabled = false,
   small = false,
   large = false,
@@ -53,8 +52,7 @@ function Button({
     primary,
     item,
     text,
-    cart,
-    disabled,
+  disabled,
     small,
     large,
   });

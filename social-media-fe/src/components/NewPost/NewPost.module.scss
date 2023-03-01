@@ -1,0 +1,52 @@
+.main-container {
+  width: 100%;
+  border-radius: 10px;
+  -webkit-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+  box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+  margin-top: 10px;
+  background-color: var(--default-header-background-color);
+}
+
+.container {
+  padding: 10px;
+  margin: 0 20px;
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  max-height: 200px;
+}
+
+.profileImg {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.input-content {
+  border: none;
+  width: 100%;
+  max-height: 150px;
+}
+
+.input-content:focus {
+  outline: none;
+}
+
+.line {
+  margin: 10px;
+}
+
+.bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 20px;
+}
+
+.options {
+  display: flex;
+}
