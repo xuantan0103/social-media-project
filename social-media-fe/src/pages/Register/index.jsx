@@ -1,4 +1,8 @@
+import styles from "./Register.module.scss";
+import classNames from "classnames/bind";
 import { useState } from "react";
+
+const cx = classNames.bind(styles);
 
 const initFormValue = {
   firstName: "",
@@ -6,56 +10,55 @@ const initFormValue = {
   email: "",
   password: "",
   confirmPassword: "",
-  dateofBirth: "",
-  gender: "",
+  dateofBirth: new Date(),
+  gender: "Male",
 };
 function Register() {
-  
   const isEmptyValue = (value) => {
     return !value || value.trim().length < 1;
   };
-
   const isEmailValue = (email) => {
     return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
   };
-  const [fromValue, setFormValue] = useState(initFormValue);
+  const [formValue, setFormValue] = useState(initFormValue);
   const [fromError, setFormError] = useState();
+  console.log(formValue.gender);
 
   const validateForm = (event) => {
     const error = {};
 
-    if (isEmptyValue(fromValue.firstName)) {
+    if (isEmptyValue(formValue.firstName)) {
       error["firstName"] = "FirstName is required";
     }
-    if (isEmptyValue(fromValue.lastName)) {
+    if (isEmptyValue(formValue.lastName)) {
       error["LastName"] = "LastName is required";
     }
-    if (isEmptyValue(fromValue.email)) {
+    if (isEmptyValue(formValue.email)) {
       error["email"] = "Email is required";
     } else {
-      if (isEmailValue(fromValue.email)) {
+      if (isEmailValue(formValue.email)) {
         error["email"] = "Email is invalid";
       }
     }
-    if (isEmptyValue(fromValue.password)) {
+    if (isEmptyValue(formValue.password)) {
       error["password"] = "Password is required";
     }
-    if (isEmptyValue(fromValue.confirmPassword)) {
+    if (isEmptyValue(formValue.confirmPassword)) {
       error["confirmPassword"] = "ConfirmPassword is required";
     } else {
-      if (fromValue.confirmPassword !== fromValue.password) {
+      if (formValue.confirmPassword !== formValue.password) {
         error["confirmPassword"] = "ConfirmPassword not match";
       }
     }
 
     setFormError(error);
-     return Object.keys(error).length === 0;
+    return Object.keys(error).length === 0;
   };
 
   const hanldeChange = (event) => {
     const { value, name } = event.target;
     setFormValue({
-      ...fromValue,
+      ...formValue,
       name: value,
     });
   };
@@ -64,110 +67,160 @@ function Register() {
     event.preventDefault();
 
     if (validateForm()) {
-      console.log("form value", fromValue);
+      console.log("form value", formValue);
     } else {
       console.log("form invalid");
     }
   };
   console.log(fromError);
   return (
-    
-    <div class="login">
-      <div class="brand-logo"></div>
-  <div class="brand-title"> REGISTER </div>
-    <div class="register-container">
+    <div className={cx("register")}>
+      <div className={cx("brand-logo")}></div>
+      <div className={cx("brand-title")}> REGISTER </div>
+      <div className={cx("register-container")}>
         <form onSubmit={handleSubmit}>
-
-        <form>
-        <lable>EMAIL</lable>
-          <input
-            type="text"
-            name="firstname"
-            class="register-name"
-            value={fromValue.firstName}
-            onchange={hanldeChange}
-          />
-          <lable>LASTNAME</lable>
-          <input
-            type="text"
-            name="lastname"
-            class="register-name"
-            value={fromValue.lastName}
-            onchange={hanldeChange}
-          />
-          <lable>EMAIL</lable>
-          <input
-            type="text"
-            name="email"
-            class="input-register-email"
-            value={fromValue.email}
-            onchange={hanldeChange}
-          />
-          <lable>DATE OF BIRTH</lable>
-        <input
-            type="text" 
-            placeholder="DD"
-            class="input-register-date"
-            value={fromValue.dateofBirth}
-            onchange={hanldeChange}
-            />
+          <form>
+            <lable>EMAIL</lable>
             <input
-            type="text" 
-            placeholder="MM"
-            class="input-register-date"
-            value={fromValue.dateofBirth}
-            onchange={hanldeChange}
+              type="text"
+              name="firstname"
+              className={cx("register-name")}
+              value={formValue.firstName}
+              onChange={(e) => {
+                setFormValue({
+                  ...formValue,
+                  firstName: e.target.value,
+                });
+              }}
             />
-            <input type="text" 
-            placeholder="YYYY"
-            class="input-register-date"
-            value={fromValue.dateofBirth}
-            onchange={hanldeChange}
+            <lable>LASTNAME</lable>
+            <input
+              type="text"
+              name="lastname"
+              className={cx("register-name")}
+              value={formValue.lastName}
+              onChange={(e) => {
+                setFormValue({
+                  ...formValue,
+                  lastName: e.target.value,
+                });
+              }}
             />
-          <lable>GENDER</lable>
-          <lable> Male </lable>
-          <input
-          input="gender-female" type="radio" name="gender" value="female"
-          label for="gender-female" Female
-          class="input-register-gender"
-          onchange={hanldeChange}
-          />
-          <lable> Female </lable>
-          <input
-          input="gender-male" type="radio" name="gender" value="male"
-          class="gender-male" for="gender-male" 
-          onchange={hanldeChange}
-          />
-          <lable>PASSWORD</lable>
-          <input
-            type="password"
-            name="password"
-            class="input-register-password"
-            value={fromValue.password}
-            onchange={hanldeChange}
-          />
-          <lable>CONFIRM PASSWORD</lable>
-          <input
-            type="password"
-            name="confirmPassword"
-            class="input-confirm-password"
-            value={fromValue.password}
-            onchange={hanldeChange}
-          />
-          <button type="submit" class="register-Button">
-            REGISTER
-          </button>
+            <lable>EMAIL</lable>
+            <input
+              type="text"
+              name="email"
+              className={cx("input-register-email")}
+              value={formValue.email}
+              onChange={(e) => {
+                setFormValue({
+                  ...formValue,
+                  email: e.target.value,
+                });
+              }}
+            />
+            <lable>BIRTHDAY</lable>
+            <input
+              type="date"
+              placeholder="Date Of Birth"
+              className={cx("input-register-date")}
+              value={formValue.dateofBirth}
+              onChange={(e) => {
+                setFormValue({
+                  ...formValue,
+                  dateofBirth: e.target.value,
+                });
+              }}
+            />
+            <lable>GENDER</lable>
+            <div className="d-flex justify-content-start">
+              <div className="form-check d-flex justify-content-start me-5">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name="male"
+                  id="male"
+                  value="Male"
+                  checked={formValue.gender === "Male"}
+                  onChange={(e) => {
+                    setFormValue({
+                      ...formValue,
+                      gender: e.target.value,
+                    });
+                  }}
+                />
+                <label className="form-check-label" for="flexRadioDefault1">
+                  Male
+                </label>
+              </div>
+              <div className="form-check d-flex justify-content-start">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name="female"
+                  value="Female"
+                  id="female"
+                  checked={formValue.gender === "Female"}
+                  onChange={(e) => {
+                    setFormValue({
+                      ...formValue,
+                      gender: e.target.value,
+                    });
+                  }}
+                />
+                <label className="form-check-label" for="flexRadioDefault2">
+                  Female
+                </label>
+              </div>
+            </div>
+
+            <lable>PASSWORD</lable>
+            <input
+              type="password"
+              name="password"
+              className={cx("input-register-password")}
+              value={formValue.password}
+              onChange={(e) => {
+                setFormValue({
+                  ...formValue,
+                  password: e.target.value,
+                });
+              }}
+            />
+            <lable>CONFIRM PASSWORD</lable>
+            <input
+              type="password"
+              name="confirmPassword"
+              className={cx("input-confirm-password")}
+              value={formValue.password}
+              onChange={(e) => {
+                setFormValue({
+                  ...formValue,
+                  confirmPassword: e.target.value,
+                });
+              }}
+            />
+            <button type="submit" className={cx("register-Button")}>
+              REGISTER
+            </button>
           </form>
           <lable> Terms and Conditions</lable>
-      <input
-        input="terms" type="checkbox"
-        class="input-condition" for="terms" 
-        />
-        <h5>I accept the terms and conditions signing up to this service hereby confirm I have read the privacy policy </h5>
+          <div className="form-check d-flex">
+            <input
+              className="form-check-input me-2"
+              type="checkbox"
+              value=""
+              id="flexCheckDefault"
+            />
+            <label className="form-check-label" for="flexCheckDefault">
+              I accept the terms and conditions signing up to this service
+              hereby confirm I have read the privacy policy
+            </label>
+          </div>
         </form>
-        <a href="./login" class="register-registerButton">
-        BACK TO LOGIN PAGE
-        </a>        
+        <a href="./login" className={cx("register-registerButton")}>
+          BACK TO LOGIN PAGE
+        </a>
       </div>
     </div>
   );
