@@ -3,7 +3,6 @@
   height: var(--default-header-height);
   border-bottom: 1px solid var(--default-background-color);
   .logo {
-    margin-left: 50px;
     height: calc(var(--default-image-height) - 2px);
     background-color: var(--default-color);
   }
@@ -41,7 +40,21 @@
     left: 10px;
   }
   .action {
-    margin-right: 50px;
+    .icon-bell {
+      position: relative;
+      .number-tag {
+        position: absolute;
+        top: -10px;
+        right: -15px;
+        background-color: var(--default-danger-color);
+        height: 20px;
+        width: 20px;
+        font-size: 12px;
+        vertical-align: middle;
+        text-align: center;
+        border-radius: 50%;
+      }
+    }
     .user-image {
       position: relative;
 
@@ -52,7 +65,7 @@
       }
       .user-icon {
         position: absolute;
-        bottom: -5px;
+        bottom: -2px;
         right: 0px;
         width: 12px;
         height: 12px;
