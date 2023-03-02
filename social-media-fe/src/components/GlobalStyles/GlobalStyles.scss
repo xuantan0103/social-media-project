@@ -2,19 +2,20 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
 :root {
   --default-header-background-color: #fff;
-
+  --white: #fff;
   --font-size-base: 14px;
   --default-header-height: 50px;
   --default-search-width: 250px;
   --default-search-height: 40px;
   --default-image-height: 50px;
   --default-background-color: #ecf3ff;
+  --default-comment-color: #f1f1f2;
   --default-color: #4ea1d3;
   --default-dark-color: #6474e5;
   --default-text-color: #1a1a1a;
   --default-danger-color: #f4a4a4;
 
-  --default-font-size: 1.6rem;
+  --default-font-size: 18px;
   --default-light-height-dark: 1.4;
 }
 
@@ -41,4 +42,7 @@ input,
 [tabindex] {
   outline: none;
   border: none;
+}
+input {
+  font-size: var(--default-font-size) !important;
 }
