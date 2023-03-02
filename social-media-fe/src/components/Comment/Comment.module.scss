@@ -1,0 +1,70 @@
+.number-comment {
+  cursor: pointer;
+  border-bottom: 1px dashed gray;
+  font-size: 15px;
+  background-color: transparent;
+}
+.modal-body {
+  overflow-y: auto;
+  margin: 20px;
+}
+.modal-footer {
+  display: flex;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: start;
+  padding: 12px 20px;
+  border-top: 1px solid var(--default-background-color);
+  border-bottom-right-radius: var(--bs-modal-inner-border-radius);
+  border-bottom-left-radius: var(--bs-modal-inner-border-radius);
+}
+.profile-img {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.input-content {
+  border: none;
+  width: calc(100% - 60px);
+}
+
+.input-content:focus {
+  outline: none;
+}
+.comment-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--default-comment-color);
+  border-radius: 5px;
+  padding: 8px;
+  margin-right: 5px;
+  .username {
+    font-weight: 600;
+  }
+  .comment-text {
+    width: fit-content;
+  }
+  .heart-number {
+    position: absolute;
+    left: 0px;
+    bottom: -15px;
+    background-color: var(--white);
+    border-radius: 12px;
+    border: 1px solid var(--default-background-color);
+    font-size: 15px;
+    padding: 0 5px;
+    .icon-heart-checked {
+      color: red;
+    }
+    .icon-heart {
+      &:hover {
+        color: red;
+      }
+    }
+  }
+}
