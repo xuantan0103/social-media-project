@@ -57,46 +57,49 @@ function Login() {
   console.log(fromError);
 
   return (
-    <div className={cx("brand-logo")}>
+    <div className={cx("form-login")}>
+      {/* <div className={cx("brand-logo")}> */}
       <div className={cx("login")}>
-        <div className={cx("brand-logo")}></div>
-        <div className={cx("brand-title")}> NETWORK SOCIAL </div>
+        <div className={cx("brand-logo")}>
+          <img src="/static/media/logo10.a0884fc24a774b4867ee.png" alt="" />
+        </div>
+        <div className={cx("brand-title")}> CHAT MEDIA </div>
         <div className={cx("login-container")}>
           <form onSubmit={handleSubmit}>
-            <form>
-              <lable>EMAIL</lable>
-              <input
-                type="text"
-                className={cx("input-login-username")}
-                placeholder="example@test.com"
-                value={formValue.email}
-                onChange={(e) => {
-                  setFormValue({
-                    ...formValue,
-                    email: e.target.value,
-                  });
-                }}
-              />
-              <lable>PASSWORD</lable>
-              <input
-                type="password"
-                className={cx("input-login-password")}
-                placeholder="password"
-                value={formValue.password}
-                onChange={(e) => {
-                  setFormValue({ ...formValue, password: e.target.value });
-                }}
-              />
-              <button type="submit" className={cx("login-Button")}>
-                LOGIN
-              </button>
-            </form>
+            <lable>EMAIL</lable>
+            <input
+              type="text"
+              className={cx("input-login-username")}
+              placeholder="example@test.com"
+              value={formValue.email}
+              onChange={(e) => {
+                setFormValue({
+                  ...formValue,
+                  email: e.target.value,
+                });
+              }}
+            />
+            <lable>PASSWORD</lable>
+            <input
+              type="password"
+              className={cx("input-login-password")}
+              placeholder="password"
+              value={formValue.password}
+              onChange={(e) => {
+                setFormValue({ ...formValue, password: e.target.value });
+              }}
+            />
+
+            <button type="submit" className={cx("login-Button")}>
+              LOGIN
+            </button>
           </form>
           <a href="./register" className={cx("login-registerButton")}>
             CREATE NEW ACCOUNT
           </a>
         </div>
       </div>
+      {/* </div> */}
     </div>
   );
 }

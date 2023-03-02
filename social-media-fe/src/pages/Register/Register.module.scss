@@ -4,12 +4,11 @@
   input {
     caret-color: red;
   }
-
   body {
     margin: 0;
     width: 100vw;
     height: 100vh;
-    background: #9cc9ec;
+    background: #4eb5f1;
     display: flex;
     align-items: center;
     text-align: center;
@@ -19,18 +18,31 @@
     font-family: poppins;
   }
   label,
+  .inputs {
+    text-align: left;
+    margin-top: 30px;
+  }
+
   input,
   button {
     display: block;
-    width: 100%;
+    width: 150%;
     padding: 0;
     border: none;
     outline: none;
     box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
   }
 
   label {
     margin-bottom: 4px;
+  }
+
+  label {
+    color: rgb(15, 15, 15);
   }
 
   label:nth-of-type(2) {
@@ -46,6 +58,7 @@
     padding: 10px;
     padding-left: 20px;
     height: 50px;
+    width: 100%;
     font-size: 14px;
     border-radius: 50px;
     box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px white;
@@ -54,8 +67,9 @@
   button {
     color: white;
     margin-top: 20px;
-    background: #1da1f2;
+    background: #4caf50;
     height: 40px;
+    width: 100%;
     border-radius: 20px;
     cursor: pointer;
     font-weight: 900;
@@ -74,42 +88,67 @@
     right: 4px;
     text-decoration: none;
     color: rgba(241, 246, 247, 0.973);
-    background: rgb(15, 24, 150);
+    background: rgb(48, 150, 65);
     border-radius: 10px;
     padding: 2px;
   }
-}
 
-.container {
-  position: relative;
-  width: 350px;
-  height: 500px;
-  border-radius: 20px;
-  padding: 40px;
-  box-sizing: border-box;
-  background: #6fb3e7;
-  box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white;
-}
+  .register-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    padding: 40px;
+    box-sizing: border-box;
+    background: rgb(111, 197, 231);
+  }
 
-.brand-logo {
-  height: 100px;
-  width: 100px;
-  background: url("");
-  margin: auto;
-  border-radius: 50%;
-  box-sizing: border-box;
-  box-shadow: 7px 7px 10px #cbced1, -7px -7px 10px white;
-}
+  .brand-logo img {
+    width: 100%;
+  }
 
-.brand-title {
-  margin-top: 10px;
-  font-weight: 900;
-  font-size: 1.8rem;
-  color: #1da1f2;
-  letter-spacing: 1px;
-}
+  .brand-logo {
+    height: 100px;
+    width: 100px;
+    background: url("../../assets/logo10.png");
+    margin: auto;
+    border-radius: 50%;
+    box-sizing: border-box;
+  }
 
-.inputs {
-  text-align: left;
-  margin-top: 30px;
+  .brand-title {
+    margin-top: 10px;
+    font-weight: 900;
+    font-size: 1.8rem;
+    color: #0a527e;
+    letter-spacing: 1px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .inputs {
+    text-align: left;
+    margin-top: 30px;
+  }
+
+  .register {
+    width: 37%;
+  }
+
+  .form-register {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .register-Button {
+    float: left;
+    width: 100%;
+    border-radius: 15px;
+    border: 0;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+    margin-top: 20px;
+  }
 }
