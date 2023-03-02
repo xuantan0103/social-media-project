@@ -83,7 +83,7 @@ function Register() {
         <div className={cx("register-container")}>
           <form onSubmit={handleSubmit}>
             <form>
-              <lable>LASTNAME</lable>
+              <lable>FIRSTNAME</lable>
               <input
                 type="text"
                 name="firstname"
@@ -213,16 +213,11 @@ function Register() {
               </button>
             </form>
             <lable> Terms and Conditions</lable>
-            <div className="form-check d-flex">
-              <input
-                className="form-check-input me-2"
-                type="checkbox"
-                value=""
-                id="flexCheckDefault"
-              />
-              <label className="form-check-label" for="flexCheckDefault">
+            <div className="comment-form-cookies-consent">
+              <input id="wp-comment-cookies-consent" name="wp-comment-cookies-consent" type="checkbox" defaultValue="yes" />
+              <label htmlFor="wp-comment-cookies-consent">
                 I accept the terms and conditions signing up to this service
-                hereby confirm I have read the privacy policy
+                hereby confirm I have read the privacy policy.
               </label>
             </div>
           </form>
