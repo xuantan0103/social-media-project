@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import Button from "../Button/Button";
+import Comment from "../Comment";
 
 const cx = classNames.bind(styles);
 
@@ -19,46 +20,6 @@ function Post() {
   };
   return (
     <div className={cx("main-container")}>
-      <div>
-        <button
-          type="button"
-          className="btn btn-primary"
-          data-toggle="modal"
-          data-target="#exampleModal"
-        >
-          Launch static backdrop modal
-        </button>
-        <div className="modal" id="exampleModal" tabIndex="-1">
-          <div className="modal-dialog">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title">Modal title</h5>
-                <button
-                  type="button"
-                  className="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                ></button>
-              </div>
-              <div className="modal-body">
-                <p>Modal body text goes here.</p>
-              </div>
-              <div className="modal-footer">
-                <button
-                  type="button"
-                  className="btn btn-secondary"
-                  data-bs-dismiss="modal"
-                >
-                  Close
-                </button>
-                <button type="button" className="btn btn-primary">
-                  Save changes
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
       <div className={cx("container")}>
         <div className={cx("top")}>
           <div className={cx("top-left")}>
@@ -95,7 +56,7 @@ function Post() {
             <span className={cx("like-counter")}>{like} people liked it</span>
           </div>
           <div className={cx("bottom-right")}>
-            <span className={cx("comment-text")}>1 comments</span>
+            <Comment />
           </div>
         </div>
       </div>

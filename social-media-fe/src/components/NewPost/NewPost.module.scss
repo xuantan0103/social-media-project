@@ -18,7 +18,7 @@
   max-height: 200px;
 }
 
-.profileImg {
+.profile-img {
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -28,12 +28,11 @@
 
 .input-content {
   border: none;
+  border-radius: 8px;
+  background-color: var(--default-comment-color);
+  padding: 5px;
   width: 100%;
   max-height: 150px;
-}
-
-.input-content:focus {
-  outline: none;
 }
 
 .line {
