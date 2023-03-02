@@ -52,7 +52,7 @@ function Button({
     primary,
     item,
     text,
-    disabled,
+  disabled,
     small,
     large,
   });

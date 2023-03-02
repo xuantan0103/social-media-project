@@ -93,14 +93,14 @@ function Login() {
             <button type="submit" className={cx("login-Button")}>
               LOGIN
             </button>
-          </form>
+          </form >
           <a href="./register" className={cx("login-registerButton")}>
-            CREATE NEW ACCOUNT
+            CREATE NEW ACCOUNT CREATE NEW ACCOUNT
           </a>
-        </div>
-      </div>
+        </div >
+      </div >
       {/* </div> */}
-    </div>
+    </div >
   );
 }
 
