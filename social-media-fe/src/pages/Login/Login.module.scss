@@ -19,7 +19,6 @@
     font-family: poppins;
   }
   label,
-
   .inputs {
     text-align: left;
     margin-top: 30px;
@@ -43,7 +42,7 @@
     margin-bottom: 4px;
   }
 
-  label{
+  label {
     color: DodgerBlue;
   }
 
@@ -114,7 +113,7 @@
 .brand-logo {
   height: 100px;
   width: 100px;
-  background: url('../../assets/logo10.png');
+  background: url("../../assets/logo10.png");
   margin: auto;
   border-radius: 50%;
   box-sizing: border-box;
@@ -140,9 +139,9 @@
 .login-button {
   float: left;
   width: 100%;
-  border-radius:15px;
-  border:0;
-  box-shadow:4px 4px 10px rgba(0,0,0,0.2);
+  border-radius: 15px;
+  border: 0;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
 }
 .form-login {
   display: flex;

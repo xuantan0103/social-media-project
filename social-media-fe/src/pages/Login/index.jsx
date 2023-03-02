@@ -66,7 +66,6 @@ function Login() {
         <div className={cx("brand-title")}> CHAT MEDIA </div>
         <div className={cx("login-container")}>
           <form onSubmit={handleSubmit}>
-
             <lable>EMAIL</lable>
             <input
               type="text"
@@ -94,15 +93,14 @@ function Login() {
             <button type="submit" className={cx("login-Button")}>
               LOGIN
             </button>
-
-          </form>
+          </form >
           <a href="./register" className={cx("login-registerButton")}>
             CREATE NEW ACCOUNT
           </a>
-        </div>
-      </div>
+        </div >
+      </div >
       {/* </div> */}
-    </div>
+    </div >
   );
 }
 
