@@ -74,153 +74,159 @@ function Register() {
   };
   console.log(fromError);
   return (
-    <div className={cx("register")}>
-      <div className={cx("brand-logo")}></div>
-      <div className={cx("brand-title")}> REGISTER </div>
-      <div className={cx("register-container")}>
-        <form onSubmit={handleSubmit}>
-          <form>
-            <lable>EMAIL</lable>
-            <input
-              type="text"
-              name="firstname"
-              className={cx("register-name")}
-              value={formValue.firstName}
-              onChange={(e) => {
-                setFormValue({
-                  ...formValue,
-                  firstName: e.target.value,
-                });
-              }}
-            />
-            <lable>LASTNAME</lable>
-            <input
-              type="text"
-              name="lastname"
-              className={cx("register-name")}
-              value={formValue.lastName}
-              onChange={(e) => {
-                setFormValue({
-                  ...formValue,
-                  lastName: e.target.value,
-                });
-              }}
-            />
-            <lable>EMAIL</lable>
-            <input
-              type="text"
-              name="email"
-              className={cx("input-register-email")}
-              value={formValue.email}
-              onChange={(e) => {
-                setFormValue({
-                  ...formValue,
-                  email: e.target.value,
-                });
-              }}
-            />
-            <lable>BIRTHDAY</lable>
-            <input
-              type="date"
-              placeholder="Date Of Birth"
-              className={cx("input-register-date")}
-              value={formValue.dateofBirth}
-              onChange={(e) => {
-                setFormValue({
-                  ...formValue,
-                  dateofBirth: e.target.value,
-                });
-              }}
-            />
-            <lable>GENDER</lable>
-            <div className="d-flex justify-content-start">
-              <div className="form-check d-flex justify-content-start me-5">
-                <input
-                  className="form-check-input"
-                  type="radio"
-                  name="male"
-                  id="male"
-                  value="Male"
-                  checked={formValue.gender === "Male"}
-                  onChange={(e) => {
-                    setFormValue({
-                      ...formValue,
-                      gender: e.target.value,
-                    });
-                  }}
-                />
-                <label className="form-check-label" for="flexRadioDefault1">
-                  Male
-                </label>
+    <div className={cx("form-register")}>
+      <div className={cx("register")}>
+        <div className={cx("brand-logo")}>
+          <img src="/static/media/logo10.a0884fc24a774b4867ee.png" alt="" />
+        </div>
+        <div className={cx("brand-title")}> REGISTER </div>
+        <div className={cx("register-container")}>
+          <form onSubmit={handleSubmit}>
+            <form>
+              <lable>LASTNAME</lable>
+              <input
+                type="text"
+                name="firstname"
+                className={cx("register-name")}
+                placeholder="firstname"
+                value={formValue.firstName}
+                onChange={(e) => {
+                  setFormValue({
+                    ...formValue,
+                    firstName: e.target.value,
+                  });
+                }}
+              />
+              <lable>LASTNAME</lable>
+              <input
+                type="text"
+                name="lastname"
+                className={cx("register-name")}
+                placeholder="lastname"
+                value={formValue.lastName}
+                onChange={(e) => {
+                  setFormValue({
+                    ...formValue,
+                    lastName: e.target.value,
+                  });
+                }}
+              />
+              <lable>EMAIL</lable>
+              <input
+                type="text"
+                name="email"
+                className={cx("input-register-email")}
+                placeholder="example@test.com"
+                value={formValue.email}
+                onChange={(e) => {
+                  setFormValue({
+                    ...formValue,
+                    email: e.target.value,
+                  });
+                }}
+              />
+              <lable>BIRTHDAY</lable>
+              <input
+                type="date"
+                placeholder="Date Of Birth"
+                className={cx("input-register-date")}
+                value={formValue.dateofBirth}
+                onChange={(e) => {
+                  setFormValue({
+                    ...formValue,
+                    dateofBirth: e.target.value,
+                  });
+                }}
+              />
+              <lable>GENDER</lable>
+              <div className="d-flex justify-content-start">
+                <div className="form-check d-flex justify-content-start me-5">
+                  <input
+                    className="form-check-input"
+                    type="radio"
+                    name="male"
+                    id="male"
+                    value="Male"
+                    checked={formValue.gender === "Male"}
+                    onChange={(e) => {
+                      setFormValue({
+                        ...formValue,
+                        gender: e.target.value,
+                      });
+                    }}
+                  />
+                  <label className="form-check-label" for="flexRadioDefault1">
+                    Male
+                  </label>
+                </div>
+                <div className="form-check d-flex justify-content-start">
+                  <input
+                    className="form-check-input"
+                    type="radio"
+                    name="female"
+                    value="Female"
+                    id="female"
+                    checked={formValue.gender === "Female"}
+                    onChange={(e) => {
+                      setFormValue({
+                        ...formValue,
+                        gender: e.target.value,
+                      });
+                    }}
+                  />
+                  <label className="form-check-label" for="flexRadioDefault2">
+                    Female
+                  </label>
+                </div>
               </div>
-              <div className="form-check d-flex justify-content-start">
-                <input
-                  className="form-check-input"
-                  type="radio"
-                  name="female"
-                  value="Female"
-                  id="female"
-                  checked={formValue.gender === "Female"}
-                  onChange={(e) => {
-                    setFormValue({
-                      ...formValue,
-                      gender: e.target.value,
-                    });
-                  }}
-                />
-                <label className="form-check-label" for="flexRadioDefault2">
-                  Female
-                </label>
-              </div>
-            </div>
 
-            <lable>PASSWORD</lable>
-            <input
-              type="password"
-              name="password"
-              className={cx("input-register-password")}
-              value={formValue.password}
-              onChange={(e) => {
-                setFormValue({
-                  ...formValue,
-                  password: e.target.value,
-                });
-              }}
-            />
-            <lable>CONFIRM PASSWORD</lable>
-            <input
-              type="password"
-              name="confirmPassword"
-              className={cx("input-confirm-password")}
-              value={formValue.password}
-              onChange={(e) => {
-                setFormValue({
-                  ...formValue,
-                  confirmPassword: e.target.value,
-                });
-              }}
-            />
-            <button type="submit" className={cx("register-Button")}>
-              REGISTER
-            </button>
+              <lable>PASSWORD</lable>
+              <input
+                type="password"
+                name="password"
+                className={cx("input-register-password")}
+                placeholder="password"
+                value={formValue.password}
+                onChange={(e) => {
+                  setFormValue({
+                    ...formValue,
+                    password: e.target.value,
+                  });
+                }}
+              />
+              <lable>CONFIRM PASSWORD</lable>
+              <input
+                type="password"
+                name="confirmPassword"
+                className={cx("input-confirm-password")}
+                placeholder="confirm password"
+                value={formValue.password}
+                onChange={(e) => {
+                  setFormValue({
+                    ...formValue,
+                    confirmPassword: e.target.value,
+                  });
+                }}
+              />
+              <button type="submit" className={cx("register-Button")}>
+                REGISTER
+              </button>
+            </form>
+            <lable> Terms and Conditions</lable>
+            <div className="form-check d-flex">
+              <input
+                className="form-check-input me-2"
+                type="checkbox"
+                value=""
+                id="flexCheckDefault"
+              />
+              <label className="form-check-label" for="flexCheckDefault">
+                I accept the terms and conditions signing up to this service
+                hereby confirm I have read the privacy policy
+              </label>
+            </div>
           </form>
-          <lable> Terms and Conditions</lable>
-          <div className="form-check d-flex">
-            <input
-              className="form-check-input me-2"
-              type="checkbox"
-              value=""
-              id="flexCheckDefault"
-            />
-            <label className="form-check-label" for="flexCheckDefault">
-              I accept the terms and conditions signing up to this service
-              hereby confirm I have read the privacy policy
-            </label>
-          </div>
-        </form>
-        <a href="./login" className={cx("register-registerButton")}>
-          BACK TO LOGIN PAGE
-        </a>
+        </div>
       </div>
     </div>
   );
