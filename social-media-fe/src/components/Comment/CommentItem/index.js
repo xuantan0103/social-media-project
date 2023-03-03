@@ -23,7 +23,7 @@ function CommentItem({ text = "kk" }) {
       />
       <div className={cx("comment-item")}>
         <span className={cx("username")}>Sương</span>
-        <span className={cx("comment-text")}>{text}</span>
+        <span className={cx("comment-text") + " text-break"}>{text}</span>
         <div className="d-flex justify-content-between align-items-center">
           <Button onClick={handleClick} className={cx("heart-number")}>
             <FontAwesomeIcon

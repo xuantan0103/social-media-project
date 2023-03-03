@@ -39,7 +39,7 @@ function Comment() {
             <div className={cx("modal-body")}>
               <CommentItem />
               <CommentItem text="xxxxxxxxxxxxxxxxxxxxxxx" />
-              <CommentItem text="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" />
+              <CommentItem text="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" />
               <CommentItem />
               <CommentItem />
               <CommentItem />

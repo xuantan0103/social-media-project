@@ -2,16 +2,21 @@ import styles from "./NewPost.module.scss";
 import classNames from "classnames/bind";
 import Button from "../Button/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFaceSmile, faImages } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCircleXmark,
+  faFaceSmile,
+  faImages,
+} from "@fortawesome/free-regular-svg-icons";
 import { useRef } from "react";
 
 const cx = classNames.bind(styles);
 
 function NewPost() {
-  const inputRef = useRef(false);
-  const handleClick = () => {
-    inputRef.current = true;
+  const addImageRef = useRef();
+  const handleAddImage = () => {
+    addImageRef.current.bind();
   };
+  const handleCloseAddImage = () => {};
   return (
     <div className={cx("main-container")}>
       <div className={cx("container")}>
@@ -33,6 +38,9 @@ function NewPost() {
         <div className={cx("bottom")}>
           <div className={cx("options")}>
             <Button
+              onClick={() => handleAddImage()}
+              data-bs-toggle="modal"
+              data-bs-target="#newPostModal"
               text
               leftIcon={<FontAwesomeIcon icon={faImages} color="#ef4c4c" />}
             >
@@ -43,6 +51,8 @@ function NewPost() {
               leftIcon={
                 <FontAwesomeIcon icon={faFaceSmile} color="rgb(227, 242, 14)" />
               }
+              data-bs-toggle="modal"
+              data-bs-target="#newPostModal"
             >
               Feelings
             </Button>
@@ -80,7 +90,42 @@ function NewPost() {
                   aria-label="Close"
                 ></button>
               </div>
-              <div className={cx("modal-body")}></div>
+              <div className={cx("modal-body")}>
+                <textarea
+                  className={cx("form-control")}
+                  id="post"
+                  rows="4"
+                ></textarea>
+
+                <div
+                  className={
+                    cx("add-image") +
+                    " btn btn-primary btn-rounded p-5 w-100 h-100"
+                  }
+                >
+                  <label
+                    className="form-label text-white m-1 d-flex flex-column align-items-center justify-content-center"
+                    htmlFor="customFile1"
+                  >
+                    <FontAwesomeIcon
+                      icon={faImages}
+                      className={cx("image-icon")}
+                    />
+                    <span>Add Image</span>
+                  </label>
+                  <input
+                    type="file"
+                    className="form-control d-none"
+                    id="customFile1"
+                  />
+                  <Button onClick={() => handleCloseAddImage()}>
+                    <FontAwesomeIcon
+                      icon={faCircleXmark}
+                      className={cx("xmark")}
+                    />
+                  </Button>
+                </div>
+              </div>
               <div className={cx("modal-footer")}>
                 <div>
                   <Button
@@ -102,16 +147,16 @@ function NewPost() {
                   >
                     Feelings
                   </Button>
-                  <Button
-                    primary
-                    type="button"
-                    className={cx("number-comment")}
-                    data-bs-toggle="modal"
-                    data-bs-target="#newPostModal"
-                  >
-                    Post
-                  </Button>
                 </div>
+                <Button
+                  primary
+                  type="button"
+                  className={cx("number-comment")}
+                  data-bs-toggle="modal"
+                  data-bs-target="#newPostModal"
+                >
+                  Post
+                </Button>
               </div>
             </div>
           </div>
