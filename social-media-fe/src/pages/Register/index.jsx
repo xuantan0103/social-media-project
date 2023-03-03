@@ -208,9 +208,6 @@ function Register() {
                   });
                 }}
               />
-              <button type="submit" className={cx("register-Button")}>
-                REGISTER
-              </button>
             </form>
             <lable> Terms and Conditions</lable>
             <div className="comment-form-cookies-consent">
@@ -221,6 +218,9 @@ function Register() {
               </label>
             </div>
           </form>
+          <button type="submit" className={cx("register-Button")}>
+            REGISTER
+          </button>
         </div>
       </div>
     </div>
