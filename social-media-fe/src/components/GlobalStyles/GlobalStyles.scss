@@ -46,3 +46,7 @@ input,
 input {
   font-size: var(--default-font-size) !important;
 }
+
+.sidebar-list li {
+  list-style: none;
+}
