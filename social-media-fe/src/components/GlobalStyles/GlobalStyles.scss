@@ -47,6 +47,12 @@ input {
   font-size: var(--default-font-size) !important;
 }
 
-.sidebar-list li {
+li {
   list-style: none;
+  display:-webkit-box;
+  align-items: center;
+  margin-bottom: 20px;
+  cursor: pointer;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp:2;
 }
