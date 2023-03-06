@@ -7,16 +7,17 @@ import {
   faFaceSmile,
   faImages,
 } from "@fortawesome/free-regular-svg-icons";
-import { useRef } from "react";
+import { useState } from "react";
 
 const cx = classNames.bind(styles);
 
 function NewPost() {
-  const addImageRef = useRef();
-  const handleAddImage = () => {
-    addImageRef.current.bind();
+  const [isShowAddImg, setIsShowAddImg] = useState(false);
+  const handlShowAddImage = (value) => {
+    value === true ? setIsShowAddImg(true) : setIsShowAddImg(false);
   };
-  const handleCloseAddImage = () => {};
+
+  console.log(isShowAddImg);
   return (
     <div className={cx("main-container")}>
       <div className={cx("container")}>
@@ -38,7 +39,6 @@ function NewPost() {
         <div className={cx("bottom")}>
           <div className={cx("options")}>
             <Button
-              onClick={() => handleAddImage()}
               data-bs-toggle="modal"
               data-bs-target="#newPostModal"
               text
@@ -91,63 +91,70 @@ function NewPost() {
                 ></button>
               </div>
               <div className={cx("modal-body")}>
+                <div className="d-flex align-items-center">
+                  <img
+                    src="https://1.bp.blogspot.com/-W1swAyDEpKM/X0AamDSp0vI/AAAAAAAAdUw/NQQiPzGIiUsoTcufNKKW3NPCEvC1WWQtACLcBGAsYHQ/s1600/flower%2Bimages%2Bfor%2Bwhatsapp%2Bprofile%2B%252831%2529.jpg"
+                    alt=""
+                    className={cx("profile-img") + " m-2"}
+                  />
+                  <div>
+                    <div className={cx("username")}>Suong</div>
+                    <select
+                      className={cx("select-wrapper") + " form-select"}
+                      aria-label="select"
+                    >
+                      <option defaultValue>Public</option>
+                      <option value="1">Private</option>
+                      <option value="2">Friend</option>
+                    </select>
+                  </div>
+                </div>
                 <textarea
-                  className={cx("form-control")}
+                  placeholder="What's in your mind?"
+                  className={cx("form-control") + " my-2"}
                   id="post"
-                  rows="4"
+                  rows="5"
                 ></textarea>
 
-                <div
-                  className={
-                    cx("add-image") +
-                    " btn btn-primary btn-rounded p-5 w-100 h-100"
-                  }
-                >
-                  <label
-                    className="form-label text-white m-1 d-flex flex-column align-items-center justify-content-center"
-                    htmlFor="customFile1"
+                {isShowAddImg && (
+                  <div
+                    className={
+                      cx("add-image") +
+                      " btn btn-primary btn-rounded p-5 w-100 h-100"
+                    }
                   >
-                    <FontAwesomeIcon
-                      icon={faImages}
-                      className={cx("image-icon")}
+                    <label
+                      className="form-label text-white m-1 d-flex flex-column align-items-center justify-content-center"
+                      htmlFor="customFile1"
+                    >
+                      <FontAwesomeIcon
+                        icon={faImages}
+                        className={cx("image-icon")}
+                      />
+                      <span>Add Image</span>
+                    </label>
+                    <input
+                      type="file"
+                      className="form-control d-none"
+                      id="customFile1"
                     />
-                    <span>Add Image</span>
-                  </label>
-                  <input
-                    type="file"
-                    className="form-control d-none"
-                    id="customFile1"
-                  />
-                  <Button onClick={() => handleCloseAddImage()}>
-                    <FontAwesomeIcon
-                      icon={faCircleXmark}
-                      className={cx("xmark")}
-                    />
-                  </Button>
-                </div>
+                    <Button onClick={() => handlShowAddImage(false)}>
+                      <FontAwesomeIcon
+                        icon={faCircleXmark}
+                        className={cx("xmark")}
+                      />
+                    </Button>
+                  </div>
+                )}
               </div>
               <div className={cx("modal-footer")}>
-                <div>
-                  <Button
-                    text
-                    leftIcon={
-                      <FontAwesomeIcon icon={faImages} color="#ef4c4c" />
-                    }
-                  >
-                    Photo/Video
-                  </Button>
-                  <Button
-                    text
-                    leftIcon={
-                      <FontAwesomeIcon
-                        icon={faFaceSmile}
-                        color="rgb(227, 242, 14)"
-                      />
-                    }
-                  >
-                    Feelings
-                  </Button>
-                </div>
+                <Button
+                  onClick={() => handlShowAddImage(!isShowAddImg)}
+                  text
+                  leftIcon={<FontAwesomeIcon icon={faImages} color="#ef4c4c" />}
+                >
+                  Photo/Video
+                </Button>
                 <Button
                   primary
                   type="button"

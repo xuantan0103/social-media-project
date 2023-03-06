@@ -4,7 +4,7 @@ import Post from "../../components/Post";
 
 function Home() {
   return (
-    <div className="d-flex justify-content-center align-items-center">
+    <div className="d-flex justify-content-center">
       <div className="col-lg-3">
         <LeftBar />
       </div>
