@@ -9,10 +9,11 @@ import {
   faUserGroup,
   faBookBookmark,
   faCircleQuestion,
-  faCalendar,
-  faSchool,
+  faGraduationCap,
   faHouse,
   faUser,
+  faCalendarDay,
+  
 } from "@fortawesome/free-solid-svg-icons";
 
 const cx = classNames.bind(styles);
@@ -59,16 +60,24 @@ function LeftBar() {
               <FontAwesomeIcon icon={faCircleQuestion} color="#DAA520" />
               <span className={cx("sidebar-text")}>Questions</span>
             </li>
-            <li className={cx("sidebar-item")}>
-              <FontAwesomeIcon icon={faCalendar} color="#C71585" />
-              <span className={cx("sidebar-text")}>Events</span>
+            <li className="sidebarListItem">
+              <FontAwesomeIcon
+                className="fa-solid fa-calendar-days"
+                icon={faCalendarDay}
+                color="#C71585"
+              />
+              <span className="sidebarListItemText">Events</span>
             </li>
-            <li className={cx("sidebar-item")}>
-              <FontAwesomeIcon icon={faSchool} color="#FF4500" />
-              <span className={cx("sidebar-text")}>Courses</span>
+            <li className="sidebarListItem">
+              <FontAwesomeIcon
+                className="fa-solid fa-graduation-cap"
+                icon={faGraduationCap}
+                color="#0000FF"
+              />
+              <span className="sidebarListItemText">Courses</span>
             </li>
           </ul>
-        </div>
+     </div>
       </div>
     </div>
   );
