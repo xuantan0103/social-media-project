@@ -24,9 +24,6 @@
   padding: 0;
   box-sizing: border-box;
 }
-.sidebar .sidebarListItemText {
-  margin-left: 15px;
-}
 
 html {
   font-size: 100%;
@@ -50,12 +47,10 @@ input {
   font-size: var(--default-font-size) !important;
 }
 
-li {
-  list-style: none;
-  display:-webkit-box;
-  align-items: center;
-  margin-bottom: 20px;
-  cursor: pointer;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp:2;
+ul {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+ul {
+  padding-left: 0rem !important;
 }

@@ -1,4 +1,6 @@
-import "./LeftBar.module.scss";
+import styles from "./LeftBar.module.scss";
+import classNames from "classnames/bind";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFeed,
@@ -12,94 +14,58 @@ import {
   faHouse,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
-//import { Users } from "../../dynamicData";
-//import CloseFriend from "../closeFriends/CloseFriend";
+
+const cx = classNames.bind(styles);
 
 function LeftBar() {
   return (
-    <div className="sidebar">
-      <div className="sidebarHomepage sidebar-list">
-        <ul className="sidebarHome">
-          <li className="sidebarListItem">
-            <FontAwesomeIcon
-              className="fa-solid fa-house"
-              icon={faHouse}
-              color="#00CED1"
-            />
-            <span className="sidebarListItemText">Home page</span>
+    <div className={cx("sidebar")}>
+      <div className={cx("sidebar-list")}>
+        <ul>
+          <li className={cx("sidebar-item")}>
+            <FontAwesomeIcon icon={faHouse} color="#00CED1" />
+            <span className={cx("sidebar-text")}>Home page</span>
           </li>
-          <li className="sidebarListItem">
-            <FontAwesomeIcon
-              className="fa-solid fa-user"
-              icon={faUser}
-              color="blue"
-            />
-            <span className="sidebarListItemText">Profile</span>
+          <li className={cx("sidebar-item")}>
+            <FontAwesomeIcon icon={faUser} color="blue" />
+            <span className={cx("sidebar-text")}>Profile</span>
           </li>
         </ul>
       </div>
-      <div className="sidebar">
-        <div className="sidebarWrapper sidebar-list">
-          <ul className="sidebarList">
-            <li className="sidebarListItem">
-              <FontAwesomeIcon className="fa-solid fa-rss" icon={faFeed} />
-              <span className="sidebarListItemText">Feed</span>
+      <div>
+        <div className={cx("sidebar-list")}>
+          <ul>
+            <li className={cx("sidebar-item")}>
+              <FontAwesomeIcon icon={faFeed} />
+              <span className={cx("sidebar-text")}>Feed</span>
             </li>
-            <li className="sidebarListItem">
-              <FontAwesomeIcon
-                className="fa-solid fa-message"
-                icon={faMessage}
-                color="#8B008B"
-              />
-              <span className="sidebarListItemText">Chats</span>
+            <li className={cx("sidebar-item")}>
+              <FontAwesomeIcon icon={faMessage} color="#8B008B" />
+              <span className={cx("sidebar-text")}>Chats</span>
             </li>
-            <li className="sidebarListItem">
-              <FontAwesomeIcon
-                className="fa-solid fa-play"
-                icon={faPlayCircle}
-                color="red"
-              />
-              <span className="sidebarListItemText">Videos</span>
+            <li className={cx("sidebar-item")}>
+              <FontAwesomeIcon icon={faPlayCircle} color="red" />
+              <span className={cx("sidebar-text")}>Videos</span>
             </li>
-            <li className="sidebarListItem">
-              <FontAwesomeIcon
-                className="fa-duotone fa-user-group"
-                icon={faUserGroup}
-                color="rgb(40, 4, 148)"
-              />
-              <span className="sidebarListItemText">Groups</span>
+            <li className={cx("sidebar-item")}>
+              <FontAwesomeIcon icon={faUserGroup} color="rgb(40, 4, 148)" />
+              <span className={cx("sidebar-text")}>Groups</span>
             </li>
-            <li className="sidebarListItem">
-              <FontAwesomeIcon
-                className="fa-solid fa-bookmark"
-                icon={faBookBookmark}
-                color="#1E90FF"
-              />
-              <span className="sidebarListItemText">Bookmarks</span>
+            <li className={cx("sidebar-item")}>
+              <FontAwesomeIcon icon={faBookBookmark} color="#1E90FF" />
+              <span className={cx("sidebar-text")}>Bookmarks</span>
             </li>
-            <li className="sidebarListItem">
-              <FontAwesomeIcon
-                className="fa-sharp fa-solid fa-circle-question"
-                icon={faCircleQuestion}
-                color="#DAA520"
-              />
-              <span className="sidebarListItemText">Questions</span>
+            <li className={cx("sidebar-item")}>
+              <FontAwesomeIcon icon={faCircleQuestion} color="#DAA520" />
+              <span className={cx("sidebar-text")}>Questions</span>
             </li>
-            <li className="sidebarListItem">
-              <FontAwesomeIcon
-                className="fa-solid fa-calendar-days"
-                icon={faCalendar}
-                color="#C71585"
-              />
-              <span className="sidebarListItemText">Events</span>
+            <li className={cx("sidebar-item")}>
+              <FontAwesomeIcon icon={faCalendar} color="#C71585" />
+              <span className={cx("sidebar-text")}>Events</span>
             </li>
-            <li className="sidebarListItem">
-              <FontAwesomeIcon
-                className="fa-solid fa-graduation-cap"
-                icon={faSchool}
-                color="#FF4500"
-              />
-              <span className="sidebarListItemText">Courses</span>
+            <li className={cx("sidebar-item")}>
+              <FontAwesomeIcon icon={faSchool} color="#FF4500" />
+              <span className={cx("sidebar-text")}>Courses</span>
             </li>
           </ul>
         </div>
