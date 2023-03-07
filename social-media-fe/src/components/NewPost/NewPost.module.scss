@@ -94,6 +94,10 @@
     outline: 0;
     box-shadow: none;
   }
+  .post-image {
+    width: 100%;
+    border: 1px solid var(--default-color);
+  }
 }
 
 .bottom {
