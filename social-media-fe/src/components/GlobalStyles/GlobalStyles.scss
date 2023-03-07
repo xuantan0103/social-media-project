@@ -49,10 +49,17 @@ input {
 
 li {
   list-style: none;
-  display:-webkit-box;
+  display: -webkit-box;
   align-items: center;
   margin-bottom: 20px;
   cursor: pointer;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp:2;
+  -webkit-line-clamp: 2;
+}
+ul {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+ul {
+  padding-left: 0rem !important;
 }
