@@ -7,10 +7,11 @@ import {
   faUserGroup,
   faBookBookmark,
   faCircleQuestion,
-  faCalendar,
-  faSchool,
+  faGraduationCap,
   faHouse,
   faUser,
+  faCalendarDay,
+  
 } from "@fortawesome/free-solid-svg-icons";
 //import { Users } from "../../dynamicData";
 //import CloseFriend from "../closeFriends/CloseFriend";
@@ -88,7 +89,7 @@ function LeftBar() {
             <li className="sidebarListItem">
               <FontAwesomeIcon
                 className="fa-solid fa-calendar-days"
-                icon={faCalendar}
+                icon={faCalendarDay}
                 color="#C71585"
               />
               <span className="sidebarListItemText">Events</span>
@@ -96,13 +97,13 @@ function LeftBar() {
             <li className="sidebarListItem">
               <FontAwesomeIcon
                 className="fa-solid fa-graduation-cap"
-                icon={faSchool}
-                color="#FF4500"
+                icon={faGraduationCap}
+                color="#0000FF"
               />
               <span className="sidebarListItemText">Courses</span>
             </li>
           </ul>
-        </div>
+     </div>
       </div>
     </div>
   );
