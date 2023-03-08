@@ -13,11 +13,17 @@ const cx = classNames.bind(styles);
 
 function NewPost() {
   const [isShowAddImg, setIsShowAddImg] = useState(false);
-  const handlShowAddImage = (value) => {
+  const handleShowAddImage = (value) => {
     value === true ? setIsShowAddImg(true) : setIsShowAddImg(false);
   };
 
-  console.log(isShowAddImg);
+  const [image, setImage] = useState();
+  const handlePreviewAvatar = (e) => {
+    const file = e.target.files[0];
+    file.preview = URL.createObjectURL(file);
+    setImage(file);
+  };
+  console.log(image);
   return (
     <div className={cx("main-container")}>
       <div className={cx("container")}>
@@ -116,7 +122,7 @@ function NewPost() {
                   rows="5"
                 ></textarea>
 
-                {isShowAddImg && (
+                {isShowAddImg && !image && (
                   <div
                     className={
                       cx("add-image") +
@@ -137,8 +143,9 @@ function NewPost() {
                       type="file"
                       className="form-control d-none"
                       id="customFile1"
+                      onChange={(e) => handlePreviewAvatar(e)}
                     />
-                    <Button onClick={() => handlShowAddImage(false)}>
+                    <Button onClick={() => handleShowAddImage(false)}>
                       <FontAwesomeIcon
                         icon={faCircleXmark}
                         className={cx("xmark")}
@@ -146,10 +153,17 @@ function NewPost() {
                     </Button>
                   </div>
                 )}
+                {image && (
+                  <img
+                    src={image.preview}
+                    alt=""
+                    className={cx("post-image")}
+                  />
+                )}
               </div>
               <div className={cx("modal-footer")}>
                 <Button
-                  onClick={() => handlShowAddImage(!isShowAddImg)}
+                  onClick={() => handleShowAddImage(!isShowAddImg)}
                   text
                   leftIcon={<FontAwesomeIcon icon={faImages} color="#ef4c4c" />}
                 >

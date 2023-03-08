@@ -4,7 +4,8 @@
   border-bottom: 1px solid var(--default-background-color);
   .logo {
     height: calc(var(--default-image-height) - 2px);
-    background-color: var(--default-color);
+    background-color: transparent;
+    padding-left: 50px;
   }
   .searchbar {
     position: relative;
@@ -40,6 +41,8 @@
     left: 10px;
   }
   .action {
+    padding-right: 50px;
+
     .icon-bell {
       position: relative;
       .number-tag {
@@ -57,7 +60,14 @@
     }
     .user-image {
       position: relative;
-
+      &:hover {
+        .user-action {
+          display: flex;
+          flex-direction: column;
+          justify-content: left;
+          align-items: center;
+        }
+      }
       .avatar {
         width: 40px;
         height: 40px;
@@ -75,6 +85,27 @@
         border-radius: 50px 50px;
         background-color: #ccd0d5;
         border: 2px solid #fff;
+      }
+      .user-action {
+        display: none;
+        position: absolute;
+        top: 45px;
+        right: 5px;
+        background-color: var(--default-comment-color);
+        width: max-content;
+        height: fit-content;
+        &::before {
+          content: " ";
+          position: absolute;
+          border: 12px solid #fff;
+          border-color: transparent transparent var(--default-comment-color)
+            transparent;
+          right: 1px;
+          top: -23px;
+        }
+        .text-left {
+          text-align: left;
+        }
       }
     }
   }

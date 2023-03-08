@@ -1,4 +1,3 @@
-import { useState } from "react";
 import styles from "./Header.module.scss";
 import classNames from "classnames/bind";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -6,17 +5,20 @@ import {
   faAngleDown,
   faBell,
   faSearch,
+  faSignOut,
+  faUser,
   faUserGroup,
 } from "@fortawesome/free-solid-svg-icons";
 import { faFacebookMessenger } from "@fortawesome/free-brands-svg-icons";
 import logo10 from "../../assets/logo10.png";
 
 import Button from "../Button/Button";
+import { useNavigate } from "react-router-dom";
 
 const cx = classNames.bind(styles);
 
 function Header() {
-  const [isLogin, setIsLogin] = useState(false);
+  const navigate = useNavigate();
   return (
     <div
       className={
@@ -64,6 +66,20 @@ function Header() {
             className={cx("avatar")}
           />
           <FontAwesomeIcon icon={faAngleDown} className={cx("user-icon")} />
+          <div className={cx("user-action")}>
+            <Button
+              onClick={() => {
+                navigate("/profile");
+              }}
+              textLeft
+              leftIcon={<FontAwesomeIcon icon={faUser} />}
+            >
+              View your profile
+            </Button>
+            <Button textLeft leftIcon={<FontAwesomeIcon icon={faSignOut} />}>
+              Sign out
+            </Button>
+          </div>
         </Button>
       </div>
     </div>
