@@ -18,16 +18,16 @@
     background-color: lightgray;
   }
   
-  .sidebarWrapper {
+  .sidebar-Wrapper {
     padding: 20px;
   }
   
-  .sidebarList{
+  .sidebar-List{
     padding: 0;
     margin: 0;
     list-style: none;
 
-    .sidebarListItem {
+    .sidebar-ListItem {
     display:-webkit-box;
     align-items: center;
     margin-bottom: 20px;
@@ -43,11 +43,11 @@
   
   
   
-  .sidebarIcon {
+  .sidebar-Icon {
     margin-right: 15px;
   }
   
-  .sidebarButton {
+  .sidebar-Button {
     width: 150px;
     border: none;
     padding: 10px;
@@ -56,7 +56,7 @@
     cursor: pointer;
   }
   
-  .sidebarHr {
+  .sidebar-Hr {
     margin: 20px 0;
   }
 
