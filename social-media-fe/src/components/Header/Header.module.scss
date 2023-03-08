@@ -9,6 +9,10 @@
   }
   .searchbar {
     position: relative;
+    margin: 0px 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: var(--default-search-height);
     border: 0;
     outline: 0;
@@ -18,7 +22,7 @@
   }
   .search-input {
     position: absolute;
-    width: calc(100% - 50px);
+    width: calc(100% - 150px);
     height: var(--default-search-height);
     color: #000;
     border: 0;
@@ -26,8 +30,6 @@
     background: #ebedf0;
     padding: 0px 2px;
     transition: width 0.4s linear;
-    caret-color: rgba(63, 118, 82, 0.67) red;
-    animation-name: fadeIn;
     animation-duration: 0.5s;
     border: 1.5px solid #ebedf0;
   }
@@ -108,5 +110,21 @@
         }
       }
     }
+  }
+}
+@media screen and (max-width: 1000px) {
+  .search-input {
+    display: none;
+  }
+  .search-icon {
+    padding: 0;
+    margin: 0;
+    width: 2em;
+  }
+  .searchbar {
+    width: 2.5em;
+    height: 2.5em;
+    border-radius: 50%;
+    background-color: aquamarine;
   }
 }
