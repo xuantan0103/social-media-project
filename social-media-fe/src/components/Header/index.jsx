@@ -26,19 +26,21 @@ function Header() {
         " d-flex flex-row justify-content-around align-items-center"
       }
     >
-      <div className="col-lg-3">
+      <div className="col-lg-2">
         <img src={logo10} alt="logo" className={cx("logo")} />
       </div>
-      <div className={cx("searchbar") + " col-lg-6"}>
-        <FontAwesomeIcon className={cx("search-icon")} icon={faSearch} />
-        <input
-          className={cx("search-input") + " ms-3"}
-          type="text"
-          name=""
-          placeholder="Search..."
-        />
+      <div className=" col-lg-8">
+        <div className={cx("searchbar")}>
+          <FontAwesomeIcon className={cx("search-icon")} icon={faSearch} />
+          <input
+            className={cx("search-input") + " ms-3"}
+            type="text"
+            name=""
+            placeholder="Search..."
+          />
+        </div>
       </div>
-      <div className={cx("action") + " col-lg-3 d-flex justify-content-end"}>
+      <div className={cx("action") + " col-lg-2 d-flex justify-content-start"}>
         <Button circle>
           <div className={cx("icon-bell")}>
             <FontAwesomeIcon icon={faBell} />
