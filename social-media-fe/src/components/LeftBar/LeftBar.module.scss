@@ -1,0 +1,25 @@
+.sidebar {
+  flex: 3;
+  height: calc(100vh - 50px);
+  overflow-y: hidden;
+  position: sticky;
+  top: 50px;
+}
+
+.sidebar-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+
+  .sidebar-item {
+    display: -webkit-box;
+    align-items: center;
+    margin-bottom: 20px;
+    cursor: pointer;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    .sidebar-text {
+      margin-left: 15px;
+    }
+  }
+}
