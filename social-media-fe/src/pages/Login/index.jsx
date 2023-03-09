@@ -1,5 +1,10 @@
 import {
+  Button,
   message,
+  Spin,
+  Typography,
+  Input,
+  Form
 } from "antd";
 import styles from "./Login.module.scss";
 import classNames from "classnames/bind";
@@ -61,53 +66,52 @@ function Login() {
       console.log("form invalid");
     }
   };
-  console.log(fromError);
-    
-      const navigate = useNavigate();
-    
-      const { setUser } = useAuthContext();
-    
-      const [isLoading, setIsLoading] = useState(false);
-    
-      const [error, setError] = useState("");
-    
-      const onFinish = async (values) => {
-        setIsLoading(true);
-        try {
-          const value = {
-            identifier: values.email,
-            password: values.password,
-          };
-          const response = await fetch(`${API}/auth/local`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(value),
-          });
-    
-          const data = await response.json();
-          if (data?.error) {
-            throw data?.error;
-          } else {
-            // set the token
-            setToken(data.jwt);
-    
-            // set the user
-            setUser(data.user);
-    
-            message.success(`Welcome back ${data.user.username}!`);
-    
-            navigate("/profile", { replace: true });
-          }
-        } catch (error) {
-          console.error(error);
-          setError(error?.message ?? "Something went wrong!");
-        } finally {
-          setIsLoading(false);
-        }
+
+  const navigate = useNavigate();
+
+  const { setUser } = useAuthContext();
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  const [error, setError] = useState("");
+
+  const onFinish = async (values) => {
+    setIsLoading(true);
+    try {
+      const value = {
+        identifier: values.email,
+        password: values.password,
       };
-    
+      const response = await fetch(`${API}/auth/local`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(value),
+      });
+
+      const data = await response.json();
+      if (data?.error) {
+        throw data?.error;
+      } else {
+        // set the token
+        setToken(data.jwt);
+
+        // set the user
+        setUser(data.user);
+
+        message.success(`Welcome back ${data.user.username}!`);
+
+        navigate("/", { replace: true });
+      }
+    } catch (error) {
+      console.error(error);
+      setError(error?.message ?? "Something went wrong!");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
 
   return (
     <div className={cx("form-login")}>
@@ -118,12 +122,16 @@ function Login() {
         </div>
         <div className={cx("brand-title")}> SIGN IN </div>
         <div className={cx("login-container")}>
-          <form onSubmit={handleSubmit}>
-            <lable>EMAIL</lable>
-            <input
-              type="text"
-              className={cx("input-login-username")}
-              placeholder="example@test.com"
+          <Form
+            name="basic"
+            layout="vertical"
+            onFinish={onFinish}
+            autoComplete="off"
+            onSubmit={handleSubmit}
+          >
+            <Form.Item
+              label="EMAIL"
+              name="email"
               value={formValue.email}
               onChange={(e) => {
                 setFormValue({
@@ -131,30 +139,40 @@ function Login() {
                   email: e.target.value,
                 });
               }}
-            />
-            <lable>PASSWORD</lable>
-            <input
-              type="password"
-              className={cx("input-login-password")}
-              placeholder="password"
-              value={formValue.password}
-              onChange={(e) => {
-                setFormValue({ ...formValue, password: e.target.value });
-              }}
-            />
-
-            <button type="submit" className={cx("login-Button")}>
-              LOGIN
-            </button>
-          </form>
-          <p className="text-center">
+              rules={[
+                {
+                  required: true,
+                  type: "email",
+                },
+              ]}
+            >
+              <Input placeholder="example@test.com" />
+            </Form.Item>
+            <Form.Item
+              label="PASSWORD"
+              name="password"
+              rules={[{ required: true,
+              type: "password" }]}
+            >
+              <Input.Password placeholder="Password" />
+            </Form.Item>
+            <Form.Item>
+              <Button
+                type="primary"
+                htmlType="submit"
+                className="login_submit_btn"
+              >
+                LOGIN {isLoading && <Spin size="small" />}
+              </Button>
+            </Form.Item>
+            <p className="text-center">
             <Link to="/register">
               <b>Register Here</b>
             </Link>
           </p>
+          </Form>
         </div>
       </div>
-      {/* </div> */}
     </div>
   );
 }

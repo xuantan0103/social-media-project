@@ -1,6 +1,11 @@
 import {
-  message,
-} from "antd";
+      message,
+      Spin,
+      Typography,
+      Button,
+      Form,
+      Input,
+    } from "antd";
 import styles from "./Register.module.scss";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../context/AuthContext";
@@ -131,13 +136,15 @@ function Register() {
         <div className={cx("brand-title")}> REGISTER </div>
         <div className={cx("register-container")}>
           <form onSubmit={handleSubmit}>
-            <form>
-              <lable>FIRSTNAME</lable>
-              <input
-                type="text"
+          <Form
+              name="basic"
+              layout="vertical"
+              onFinish={onFinish}
+              autoComplete="off"
+            >
+              <Form.Item
+                label="Firstname"
                 name="firstname"
-                className={cx("register-name")}
-                placeholder="firstname"
                 value={formValue.firstName}
                 onChange={(e) => {
                   setFormValue({
@@ -145,13 +152,18 @@ function Register() {
                     firstName: e.target.value,
                   });
                 }}
-              />
-              <lable>LASTNAME</lable>
-              <input
-                type="text"
+                rules={[
+                  {
+                    required: true,
+                    type: "string",
+                  },
+                ]}
+              >
+                <Input placeholder="Firstname" />
+              </Form.Item>
+              <Form.Item
+                label="Lastname"
                 name="lastname"
-                className={cx("register-name")}
-                placeholder="lastname"
                 value={formValue.lastName}
                 onChange={(e) => {
                   setFormValue({
@@ -159,13 +171,18 @@ function Register() {
                     lastName: e.target.value,
                   });
                 }}
-              />
-              <lable>EMAIL</lable>
-              <input
-                type="text"
+                rules={[
+                  {
+                    required: true,
+                    type: "string",
+                  },
+                ]}
+              >
+                <Input placeholder="Lastname" />
+              </Form.Item>
+              <Form.Item
+                label="Email"
                 name="email"
-                className={cx("input-register-email")}
-                placeholder="example@test.com"
                 value={formValue.email}
                 onChange={(e) => {
                   setFormValue({
@@ -173,9 +190,18 @@ function Register() {
                     email: e.target.value,
                   });
                 }}
-              />
-              <lable>BIRTHDAY</lable>
-              <input
+                rules={[
+                  {
+                    required: true,
+                    type: "email",
+                  },
+                ]}
+              >
+                <Input placeholder="Example@test.com" />
+              </Form.Item>
+              <Form.Item>
+                <lable> Birthday</lable>
+              <input             
                 type="date"
                 placeholder="Date Of Birth"
                 className={cx("input-register-date")}
@@ -187,27 +213,27 @@ function Register() {
                   });
                 }}
               />
-              <lable>GENDER</lable>
-              <div className="d-flex justify-content-start">
+              </Form.Item>
+                <lable> Gender</lable>
+                 <div className="d-flex justify-content-start">
                 <div className="form-check d-flex justify-content-start me-5">
-                  <input
-                    className="form-check-input"
-                    type="radio"
-                    name="male"
-                    id="male"
-                    value="Male"
-                    checked={formValue.gender === "Male"}
-                    onChange={(e) => {
-                      setFormValue({
-                        ...formValue,
-                        gender: e.target.value,
-                      });
-                    }}
-                  />
-                  <label className="form-check-label" for="flexRadioDefault1">
+              <input
+              type="radio"
+              name="male"
+              id="male"
+              value="Male"
+              checked={formValue.gender === "Male"}
+              onChange={(e) => {
+                setFormValue({
+                  ...formValue,
+                  gender: e.target.value,
+                });
+              }}
+            />
+
+               <label className="form-check-label" for="flexRadioDefault1">
                     Male
                   </label>
-                </div>
                 <div className="form-check d-flex justify-content-start">
                   <input
                     className="form-check-input"
@@ -226,54 +252,39 @@ function Register() {
                   <label className="form-check-label" for="flexRadioDefault2">
                     Female
                   </label>
-                </div>
-              </div>
+                  </div>
+                  </div>
+                  </div>
 
-              <lable>PASSWORD</lable>
-              <input
-                type="password"
+              <Form.Item
+                label="Password"
                 name="password"
-                className={cx("input-register-password")}
-                placeholder="password"
-                value={formValue.password}
-                onChange={(e) => {
-                  setFormValue({
-                    ...formValue,
-                    password: e.target.value,
-                  });
-                }}
-              />
-              <lable>CONFIRM PASSWORD</lable>
-              <input
-                type="password"
-                name="confirmPassword"
-                className={cx("input-confirm-password")}
-                placeholder="confirm password"
-                value={formValue.confirmPassword}                                                     
-                onChange={(e) => {
-                  setFormValue({
-                    ...formValue,
-                    confirmPassword: e.target.value,
-                  });
-                }}
-              />
+                rules={[{ required: true }]}
+              >
+                <Input.Password placeholder="Password" />
+              </Form.Item>
+              <Form.Item
+                label="Confirm Password"
+                name="password"
+                rules={[{ required: true }]}
+              >
+                <Input.Password placeholder="Confirm Password" />
+              </Form.Item>
+
+              <Form.Item>
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  className="login_submit_btn"
+                >
+                  Submit {isLoading && <Spin size="small" />}
+                </Button>
+              </Form.Item>
+            </Form>
+            <Typography.Paragraph className="form_help_text">
+              Already have an account? <Link to="/login">Login</Link>
+            </Typography.Paragraph>
             </form>
-            <lable> Terms and Conditions</lable>
-            <div className="comment-form-cookies-consent">
-              <input id="wp-comment-cookies-consent" name="wp-comment-cookies-consent" type="checkbox" defaultValue="yes" />
-              <label htmlFor="wp-comment-cookies-consent">
-                I accept the terms and conditions signing up to this service
-                hereby confirm I have read the privacy policy.
-              </label>
-            </div>
-          </form>
-          <button type="submit" className={cx("register-Button")}>
-            REGISTER
-          </button>
-          <p className="text-center">
-            <Link to="/REGISTER">
-            </Link>
-          </p>
         </div>
       </div>
     </div>
