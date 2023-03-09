@@ -61,16 +61,14 @@
     height: 50px;
     width: 100%;
     font-size: 14px;
-    border-radius: 50px;
     box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px white;
   }
 
-  button {
+  Button {
     color: white;
-    margin-top: 20px;
     background: #4caf50;
     height: 40px;
-    width: 100%;
+    width: 90%;
     border-radius: 20px;
     cursor: pointer;
     font-weight: 900;
@@ -136,7 +134,7 @@
   margin-top: 30px;
 }
 
-.login-button {
+.login-submit-btn{
   float: left;
   width: 100%;
   border-radius: 15px;
