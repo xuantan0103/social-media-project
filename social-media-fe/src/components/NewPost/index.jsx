@@ -36,9 +36,8 @@ function NewPost() {
           <input
             className={cx("input-content")}
             placeholder="What's in your mind?"
-            onFocus={() => {
-              console.log("click");
-            }}
+            data-bs-toggle="modal"
+            data-bs-target="#newPostModal"
           />
         </div>
         <hr className={cx("line")} />
@@ -169,13 +168,7 @@ function NewPost() {
                 >
                   Photo/Video
                 </Button>
-                <Button
-                  primary
-                  type="button"
-                  className={cx("number-comment")}
-                  data-bs-toggle="modal"
-                  data-bs-target="#newPostModal"
-                >
+                <Button primary type="button">
                   Post
                 </Button>
               </div>

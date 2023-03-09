@@ -116,10 +116,14 @@
   .search-input {
     display: none;
   }
-  .search-icon {
-    padding: 0;
-    margin: 0;
-    width: 2em;
+  .container {
+    .search-icon {
+      padding: 0;
+      margin: 0;
+      width: 2em;
+      top: 12px;
+      left: 5px;
+    }
   }
   .searchbar {
     width: 2.5em;

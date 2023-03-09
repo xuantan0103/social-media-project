@@ -4,10 +4,10 @@ import Post from "../../components/Post";
 
 function Home() {
   return (
-    <>
+    <div className="mt-4">
       <NewPost />
       <Post />
-    </>
+    </div>
   );
 }
 

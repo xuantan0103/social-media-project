@@ -11,7 +11,7 @@ import classNames from "classnames/bind";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../context/AuthContext";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import { API } from "../../constant";
 import { setToken } from "../../helpers";
 const cx = classNames.bind(styles);
@@ -66,6 +66,9 @@ function Login() {
       console.log("form invalid");
     }
   };
+
+  console.log(fromError);
+
 
   const navigate = useNavigate();
 
@@ -176,6 +179,5 @@ function Login() {
     </div>
   );
 }
-
 
 export default Login;

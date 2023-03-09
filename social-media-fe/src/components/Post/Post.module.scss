@@ -43,7 +43,13 @@
 .top-right {
   cursor: pointer;
   position: relative;
+  &:hover {
+    .show-action {
+      display: block;
+    }
+  }
   .show-action {
+    display: none;
     position: absolute;
     top: 25px;
     right: 0px;

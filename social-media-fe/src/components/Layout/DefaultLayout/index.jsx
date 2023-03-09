@@ -2,6 +2,7 @@ import Header from "../../Header";
 import styles from "./DefaultLayout.module.scss";
 import classNames from "classnames/bind";
 import LeftBar from "../../LeftBar";
+import RightBar from "../../RightBar";
 
 const cx = classNames.bind(styles);
 
@@ -18,10 +19,12 @@ function DefaultLayout({ children }) {
           <div className={cx("left-bar") + " col-lg-2 mt-4"}>
             <LeftBar />
           </div>
-          <div className="col-lg-8 mt-4">
+          <div className="col-lg-8">
             <div className={cx("content-wrapper")}>{children}</div>
           </div>
-          <div className={cx("right-bar") + " col-lg-2 mt-4"}>Right Bar</div>
+          <div className={cx("right-bar") + " col-lg-2 mt-4"}>
+            <RightBar />
+          </div>
         </div>
       </div>
     </div>
