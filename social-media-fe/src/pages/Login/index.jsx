@@ -1,7 +1,14 @@
+import {
+  message,
+} from "antd";
 import styles from "./Login.module.scss";
 import classNames from "classnames/bind";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuthContext } from "../../context/AuthContext";
 import { Link } from 'react-router-dom';
+import { API } from "../../constant";
+import { setToken } from "../../helpers";
 const cx = classNames.bind(styles);
 const initFormValue = {
   email: "",
@@ -55,6 +62,52 @@ function Login() {
     }
   };
   console.log(fromError);
+    
+      const navigate = useNavigate();
+    
+      const { setUser } = useAuthContext();
+    
+      const [isLoading, setIsLoading] = useState(false);
+    
+      const [error, setError] = useState("");
+    
+      const onFinish = async (values) => {
+        setIsLoading(true);
+        try {
+          const value = {
+            identifier: values.email,
+            password: values.password,
+          };
+          const response = await fetch(`${API}/auth/local`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(value),
+          });
+    
+          const data = await response.json();
+          if (data?.error) {
+            throw data?.error;
+          } else {
+            // set the token
+            setToken(data.jwt);
+    
+            // set the user
+            setUser(data.user);
+    
+            message.success(`Welcome back ${data.user.username}!`);
+    
+            navigate("/profile", { replace: true });
+          }
+        } catch (error) {
+          console.error(error);
+          setError(error?.message ?? "Something went wrong!");
+        } finally {
+          setIsLoading(false);
+        }
+      };
+    
 
   return (
     <div className={cx("form-login")}>
@@ -105,5 +158,6 @@ function Login() {
     </div>
   );
 }
+
 
 export default Login;

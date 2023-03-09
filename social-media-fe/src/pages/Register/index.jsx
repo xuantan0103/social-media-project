@@ -1,4 +1,11 @@
+import {
+  message,
+} from "antd";
 import styles from "./Register.module.scss";
+import { useNavigate } from "react-router-dom";
+import { useAuthContext } from "../../context/AuthContext";
+import { API } from "../../constant";
+import { setToken } from "../../helpers";
 import classNames from "classnames/bind";
 import { useState } from "react";
 import { Link } from 'react-router-dom';;
@@ -74,6 +81,47 @@ function Register() {
     }
   };
   console.log(fromError);
+  
+    const navigate = useNavigate();
+  
+    const { setUser } = useAuthContext();
+  
+    const [isLoading, setIsLoading] = useState(false);
+  
+    const [error, setError] = useState("");
+  
+    const onFinish = async (values) => {
+      setIsLoading(true);
+      try {
+        const response = await fetch(`${API}/auth/local/register`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(values),
+        });
+  
+        const data = await response.json();
+        if (data?.error) {
+          throw data?.error;
+        } else {
+          // set the token
+          setToken(data.jwt);
+  
+          // set the user
+          setUser(data.user);
+  
+          message.success(`Welcome to Social Cards ${data.user.username}!`);
+  
+          navigate("/profile", { replace: true });
+        }
+      } catch (error) {
+        console.error(error);
+        setError(error?.message ?? "Something went wrong!");
+      } finally {
+        setIsLoading(false);
+      }
+    };
   return (
     <div className={cx("form-register")}>
       <div className={cx("register")}>
@@ -231,4 +279,5 @@ function Register() {
     </div>
   );
 }
+
 export default Register;
