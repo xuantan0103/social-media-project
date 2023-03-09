@@ -7,12 +7,10 @@
     right: 0;
     z-index: 100;
     padding: 0;
-    padding: 0;
     width: 100%;
     display: block;
     height: var(--default-header-height);
     .header-wrapper {
-      padding: 0px 50px;
       z-index: 99;
       background-color: var(--default-header-background-color);
     }
@@ -22,7 +20,13 @@
     background-color: var(--default-background-color);
     margin-top: var(--default-header-height);
   }
+  .left-bar {
+    padding-left: 50px;
+  }
+  .right-bar {
+    padding-right: 50px;
+  }
   .content-wrapper {
-    margin: 0px 50px;
+    margin: 0px 100px;
   }
 }

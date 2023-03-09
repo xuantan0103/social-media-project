@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Users } from "./data";
 import styles from "./Post.module.scss";
 import classNames from "classnames/bind";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -13,10 +12,14 @@ const cx = classNames.bind(styles);
 function Post() {
   const [like, setLike] = useState(1);
   const [isLiked, setIsLiked] = useState(false);
+  const [isShow, setIsShow] = useState(false);
 
-  const handleClick = () => {
+  const handleLike = () => {
     setLike(isLiked ? like - 1 : like + 1);
     setIsLiked(!isLiked);
+  };
+  const handleShow = () => {
+    setIsShow(!isShow);
   };
   return (
     <div className={cx("main-container")}>
@@ -32,7 +35,14 @@ function Post() {
             <span className={cx("date")}>22/2/2023</span>
           </div>
           <div className={cx("top-right")}>
-            <FontAwesomeIcon icon={faEllipsisVertical} />
+            <Button onClick={handleShow}>
+              <FontAwesomeIcon icon={faEllipsisVertical} />
+            </Button>
+            {isShow && (
+              <div className={cx("show-action")}>
+                <Button>Delete</Button>
+              </div>
+            )}
           </div>
         </div>
         <div className={cx("content")}>
@@ -45,7 +55,7 @@ function Post() {
         </div>
         <div className={cx("bottom")}>
           <div className={cx("bottom-left")}>
-            <Button onClick={handleClick}>
+            <Button onClick={handleLike}>
               <FontAwesomeIcon
                 icon={faHeart}
                 className={

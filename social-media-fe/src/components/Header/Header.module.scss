@@ -4,10 +4,15 @@
   border-bottom: 1px solid var(--default-background-color);
   .logo {
     height: calc(var(--default-image-height) - 2px);
-    background-color: var(--default-color);
+    background-color: transparent;
+    padding-left: 50px;
   }
   .searchbar {
     position: relative;
+    margin: 0px 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: var(--default-search-height);
     border: 0;
     outline: 0;
@@ -17,7 +22,7 @@
   }
   .search-input {
     position: absolute;
-    width: calc(100% - 50px);
+    width: calc(100% - 150px);
     height: var(--default-search-height);
     color: #000;
     border: 0;
@@ -25,8 +30,6 @@
     background: #ebedf0;
     padding: 0px 2px;
     transition: width 0.4s linear;
-    caret-color: rgba(63, 118, 82, 0.67) red;
-    animation-name: fadeIn;
     animation-duration: 0.5s;
     border: 1.5px solid #ebedf0;
   }
@@ -40,6 +43,8 @@
     left: 10px;
   }
   .action {
+    padding-right: 50px;
+
     .icon-bell {
       position: relative;
       .number-tag {
@@ -57,7 +62,14 @@
     }
     .user-image {
       position: relative;
-
+      &:hover {
+        .user-action {
+          display: flex;
+          flex-direction: column;
+          justify-content: left;
+          align-items: center;
+        }
+      }
       .avatar {
         width: 40px;
         height: 40px;
@@ -76,6 +88,43 @@
         background-color: #ccd0d5;
         border: 2px solid #fff;
       }
+      .user-action {
+        display: none;
+        position: absolute;
+        top: 45px;
+        right: 5px;
+        background-color: var(--default-comment-color);
+        width: max-content;
+        height: fit-content;
+        &::before {
+          content: " ";
+          position: absolute;
+          border: 12px solid #fff;
+          border-color: transparent transparent var(--default-comment-color)
+            transparent;
+          right: 1px;
+          top: -23px;
+        }
+        .text-left {
+          text-align: left;
+        }
+      }
     }
+  }
+}
+@media screen and (max-width: 1000px) {
+  .search-input {
+    display: none;
+  }
+  .search-icon {
+    padding: 0;
+    margin: 0;
+    width: 2em;
+  }
+  .searchbar {
+    width: 2.5em;
+    height: 2.5em;
+    border-radius: 50%;
+    background-color: aquamarine;
   }
 }

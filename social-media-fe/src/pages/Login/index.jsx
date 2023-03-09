@@ -3,14 +3,12 @@ import {
 } from "antd";
 import styles from "./Login.module.scss";
 import classNames from "classnames/bind";
-import React, { Fragment, useState } from "react";
-import { Link } from "react-router-dom";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../context/AuthContext";
-
+import { Link } from 'react-router-dom';
 import { API } from "../../constant";
 import { setToken } from "../../helpers";
-
 const cx = classNames.bind(styles);
 const initFormValue = {
   email: "",
@@ -118,7 +116,7 @@ function Login() {
         <div className={cx("brand-logo")}>
           <img src="/static/media/logo10.a0884fc24a774b4867ee.png" alt="" />
         </div>
-        <div className={cx("brand-title")}> CHAT MEDIA </div>
+        <div className={cx("brand-title")}> SIGN IN </div>
         <div className={cx("login-container")}>
           <form onSubmit={handleSubmit}>
             <lable>EMAIL</lable>
@@ -149,9 +147,11 @@ function Login() {
               LOGIN
             </button>
           </form>
-          <a href="./register" className={cx("login-registerButton")}>
-            CREATE NEW ACCOUNT
-          </a>
+          <p className="text-center">
+            <Link to="/register">
+              <b>Register Here</b>
+            </Link>
+          </p>
         </div>
       </div>
       {/* </div> */}

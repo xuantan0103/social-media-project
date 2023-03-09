@@ -1,4 +1,3 @@
-import { faL } from "@fortawesome/free-solid-svg-icons";
 import classNames from "classnames/bind";
 import { Link } from "react-router-dom";
 import styles from "./Button.module.scss";
@@ -9,7 +8,7 @@ function Button({
   to,
   href,
   primary = false,
-  rounded = false,
+  textLeft = false,
   circle = false,
   item = false,
   text = false,
@@ -47,7 +46,7 @@ function Button({
 
   const classes = cx("wrapper", {
     [className]: className,
-    rounded,
+    textLeft,
     circle,
     primary,
     item,

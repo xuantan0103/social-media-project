@@ -42,6 +42,16 @@
 
 .top-right {
   cursor: pointer;
+  position: relative;
+  .show-action {
+    position: absolute;
+    top: 25px;
+    right: 0px;
+    border: 1px solid #f1f1f2;
+    border-radius: 5px;
+    background-color: var(--default-background-color);
+    padding: 5px;
+  }
 }
 
 .content {
@@ -84,5 +94,3 @@
 .like-counter {
   font-size: 15px;
 }
-
-

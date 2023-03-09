@@ -2,14 +2,13 @@ import {
   message,
 } from "antd";
 import styles from "./Register.module.scss";
-import classNames from "classnames/bind";
-import React, { Fragment, useState } from "react";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../context/AuthContext";
-//import useScreenSize from "../../hooks/useScreenSize";
 import { API } from "../../constant";
 import { setToken } from "../../helpers";
+import classNames from "classnames/bind";
+import { useState } from "react";
+import { Link } from 'react-router-dom';;
 
 const cx = classNames.bind(styles);
 
@@ -250,7 +249,7 @@ function Register() {
                 name="confirmPassword"
                 className={cx("input-confirm-password")}
                 placeholder="confirm password"
-                value={formValue.password}
+                value={formValue.confirmPassword}                                                     
                 onChange={(e) => {
                   setFormValue({
                     ...formValue,
@@ -271,6 +270,10 @@ function Register() {
           <button type="submit" className={cx("register-Button")}>
             REGISTER
           </button>
+          <p className="text-center">
+            <Link to="/REGISTER">
+            </Link>
+          </p>
         </div>
       </div>
     </div>

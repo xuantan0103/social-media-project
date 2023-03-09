@@ -1,4 +1,3 @@
-import { useState } from "react";
 import styles from "./Header.module.scss";
 import classNames from "classnames/bind";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -6,17 +5,20 @@ import {
   faAngleDown,
   faBell,
   faSearch,
+  faSignOut,
+  faUser,
   faUserGroup,
 } from "@fortawesome/free-solid-svg-icons";
 import { faFacebookMessenger } from "@fortawesome/free-brands-svg-icons";
 import logo10 from "../../assets/logo10.png";
 
 import Button from "../Button/Button";
+import { useNavigate } from "react-router-dom";
 
 const cx = classNames.bind(styles);
 
 function Header() {
-  const [isLogin, setIsLogin] = useState(false);
+  const navigate = useNavigate();
   return (
     <div
       className={
@@ -24,19 +26,21 @@ function Header() {
         " d-flex flex-row justify-content-around align-items-center"
       }
     >
-      <div className="col-lg-3">
+      <div className="col-lg-2">
         <img src={logo10} alt="logo" className={cx("logo")} />
       </div>
-      <div className={cx("searchbar") + " col-lg-6"}>
-        <FontAwesomeIcon className={cx("search-icon")} icon={faSearch} />
-        <input
-          className={cx("search-input") + " ms-3"}
-          type="text"
-          name=""
-          placeholder="Search..."
-        />
+      <div className=" col-lg-8">
+        <div className={cx("searchbar")}>
+          <FontAwesomeIcon className={cx("search-icon")} icon={faSearch} />
+          <input
+            className={cx("search-input") + " ms-3"}
+            type="text"
+            name=""
+            placeholder="Search..."
+          />
+        </div>
       </div>
-      <div className={cx("action") + " col-lg-3 d-flex justify-content-end"}>
+      <div className={cx("action") + " col-lg-2 d-flex justify-content-start"}>
         <Button circle>
           <div className={cx("icon-bell")}>
             <FontAwesomeIcon icon={faBell} />
@@ -64,6 +68,20 @@ function Header() {
             className={cx("avatar")}
           />
           <FontAwesomeIcon icon={faAngleDown} className={cx("user-icon")} />
+          <div className={cx("user-action")}>
+            <Button
+              onClick={() => {
+                navigate("/profile");
+              }}
+              textLeft
+              leftIcon={<FontAwesomeIcon icon={faUser} />}
+            >
+              View your profile
+            </Button>
+            <Button textLeft leftIcon={<FontAwesomeIcon icon={faSignOut} />}>
+              Sign out
+            </Button>
+          </div>
         </Button>
       </div>
     </div>
