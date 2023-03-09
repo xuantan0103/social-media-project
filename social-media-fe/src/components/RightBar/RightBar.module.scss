@@ -1,0 +1,25 @@
+.sidebar {
+}
+.container {
+  display: flex;
+  align-items: center;
+  padding: 7px;
+  border-radius: 10px;
+
+  &:hover {
+    border-radius: 10px;
+    background-color: var(--white);
+  }
+}
+
+.profile-img {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.username {
+  font-weight: 450;
+  margin: 0 10px;
+}

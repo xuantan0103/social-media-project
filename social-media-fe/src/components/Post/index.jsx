@@ -12,15 +12,12 @@ const cx = classNames.bind(styles);
 function Post() {
   const [like, setLike] = useState(1);
   const [isLiked, setIsLiked] = useState(false);
-  const [isShow, setIsShow] = useState(false);
 
   const handleLike = () => {
     setLike(isLiked ? like - 1 : like + 1);
     setIsLiked(!isLiked);
   };
-  const handleShow = () => {
-    setIsShow(!isShow);
-  };
+
   return (
     <div className={cx("main-container")}>
       <div className={cx("container")}>
@@ -35,14 +32,13 @@ function Post() {
             <span className={cx("date")}>22/2/2023</span>
           </div>
           <div className={cx("top-right")}>
-            <Button onClick={handleShow}>
+            <Button>
               <FontAwesomeIcon icon={faEllipsisVertical} />
             </Button>
-            {isShow && (
-              <div className={cx("show-action")}>
-                <Button>Delete</Button>
-              </div>
-            )}
+            <div className={cx("show-action")}>
+              <Button textLeft>Edit</Button>
+              <Button textLeft>Delete</Button>
+            </div>
           </div>
         </div>
         <div className={cx("content")}>

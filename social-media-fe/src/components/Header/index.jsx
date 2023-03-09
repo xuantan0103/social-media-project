@@ -27,7 +27,9 @@ function Header() {
       }
     >
       <div className="col-lg-2">
-        <img src={logo10} alt="logo" className={cx("logo")} />
+        <Button onClick={() => navigate("/")}>
+          <img src={logo10} alt="logo" className={cx("logo")} />
+        </Button>
       </div>
       <div className=" col-lg-8">
         <div className={cx("searchbar")}>
