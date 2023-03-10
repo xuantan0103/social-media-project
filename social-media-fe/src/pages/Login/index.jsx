@@ -2,7 +2,6 @@ import {
   Button,
   message,
   Spin,
-  Typography,
   Input,
   Form
 } from "antd";

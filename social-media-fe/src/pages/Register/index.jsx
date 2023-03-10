@@ -163,7 +163,7 @@ function Register() {
               </Form.Item>
               <Form.Item
                 label="Lastname"
-                name="lastname"
+                name="lastame"
                 value={formValue.lastName}
                 onChange={(e) => {
                   setFormValue({

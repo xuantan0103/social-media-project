@@ -8,11 +8,11 @@ import {
   faPlayCircle,
   faUserGroup,
   faBookBookmark,
-  faCircleQuestion,
   faGraduationCap,
   faHouse,
   faUser,
   faCalendarDay,
+  faPeopleGroup,
 } from "@fortawesome/free-solid-svg-icons";
 
 const cx = classNames.bind(styles);
@@ -40,6 +40,10 @@ function LeftBar() {
               <span className={cx("sidebar-text")}>Feed</span>
             </li>
             <li className={cx("sidebar-item")}>
+              <FontAwesomeIcon icon={faUserGroup} color="#40E0D0" />
+              <span className={cx("sidebar-text")}>Friends</span>
+            </li>
+            <li className={cx("sidebar-item")}>
               <FontAwesomeIcon icon={faMessage} color="#8B008B" />
               <span className={cx("sidebar-text")}>Chats</span>
             </li>
@@ -48,17 +52,13 @@ function LeftBar() {
               <span className={cx("sidebar-text")}>Videos</span>
             </li>
             <li className={cx("sidebar-item")}>
-              <FontAwesomeIcon icon={faUserGroup} color="rgb(40, 4, 148)" />
+              <FontAwesomeIcon icon={faPeopleGroup} color="rgb(40, 4, 148)" />
               <span className={cx("sidebar-text")}>Groups</span>
             </li>
             <li className={cx("sidebar-item")}>
               <FontAwesomeIcon icon={faBookBookmark} color="#1E90FF" />
               <span className={cx("sidebar-text")}>Bookmarks</span>
-            </li>
-            <li className={cx("sidebar-item")}>
-              <FontAwesomeIcon icon={faCircleQuestion} color="#DAA520" />
-              <span className={cx("sidebar-text")}>Questions</span>
-            </li>
+            </li>          
             <li className={cx("sidebar-item")}>
               <FontAwesomeIcon icon={faCalendarDay} color="#C71585" />
               <span className={cx("sidebar-text")}>Events</span>
