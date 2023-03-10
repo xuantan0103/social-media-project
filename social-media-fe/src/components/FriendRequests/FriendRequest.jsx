@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {AiFillPicture} from 'react-icons/ai';
+// import { AiFillPicture } from 'solid-icons/ai'
 import {Image,Transformation} from 'cloudinary-react';
 import {Link, Route, Switch} from 'react-router-dom';
 import './FriendRequests.css';
@@ -9,8 +9,8 @@ import axios from 'axios';
 
 function FriendRequests({friendsRequest}) {
   const {list, loading} = useSelector(state => state.friendsRequest);
-  const dispatch = useDispatch();
-  const [isAccept, setIsAccept] = useState('default');
+//   const dispatch = useDispatch();
+//   const [isAccept, setIsAccept] = useState('default');
 
   const Button = (props) => {
       const [isAccept, setIsAccept] = useState('default');
@@ -102,7 +102,7 @@ function FriendRequests({friendsRequest}) {
                   {rq.user_avatar_cropX === null ?
                     <img src={rq.user_avatar} alt={rq.user_last_name} />
                     :
-                    <Image cloudName="mohi-vn" publicId={rq.user_avatar+ ".jpg"} version="1607061343">
+                    <Image cloudName="social-media" publicId={rq.user_avatar+ ".jpg"} version="1607061343">
                       <Transformation height={rq.user_avatar_cropH}  width={rq.user_avatar_cropW} x={rq.user_avatar_cropX} y={rq.user_avatar_cropY} crop="crop" />
                     </Image>
                   }
