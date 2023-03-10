@@ -68,7 +68,6 @@ function Login() {
 
   console.log(fromError);
 
-
   const navigate = useNavigate();
 
   const { setUser } = useAuthContext();
@@ -114,7 +113,6 @@ function Login() {
     }
   };
 
-
   return (
     <div className={cx("form-login")}>
       {/* <div className={cx("brand-logo")}> */}
@@ -134,6 +132,7 @@ function Login() {
             <Form.Item
               label="EMAIL"
               name="email"
+              type="email"
               value={formValue.email}
               onChange={(e) => {
                 setFormValue({
@@ -153,8 +152,7 @@ function Login() {
             <Form.Item
               label="PASSWORD"
               name="password"
-              rules={[{ required: true,
-              type: "password" }]}
+              rules={[{ required: true, type: "password" }]}
             >
               <Input.Password placeholder="Password" />
             </Form.Item>
@@ -168,10 +166,10 @@ function Login() {
               </Button>
             </Form.Item>
             <p className="text-center">
-            <Link to="/register">
-              <b>Register Here</b>
-            </Link>
-          </p>
+              <Link to="/register">
+                <b>Register Here</b>
+              </Link>
+            </p>
           </Form>
         </div>
       </div>
