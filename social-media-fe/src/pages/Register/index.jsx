@@ -141,7 +141,26 @@ function Register() {
                 onChange={(e) => {
                   setFormValue({
                     ...formValue,
-                    userName: e.target.value,
+                    firstName: e.target.value,
+                  });
+                }}
+                rules={[
+                  {
+                    required: true,
+                    type: "string",
+                  },
+                ]}
+              >
+                <Input placeholder="Firstname" />
+              </Form.Item>
+              <Form.Item
+                label="Lastname"
+                name="lastame"
+                value={formValue.lastName}
+                onChange={(e) => {
+                  setFormValue({
+                    ...formValue,
+                    lastName: e.target.value,
                   });
                 }}
                 rules={[
