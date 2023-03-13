@@ -6,5 +6,6 @@ const routes = {
   editprofile: "/editprofile",
   friendrequests: "/friendrequests",
   sentrequests: "/sentrequests",
+  friendsmenu: "/friendsmenu",
 };
 export default routes;

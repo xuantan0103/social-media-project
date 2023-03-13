@@ -1,6 +1,6 @@
 import styles from "./LeftBar.module.scss";
 import classNames from "classnames/bind";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFeed,
