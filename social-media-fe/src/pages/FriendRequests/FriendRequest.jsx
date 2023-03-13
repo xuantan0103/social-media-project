@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Image, Transformation } from "cloudinary-react";
 import { Link, Route } from "react-router-dom";
+import "../FriendRequests/FriendRequest.css"
 // import "./FriendRequests.css";
 // import { useSelector, useDispatch } from "react-redux";
 import { Spin } from "antd";
@@ -127,7 +128,7 @@ function FriendRequests({ friendsRequest }) {
                       <img src={logo10} alt="a" />
                     ) : ( */}
                     <Image
-                      cloudName="mohi-vn"
+                      cloudName="socia-media"
                       // publicId={rq.user_avatar + ".jpg"}
                       version="1607061343"
                     >
