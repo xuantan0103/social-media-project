@@ -12,10 +12,10 @@ const Button = (props) => {
     const onSubmitFriendRequest = async (type, id) => {
       if(type === 'accept'){
         setIsAccept(true)
-        await axios.post('', {follow_users_UserId: id})
+        await axios.post('1', {follow_users_UserId: id})
       }else {
         setIsAccept(false)
-        await axios.post('', {follow_users_UserId: id})
+        await axios.post('1', {follow_users_UserId: id})
       }
     }
 

@@ -5,9 +5,9 @@ import {
   FaCheck,
   FaUserPlus,
 } from "react-icons/fa";
-import { Link, Route } from "react-router-dom";
+import { Link} from "react-router-dom";
 import "../FriendRequests/FriendRequest.css";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { Image, Transformation } from "cloudinary-react";
 import axios from "axios";
 import { Tooltip, Spin } from "antd";
@@ -21,7 +21,7 @@ function FriendSent({ friendsRequest }) {
         <div className="noti-container">
           <div className="friend-requests-title">
             <h4>Your friend request</h4>
-            <Link to="/friend-sent">
+            <Link to="/friendsent">
               <span>View Sent Requests</span>
             </Link>
           </div>
@@ -150,7 +150,7 @@ function FriendSent({ friendsRequest }) {
                           <img src={rq.user_avatar} alt={rq.user_last_name} />
                         ) : (
                           <Image
-                            cloudName="mohi-vn"
+                            cloudName="social-media"
                             publicId={rq.user_avatar + ".jpg"}
                             version="1607061343"
                           >
@@ -184,13 +184,6 @@ function FriendSent({ friendsRequest }) {
       </>
     );
   };
-
-  return (
-    <div>
-      <Route path="/friendsent" component={FriendSent} />
-      <Route component={FriendSent} />
-    </div>
-  );
 }
 
 export default FriendSent;

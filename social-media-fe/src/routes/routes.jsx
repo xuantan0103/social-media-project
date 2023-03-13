@@ -10,6 +10,9 @@ import routes from "../config/routes";
 import Profile from "../pages/Profile";
 import FriendRequests from "../pages/FriendRequests/FriendRequest";
 import FriendSent from "../pages/FriendRequests/FriendSent";
+import EditProfile from "../pages/editProfile/EditProfile";
+import Friends from "../components/Friends/Friend"
+
 const publicRoutes = [
   { path: routes.login, component: Login },
   { path: routes.register, component: Register },
@@ -26,6 +29,17 @@ const publicRoutes = [
     component: FriendSent,
     layout: DefaultLayout,
   },
+
+  {
+    path: routes.editprofile,
+    component: EditProfile,
+    layout: DefaultLayout,
+  },
+
+  {
+    path: routes.friends,
+    component: Friends,
+  }
 ];
 
 const privateRoutes = [];
