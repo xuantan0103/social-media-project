@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import {
-  FaUserFriends,
-  FaUserClock,
+  // FaUserFriends,
+  // FaUserClock,
   FaCheck,
   FaUserPlus,
 } from "react-icons/fa";
-import { Link, Route, Switch } from "react-router-dom";
-import "./FriendRequests.css";
+import { Link, Route } from "react-router-dom";
+import "../FriendRequests/FriendRequest.css";
 import { useSelector, useDispatch } from "react-redux";
 import { Image, Transformation } from "cloudinary-react";
 import axios from "axios";
@@ -186,10 +186,10 @@ function FriendSent({ friendsRequest }) {
   };
 
   return (
-    <Switch>
+    <div>
       <Route path="/friendsent" component={FriendSent} />
       <Route component={FriendSent} />
-    </Switch>
+    </div>
   );
 }
 
