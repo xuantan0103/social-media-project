@@ -1,6 +1,6 @@
 import styles from "./LeftBar.module.scss";
 import classNames from "classnames/bind";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFeed,
@@ -18,6 +18,7 @@ import {
 const cx = classNames.bind(styles);
 
 function LeftBar() {
+  const navigate = useNavigate();
   return (
     <div className={cx("sidebar")}>
       <div className={cx("sidebar-list")}>
@@ -26,15 +27,14 @@ function LeftBar() {
             <FontAwesomeIcon icon={faHouse} color="#00CED1" />
             <span className={cx("sidebar-text")}>Home page</span>
           </li>
-          <Link to="/profile">
-            <p className="text-center">
-          <li className={cx("sidebar-item")}>
+          <li
+            className={cx("sidebar-item")}
+            onClick={() => navigate("/profile")}
+          >
             <FontAwesomeIcon icon={faUser} color="blue" />
-            <span className={cx("sidebar-text")}><b>Profile</b> </span>
-            </li>
-            </p>
-            </Link>
-            </ul>
+            <span className={cx("sidebar-text")}>Profile</span>
+          </li>
+        </ul>
       </div>
       <div>
         <div className={cx("sidebar-list")}>
@@ -43,14 +43,13 @@ function LeftBar() {
               <FontAwesomeIcon icon={faFeed} />
               <span className={cx("sidebar-text")}>Feed</span>
             </li>
-            <Link to="/friendrequests">
-            <p className="text-center">
-            <li className={cx("sidebar-item")}>
+            <li
+              className={cx("sidebar-item")}
+              onClick={() => navigate("/friendrequests")}
+            >
               <FontAwesomeIcon icon={faUserGroup} color="#40E0D0" />
-              <span className={cx("sidebar-text")}><b>Friend</b> </span>
+              <span className={cx("sidebar-text")}>Friends</span>
             </li>
-            </p>
-            </Link>
             <li className={cx("sidebar-item")}>
               <FontAwesomeIcon icon={faMessage} color="#8B008B" />
               <span className={cx("sidebar-text")}>Chats</span>
@@ -66,13 +65,13 @@ function LeftBar() {
             <li className={cx("sidebar-item")}>
               <FontAwesomeIcon icon={faBookBookmark} color="#1E90FF" />
               <span className={cx("sidebar-text")}>Bookmarks</span>
-            </li>          
+            </li>
             <li className={cx("sidebar-item")}>
               <FontAwesomeIcon icon={faCalendarDay} color="#C71585" />
               <span className={cx("sidebar-text")}>Events</span>
             </li>
             <li className={cx("sidebar-item")}>
-              <FontAwesomeIcon icon={faGraduationCap} color="#0000FF"/>
+              <FontAwesomeIcon icon={faGraduationCap} color="#0000FF" />
               <span className={cx("sidebar-text")}>Courses</span>
             </li>
           </ul>
