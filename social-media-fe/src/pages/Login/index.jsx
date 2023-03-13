@@ -1,10 +1,4 @@
-import {
-  Button,
-  message,
-  Spin,
-  Input,
-  Form
-} from "antd";
+import { Button, message, Spin, Input, Form } from "antd";
 import styles from "./Login.module.scss";
 import classNames from "classnames/bind";
 import { useState } from "react";
@@ -102,7 +96,6 @@ function Login() {
         setUser(data.user);
 
         message.success(`Welcome back ${data.user.username}!`);
-
         navigate("/", { replace: true });
       }
     } catch (error) {
