@@ -8,7 +8,6 @@ function Friends() {
     return (
         <div className={cx("fr-card")}>
             <div className={cx("fr-card")}>
-                <h4 class="mb-4">People You May Know</h4>
                 <h4 className="mb-4">People You May Know</h4>
                 <div className="card" style={{ width: '18rem' }}>
                     <img className="card-img-top" src="../" alt="" />
