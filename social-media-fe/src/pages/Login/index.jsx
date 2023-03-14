@@ -1,7 +1,7 @@
 import { Button, message, Spin, Input, Form } from "antd";
 import styles from "./Login.module.scss";
 import classNames from "classnames/bind";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../context/AuthContext";
 import { Link } from "react-router-dom";
@@ -105,10 +105,13 @@ function Login() {
       setIsLoading(false);
     }
   };
-
+  useEffect(() => {
+    if (localStorage.getItem("authToken")) {
+      navigate("/");
+    }
+  }, []);
   return (
     <div className={cx("form-login")}>
-      {/* <div className={cx("brand-logo")}> */}
       <div className={cx("login")}>
         <div className={cx("brand-logo")}>
           <img src="/static/media/logo10.a0884fc24a774b4867ee.png" alt="" />

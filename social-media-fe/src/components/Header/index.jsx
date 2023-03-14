@@ -14,11 +14,23 @@ import logo10 from "../../assets/logo10.png";
 
 import Button from "../Button/Button";
 import { useNavigate } from "react-router-dom";
+import { removeToken } from "../../helpers";
+import { useEffect, useState } from "react";
 
 const cx = classNames.bind(styles);
 
 function Header() {
+  const [authToken, setAuthToken] = useState(localStorage.getItem("authToken"));
   const navigate = useNavigate();
+  useEffect(() => {
+    if (!authToken) {
+      navigate("/login");
+    }
+  }, [authToken]);
+  const handleLogout = () => {
+    removeToken();
+    setAuthToken(localStorage.getItem("authToken"));
+  };
   return (
     <div
       className={
@@ -80,7 +92,11 @@ function Header() {
             >
               View your profile
             </Button>
-            <Button textLeft leftIcon={<FontAwesomeIcon icon={faSignOut} />}>
+            <Button
+              textLeft
+              leftIcon={<FontAwesomeIcon icon={faSignOut} />}
+              onClick={handleLogout}
+            >
               Sign out
             </Button>
           </div>
