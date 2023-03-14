@@ -80,6 +80,17 @@
       "mappedBy": "users_permissions_user"
     },
     "avatar": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "cover_image": {
       "allowedTypes": [
         "images",
         "files",

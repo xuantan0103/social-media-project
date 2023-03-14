@@ -11,13 +11,12 @@ import Profile from "../pages/Profile";
 import FriendRequests from "../pages/FriendRequests/FriendRequest";
 import FriendSent from "../pages/FriendRequests/FriendSent";
 import EditProfile from "../pages/editProfile/EditProfile";
-import Friends from "../components/Friends/Friend"
+import Friends from "../components/Friends/Friend";
 
 const publicRoutes = [
   { path: routes.login, component: Login },
   { path: routes.register, component: Register },
-  { path: routes.home, component: Home, layout: DefaultLayout },
-  { path: routes.profile, component: Profile, layout: DefaultLayout },
+  // { path: routes.home, component: Home, layout: DefaultLayout },
   {
     path: routes.friendrequests,
     component: FriendRequests,
@@ -36,12 +35,12 @@ const publicRoutes = [
     layout: DefaultLayout,
   },
 
-  {
-    path: routes.friends,
-    component: Friends,
-  }
+  { path: routes.friends, component: Friends },
 ];
 
-const privateRoutes = [];
+const privateRoutes = [
+  { path: routes.home, component: Home, layout: DefaultLayout },
+  { path: routes.profile, component: Profile, layout: DefaultLayout },
+];
 
 export { publicRoutes, privateRoutes };

@@ -1,26 +1,25 @@
 .friend {
-    flex: 3;
-    height: calc(100vh - 50px);
-    overflow-y: hidden;
-    position: sticky;
-    top: 50px;
-  }
-  
-    .friend-list {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-  
-    .friend-item {
-      display: -webkit-box;
-      align-items: center;
-      margin-bottom: 20px;
-      cursor: pointer;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 2;
-      .friend-text {
-        margin-left: 15px;
-      }
+  flex: 3;
+  height: calc(100vh - 50px);
+  overflow-y: hidden;
+  position: sticky;
+  top: 50px;
+}
+
+.friend-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+
+  .friend-item {
+    display: -webkit-box;
+    align-items: center;
+    margin-bottom: 20px;
+    cursor: pointer;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    .friend-text {
+      margin-left: 15px;
     }
   }
-  
+}
