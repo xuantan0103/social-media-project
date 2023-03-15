@@ -1,13 +1,7 @@
-import {
-  Button,
-  message,
-  Spin,
-  Input,
-  Form
-} from "antd";
+import { Button, message, Spin, Input, Form } from "antd";
 import styles from "./Login.module.scss";
 import classNames from "classnames/bind";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../context/AuthContext";
 import { Link } from "react-router-dom";
@@ -68,7 +62,6 @@ function Login() {
 
   console.log(fromError);
 
-
   const navigate = useNavigate();
 
   const { setUser } = useAuthContext();
@@ -103,7 +96,6 @@ function Login() {
         setUser(data.user);
 
         message.success(`Welcome back ${data.user.username}!`);
-
         navigate("/", { replace: true });
       }
     } catch (error) {
@@ -113,11 +105,13 @@ function Login() {
       setIsLoading(false);
     }
   };
-
-
+  useEffect(() => {
+    if (localStorage.getItem("authToken")) {
+      navigate("/");
+    }
+  }, []);
   return (
     <div className={cx("form-login")}>
-      {/* <div className={cx("brand-logo")}> */}
       <div className={cx("login")}>
         <div className={cx("brand-logo")}>
           <img src="/static/media/logo10.a0884fc24a774b4867ee.png" alt="" />
@@ -134,6 +128,7 @@ function Login() {
             <Form.Item
               label="EMAIL"
               name="email"
+              type="email"
               value={formValue.email}
               onChange={(e) => {
                 setFormValue({
@@ -153,8 +148,7 @@ function Login() {
             <Form.Item
               label="PASSWORD"
               name="password"
-              rules={[{ required: true,
-              type: "password" }]}
+              rules={[{ required: true, type: "password" }]}
             >
               <Input.Password placeholder="Password" />
             </Form.Item>
@@ -168,10 +162,10 @@ function Login() {
               </Button>
             </Form.Item>
             <p className="text-center">
-            <Link to="/register">
-              <b>Register Here</b>
-            </Link>
-          </p>
+              <Link to="/register">
+                <b>Register Here</b>
+              </Link>
+            </p>
           </Form>
         </div>
       </div>

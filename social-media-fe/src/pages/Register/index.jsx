@@ -15,12 +15,13 @@ import { useAuthContext } from "../../context/AuthContext";
 // import { setToken } from "../../helpers";
 import classNames from "classnames/bind";
 import {useState } from "react";
-import { Link } from 'react-router-dom';;
+import { Link } from "react-router-dom";
 
 const cx = classNames.bind(styles);
 
 const initFormValue = {
   userName:"",
+
   email: "",
   password: "",
   confirmPassword: "",
@@ -125,7 +126,7 @@ function Register() {
         <div className={cx("brand-title")}> REGISTER </div>
         <div className={cx("register-container")}>
           <form onSubmit={handleSubmit}>
-          <Form
+            <Form
               name="basic"
               layout="vertical"
               onFinish={onFinish}
@@ -134,6 +135,7 @@ function Register() {
               <Form.Item
                 label="Username"
                 name="username"
+
                 value={formValue.userName}
                 onChange={(e) => {
                   setFormValue({
@@ -169,12 +171,9 @@ function Register() {
               >
                 <Input placeholder="Example@test.com" />
               </Form.Item>
-              <Form.Item>
-                <lable> Birthday</lable>
-              <input             
-                type="date"
-                placeholder="Date Of Birth"
-                className={cx("input-register-date")}
+              <Form.Item
+                label="Birthday"
+                name="birthday"
                 value={formValue.dateofBirth}
                 onChange={(e) => {
                   setFormValue({
@@ -182,82 +181,116 @@ function Register() {
                     dateofBirth: e.target.value,
                   });
                 }}
-              />
+                rules={[
+                  {
+                    required: true,
+                    type: "date",
+                  },
+                ]}
+              >
+                <Input
+                  type="date"
+                  placeholder="Date Of Birth"
+                  className={cx("input-register-date")}
+                  value={formValue.dateofBirth}
+                  onChange={(e) => {
+                    setFormValue({
+                      ...formValue,
+                      dateofBirth: e.target.value,
+                    });
+                  }}
+                />
               </Form.Item>
-                <lable> Gender</lable>
-                 <div className="d-flex justify-content-start">
-                <div className="form-check d-flex justify-content-start me-5">
-              <input
-              type="radio"
-              name="male"
-              id="male"
-              value="Male"
-              checked={formValue.gender === "Male"}
-              onChange={(e) => {
-                setFormValue({
-                  ...formValue,
-                  gender: e.target.value,
-                });
-              }}
-            />
-
-               <label className="form-check-label" for="flexRadioDefault1">
-                    Male
-                  </label>
-                <div className="form-check d-flex justify-content-start">
-                  <input
-                    className="form-check-input"
-                    type="radio"
-                    name="female"
-                    value="Female"
-                    id="female"
-                    checked={formValue.gender === "Female"}
-                    onChange={(e) => {
-                      setFormValue({
-                        ...formValue,
-                        gender: e.target.value,
-                      });
-                    }}
-                  />
-                  <label className="form-check-label" for="flexRadioDefault2">
-                    Female
-                  </label>
-                  </div>
-                  </div>
-                  </div>
-
               <Form.Item
-                label="Password"
+                label="Gender"
+                name="gender"
+                value={formValue.gender}
+                onChange={(e) => {
+                  setFormValue({
+                    ...formValue,
+                    gender: e.target.value,
+                  });
+                }}
+                rules={[
+                  {
+                    required: true,
+                  },
+                ]}
+              >
+                <Radio value="Male"> Male </Radio>
+                <Radio value="Female"> Female </Radio>
+              </Form.Item>
+              <Form.Item
                 name="password"
-                rules={[{ required: true }]}
+                label="Password"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input your password!",
+                  },
+                ]}
+                onChange={(e) => {
+                  setFormValue({
+                    ...formValue,
+                    password: e.target.value,
+                  });
+                }}
+                hasFeedback
               >
                 <Input.Password placeholder="Password" />
               </Form.Item>
               <Form.Item
+                name="confirm"
                 label="Confirm Password"
-                name="password"
-                rules={[{ required: true }]}
+                dependencies={["password"]}
+                hasFeedback
+                onChange={(e) => {
+                  setFormValue({
+                    ...formValue,
+                    confirmPassword: e.target.value,
+                  });
+                }}
+                rules={[
+                  {
+                    required: true,
+                    type: "email",
+                    message: "Please confirm your password!",
+                  },
+                  ({ getFieldValue }) => ({
+                    validator(_, value) {
+                      if (!value || getFieldValue("password") === value) {
+                        return Promise.resolve();
+                      }
+                      return Promise.reject(
+                        new Error(
+                          "The two passwords that you entered do not match!"
+                        )
+                      );
+                    },
+                  }),
+                ]}
               >
                 <Input.Password placeholder="Confirm Password" />
               </Form.Item>
-
               <Form.Item>
                 <Button
                   type="primary"
                   htmlType="submit"
-                  className="login_submit_btn"
+                  className="mt-2"
+                  onClick={() => console.log(formValue)}
                 >
                 <Link to="/login"></Link> Submit {isLoading && <Spin size="small" />}
                 </Button>
               </Form.Item>
             </Form>
             <Typography.Paragraph className="form_help_text">
-              Already have an account? <Link to="/login">Login</Link>
+              Already have an account? <Link to="/login">Login here</Link>
             </Typography.Paragraph>
-            </form>
+          </form>
         </div>
       </div>
     </div>
   );
 }
 export default Register;
+
