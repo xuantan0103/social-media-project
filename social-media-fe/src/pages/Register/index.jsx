@@ -1,3 +1,5 @@
+import axios from "axios";
+import {toast} from "react-toastify"
 import {
       message,
       Spin,
@@ -9,17 +11,16 @@ import {
 import styles from "./Register.module.scss";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../context/AuthContext";
-import { API } from "../../constant";
-import { setToken } from "../../helpers";
+// import { API } from "../../constant";
+// import { setToken } from "../../helpers";
 import classNames from "classnames/bind";
-import { useState } from "react";
+import {useState } from "react";
 import { Link } from 'react-router-dom';;
 
 const cx = classNames.bind(styles);
 
 const initFormValue = {
-  firstName: "",
-  lastName: "",
+  userName:"",
   email: "",
   password: "",
   confirmPassword: "",
@@ -40,11 +41,8 @@ function Register() {
   const validateForm = (event) => {
     const error = {};
 
-    if (isEmptyValue(formValue.firstName)) {
-      error["firstName"] = "FirstName is required";
-    }
-    if (isEmptyValue(formValue.lastName)) {
-      error["LastName"] = "LastName is required";
+    if (isEmptyValue(formValue.userName)) {
+      error["firstName"] = "UserName is required";
     }
     if (isEmptyValue(formValue.email)) {
       error["email"] = "Email is required";
@@ -97,37 +95,28 @@ function Register() {
   
     const onFinish = async (values) => {
       setIsLoading(true);
-      try {
-        const response = await fetch(`${API}/auth/local/register`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(values),
-        });
-  
-        const data = await response.json();
-        if (data?.error) {
-          throw data?.error;
-        } else {
-          // set the token
-          setToken(data.jwt);
-  
-          // set the user
-          setUser(data.user);
-  
-          message.success(`Welcome to Social Cards ${data.user.username}!`);
-  
-          navigate("/profile", { replace: true });
+
+      const signUp =async () => {
+          try {
+            const url = 'http://localhost:1337/api/auth/local/register';
+            if (values.userName && values.email && values.gender && values.dateofBirth && values.password ) {
+        const response = await axios.post(url, );
+          if (response) {
+            setUser(initFormValue);
+            navigate("/login");
+          }
+          console.log (response);
         }
       } catch (error) {
-        console.error(error);
-        setError(error?.message ?? "Something went wrong!");
-      } finally {
-        setIsLoading(false);
-      }
-    };
-  return (
+        toast.error(error);
+        setError(error.message, {
+          hideProgressBar: true,
+        }); 
+    }
+  }
+  };
+
+    return (
     <div className={cx("form-register")}>
       <div className={cx("register")}>
         <div className={cx("brand-logo")}>
@@ -143,9 +132,9 @@ function Register() {
               autoComplete="off"
             >
               <Form.Item
-                label="Firstname"
-                name="firstname"
-                value={formValue.firstName}
+                label="Username"
+                name="username"
+                value={formValue.userName}
                 onChange={(e) => {
                   setFormValue({
                     ...formValue,
@@ -159,26 +148,7 @@ function Register() {
                   },
                 ]}
               >
-                <Input placeholder="Firstname" />
-              </Form.Item>
-              <Form.Item
-                label="Lastname"
-                name="lastame"
-                value={formValue.lastName}
-                onChange={(e) => {
-                  setFormValue({
-                    ...formValue,
-                    lastName: e.target.value,
-                  });
-                }}
-                rules={[
-                  {
-                    required: true,
-                    type: "string",
-                  },
-                ]}
-              >
-                <Input placeholder="Lastname" />
+                <Input placeholder="Username" />
               </Form.Item>
               <Form.Item
                 label="Email"
@@ -277,7 +247,7 @@ function Register() {
                   htmlType="submit"
                   className="login_submit_btn"
                 >
-                  Submit {isLoading && <Spin size="small" />}
+                <Link to="/login"></Link> Submit {isLoading && <Spin size="small" />}
                 </Button>
               </Form.Item>
             </Form>
@@ -290,5 +260,4 @@ function Register() {
     </div>
   );
 }
-
 export default Register;
