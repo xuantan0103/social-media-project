@@ -24,11 +24,9 @@ function RightBar() {
         <User />
         <User />
         <User />
-        
       </div>
       <div className={cx("sidebar")}>
         <h5 className="mb-3">Contacts</h5>
-        <User />
         <User />
         <User />
         <User />
