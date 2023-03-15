@@ -22,7 +22,7 @@ function App() {
               path={route.path}
               element={
                 route.prop ? (
-                  <Layout>
+                  <Layout >
                     <Page prop={route.prop} />
                   </Layout>
                 ) : (

@@ -1,5 +1,6 @@
 //Layouts
 import DefaultLayout from "../components/Layout/DefaultLayout";
+import FriendLayout from "../components/Layout/FriendLayout";
 
 //Pages
 import Login from "../pages/Login";
@@ -16,11 +17,10 @@ import Friends from "../components/Friends/Friend";
 const publicRoutes = [
   { path: routes.login, component: Login },
   { path: routes.register, component: Register },
-  // { path: routes.home, component: Home, layout: DefaultLayout },
   {
     path: routes.friendrequests,
     component: FriendRequests,
-    layout: DefaultLayout,
+    layout: FriendLayout,
   },
 
   {

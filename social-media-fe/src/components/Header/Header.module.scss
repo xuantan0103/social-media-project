@@ -5,7 +5,7 @@
   .logo {
     height: calc(var(--default-image-height) - 2px);
     background-color: transparent;
-    padding-left: 50px;
+    padding-left: 20px;
   }
   .searchbar {
     position: relative;
@@ -43,7 +43,7 @@
     left: 10px;
   }
   .action {
-    padding-right: 50px;
+    padding-right: 20px;
 
     .icon-bell {
       position: relative;

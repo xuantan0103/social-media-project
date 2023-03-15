@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { Image, Transformation } from "cloudinary-react";
 import { Link, Route } from "react-router-dom";
-import "../FriendRequests/FriendRequest.css"
+import "../FriendRequests/FriendRequest.css";
 // import "./FriendRequests.css";
 // import { useSelector, useDispatch } from "react-redux";
 import { Spin } from "antd";
 import axios from "axios";
 import logo10 from "../../../src/assets/logo10.png";
+import Friends from "../../components/Friends/Friend";
 
 function FriendRequests({ friendsRequest }) {
   // const { list, loading } = useSelector((state) => state.friendsRequest);
@@ -84,7 +85,7 @@ function FriendRequests({ friendsRequest }) {
 
   if (!loading && !list.length) {
     return (
-      <div className="noti-all">
+      <div className="noti-all ">
         <div className="noti-container">
           <div className="friend-requests-title">
             <h4>Your friend request</h4>
@@ -92,15 +93,8 @@ function FriendRequests({ friendsRequest }) {
               <span>View Sent Requests</span>
             </Link>
           </div>
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              height: "100vh",
-            }}
-          >
-            You don't have a friend request yet
+          <div className="py-2">
+            <Friends />
           </div>
         </div>
       </div>
