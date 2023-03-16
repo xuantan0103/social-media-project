@@ -63,14 +63,14 @@
       "inversedBy": "users",
       "configurable": false
     },
-    "Birthday": {
+    "birthday": {
       "type": "date"
     },
-    "Gender": {
+    "gender": {
       "type": "enumeration",
       "enum": [
         "male ",
-        "femal"
+        "female"
       ]
     },
     "posts": {
@@ -91,14 +91,15 @@
       ]
     },
     "cover_image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     }
   }
 }

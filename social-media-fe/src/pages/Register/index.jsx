@@ -1,32 +1,23 @@
 import axios from "axios";
-import {toast} from "react-toastify"
-import {
-      message,
-      Spin,
-      Typography,
-      Button,
-      Form,
-      Input,
-    } from "antd";
+import { toast } from "react-toastify";
+import { Spin, Typography, Button, Form, Input, Radio } from "antd";
 import styles from "./Register.module.scss";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../context/AuthContext";
-// import { API } from "../../constant";
-// import { setToken } from "../../helpers";
 import classNames from "classnames/bind";
-import {useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import { API } from "../../constant";
 
 const cx = classNames.bind(styles);
 
 const initFormValue = {
-  userName:"",
-
+  username: "a",
   email: "",
   password: "",
   confirmPassword: "",
-  dateofBirth: new Date(),
-  gender: "Male",
+  birthday: new Date(),
+  gender: "male",
 };
 function Register() {
   const isEmptyValue = (value) => {
@@ -42,8 +33,8 @@ function Register() {
   const validateForm = (event) => {
     const error = {};
 
-    if (isEmptyValue(formValue.userName)) {
-      error["firstName"] = "UserName is required";
+    if (isEmptyValue(formValue.username)) {
+      error["username"] = "UserName is required";
     }
     if (isEmptyValue(formValue.email)) {
       error["email"] = "Email is required";
@@ -67,14 +58,6 @@ function Register() {
     return Object.keys(error).length === 0;
   };
 
-  const hanldeChange = (event) => {
-    const { value, name } = event.target;
-    setFormValue({
-      ...formValue,
-      name: value,
-    });
-  };
-
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -84,40 +67,52 @@ function Register() {
       console.log("form invalid");
     }
   };
-  console.log(fromError);
-  
-    const navigate = useNavigate();
-  
-    const { setUser } = useAuthContext();
-  
-    const [isLoading, setIsLoading] = useState(false);
-  
-    const [error, setError] = useState("");
-  
-    const onFinish = async (values) => {
-      setIsLoading(true);
+  console.log("fromError", fromError);
 
-      const signUp =async () => {
-          try {
-            const url = 'http://localhost:1337/api/auth/local/register';
-            if (values.userName && values.email && values.gender && values.dateofBirth && values.password ) {
-        const response = await axios.post(url, );
-          if (response) {
-            setUser(initFormValue);
-            navigate("/login");
-          }
-          console.log (response);
+  const navigate = useNavigate();
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  const [error, setError] = useState("");
+
+  const onFinish = async (values) => {
+    setIsLoading(true);
+    axios
+      .post(
+        API + "/auth/local/register",
+        {
+          username: formValue.username,
+          email: formValue.email,
+          password: formValue.password,
+          gender: formValue.gender,
+          birthday: formValue.birthday,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
         }
-      } catch (error) {
-        toast.error(error);
-        setError(error.message, {
+      )
+      .then((res) => {
+        navigate("/login");
+        console.log("data", res.data.user);
+      })
+      .catch((err) => {
+        toast.error(err);
+        setError(err.message, {
           hideProgressBar: true,
-        }); 
-    }
-  }
+        });
+      });
   };
-
-    return (
+  console.log("error", error);
+  const onRadioChange = (e) => {
+    console.log("radio checked", e.target.value);
+    setFormValue({
+      ...formValue,
+      gender: e.target.value,
+    });
+  };
+  return (
     <div className={cx("form-register")}>
       <div className={cx("register")}>
         <div className={cx("brand-logo")}>
@@ -125,172 +120,151 @@ function Register() {
         </div>
         <div className={cx("brand-title")}> REGISTER </div>
         <div className={cx("register-container")}>
-          <form onSubmit={handleSubmit}>
-            <Form
-              name="basic"
-              layout="vertical"
-              onFinish={onFinish}
-              autoComplete="off"
+          <Form
+            name="basic"
+            layout="vertical"
+            onFinish={onFinish}
+            autoComplete="off"
+            onSubmit={handleSubmit}
+          >
+            <Form.Item
+              label="Username"
+              name="username"
+              value={formValue.username}
+              onChange={(e) => {
+                setFormValue({
+                  ...formValue,
+                  username: e.target.value,
+                });
+              }}
+              rules={[
+                {
+                  required: true,
+                  type: "string",
+                },
+              ]}
             >
-              <Form.Item
-                label="Username"
-                name="username"
-
-                value={formValue.userName}
-                onChange={(e) => {
-                  setFormValue({
-                    ...formValue,
-                    firstName: e.target.value,
-                  });
-                }}
-                rules={[
-                  {
-                    required: true,
-                    type: "string",
+              <Input placeholder="Username" />
+            </Form.Item>
+            <Form.Item
+              label="Email"
+              name="email"
+              value={formValue.email}
+              onChange={(e) => {
+                setFormValue({
+                  ...formValue,
+                  email: e.target.value,
+                });
+              }}
+              rules={[
+                {
+                  required: true,
+                  type: "email",
+                },
+              ]}
+            >
+              <Input placeholder="Example@test.com" />
+            </Form.Item>
+            <Form.Item
+              label="Birthday"
+              name="birthday"
+              value={formValue.birthday}
+              onChange={(e) => {
+                setFormValue({
+                  ...formValue,
+                  birthday: e.target.value,
+                });
+              }}
+              rules={[
+                {
+                  required: true,
+                  type: "date",
+                },
+              ]}
+            >
+              <Input
+                type="date"
+                placeholder="Date Of Birth"
+                className={cx("input-register-date")}
+              />
+            </Form.Item>
+            <Form.Item
+              label="Gender"
+              name="gender"
+              rules={[
+                {
+                  required: true,
+                },
+              ]}
+            >
+              <Radio.Group onChange={onRadioChange} value={formValue.gender}>
+                <Radio value="male" checked>
+                  Male
+                </Radio>
+                <Radio value="female">Female</Radio>
+              </Radio.Group>
+            </Form.Item>
+            <Form.Item
+              name="password"
+              label="Password"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your password!",
+                },
+              ]}
+              onChange={(e) => {
+                setFormValue({
+                  ...formValue,
+                  password: e.target.value,
+                });
+              }}
+            >
+              <Input.Password placeholder="Password" />
+            </Form.Item>
+            <Form.Item
+              name="confirm"
+              label="Confirm Password"
+              dependencies={["password"]}
+              onChange={(e) => {
+                setFormValue({
+                  ...formValue,
+                  confirmPassword: e.target.value,
+                });
+              }}
+              rules={[
+                {
+                  required: true,
+                  message: "Please confirm your password!",
+                },
+                ({ getFieldValue }) => ({
+                  validator(_, value) {
+                    if (!value || getFieldValue("password") === value) {
+                      return Promise.resolve();
+                    }
+                    return Promise.reject(
+                      new Error(
+                        "The two passwords that you entered do not match!"
+                      )
+                    );
                   },
-                ]}
-              >
-                <Input placeholder="Username" />
-              </Form.Item>
-              <Form.Item
-                label="Email"
-                name="email"
-                value={formValue.email}
-                onChange={(e) => {
-                  setFormValue({
-                    ...formValue,
-                    email: e.target.value,
-                  });
-                }}
-                rules={[
-                  {
-                    required: true,
-                    type: "email",
-                  },
-                ]}
-              >
-                <Input placeholder="Example@test.com" />
-              </Form.Item>
-              <Form.Item
-                label="Birthday"
-                name="birthday"
-                value={formValue.dateofBirth}
-                onChange={(e) => {
-                  setFormValue({
-                    ...formValue,
-                    dateofBirth: e.target.value,
-                  });
-                }}
-                rules={[
-                  {
-                    required: true,
-                    type: "date",
-                  },
-                ]}
-              >
-                <Input
-                  type="date"
-                  placeholder="Date Of Birth"
-                  className={cx("input-register-date")}
-                  value={formValue.dateofBirth}
-                  onChange={(e) => {
-                    setFormValue({
-                      ...formValue,
-                      dateofBirth: e.target.value,
-                    });
-                  }}
-                />
-              </Form.Item>
-              <Form.Item
-                label="Gender"
-                name="gender"
-                value={formValue.gender}
-                onChange={(e) => {
-                  setFormValue({
-                    ...formValue,
-                    gender: e.target.value,
-                  });
-                }}
-                rules={[
-                  {
-                    required: true,
-                  },
-                ]}
-              >
-                <Radio value="Male"> Male </Radio>
-                <Radio value="Female"> Female </Radio>
-              </Form.Item>
-              <Form.Item
-                name="password"
-                label="Password"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input your password!",
-                  },
-                ]}
-                onChange={(e) => {
-                  setFormValue({
-                    ...formValue,
-                    password: e.target.value,
-                  });
-                }}
-                hasFeedback
-              >
-                <Input.Password placeholder="Password" />
-              </Form.Item>
-              <Form.Item
-                name="confirm"
-                label="Confirm Password"
-                dependencies={["password"]}
-                hasFeedback
-                onChange={(e) => {
-                  setFormValue({
-                    ...formValue,
-                    confirmPassword: e.target.value,
-                  });
-                }}
-                rules={[
-                  {
-                    required: true,
-                    type: "email",
-                    message: "Please confirm your password!",
-                  },
-                  ({ getFieldValue }) => ({
-                    validator(_, value) {
-                      if (!value || getFieldValue("password") === value) {
-                        return Promise.resolve();
-                      }
-                      return Promise.reject(
-                        new Error(
-                          "The two passwords that you entered do not match!"
-                        )
-                      );
-                    },
-                  }),
-                ]}
-              >
-                <Input.Password placeholder="Confirm Password" />
-              </Form.Item>
-              <Form.Item>
-                <Button
-                  type="primary"
-                  htmlType="submit"
-                  className="mt-2"
-                  onClick={() => console.log(formValue)}
-                >
-                <Link to="/login"></Link> Submit {isLoading && <Spin size="small" />}
-                </Button>
-              </Form.Item>
-            </Form>
-            <Typography.Paragraph className="form_help_text">
-              Already have an account? <Link to="/login">Login here</Link>
-            </Typography.Paragraph>
-          </form>
+                }),
+              ]}
+            >
+              <Input.Password placeholder="Confirm Password" />
+            </Form.Item>
+            <Form.Item>
+              <Button type="primary" htmlType="submit" className="mt-2">
+                {isLoading ? <Spin size="small" /> : "Submit"}
+              </Button>
+            </Form.Item>
+          </Form>
+          <Typography.Paragraph className="form_help_text">
+            Already have an account? <Link to="/login">Login here</Link>
+          </Typography.Paragraph>
         </div>
       </div>
     </div>
   );
 }
 export default Register;
-

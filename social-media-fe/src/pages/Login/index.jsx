@@ -9,7 +9,7 @@ import { API } from "../../constant";
 import { setToken } from "../../helpers";
 const cx = classNames.bind(styles);
 const initFormValue = {
-  email: "",
+  email: "suongphan@gmail.com",
   password: "",
 };
 
@@ -42,14 +42,6 @@ function Login() {
     return Object.keys(error).length === 0;
   };
 
-  const hanldeChange = (event) => {
-    const { value, name } = event.target.value;
-    setFormValue({
-      ...formValue,
-      name: value,
-    });
-  };
-
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -60,7 +52,7 @@ function Login() {
     }
   };
 
-  console.log(fromError);
+  console.log(formValue);
 
   const navigate = useNavigate();
 
