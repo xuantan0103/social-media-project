@@ -7,5 +7,6 @@ const routes = {
   friendrequests: "/friendrequests",
   sentrequests: "/sentrequests",
   friendsmenu: "/friendsmenu",
+  friendyoumayknow: "/friendyoumayknow"
 };
 export default routes;

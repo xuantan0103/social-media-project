@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import './FriendRequestMenu.css';
+import './FriendRequestMenu.scss';
 import {Image,Transformation} from 'cloudinary-react';
 import {Link} from 'react-router-dom';
 import { useSelector } from 'react-redux';

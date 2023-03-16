@@ -1,18 +1,12 @@
 import React, { useState } from "react";
 import { Image, Transformation } from "cloudinary-react";
 import { Link, Route } from "react-router-dom";
-import "../FriendRequests/FriendRequest.css";
+import "../FriendRequests/FriendRequest.scss";
 // import "./FriendRequests.css";
-// import { useSelector, useDispatch } from "react-redux";
-import { Spin } from "antd";
 import axios from "axios";
-import logo10 from "../../../src/assets/logo10.png";
 import Friends from "../../components/Friends/Friend";
 
 function FriendRequests({ friendsRequest }) {
-  // const { list, loading } = useSelector((state) => state.friendsRequest);
-  // const dispatch = useDispatch();
-  // const [isAccept, setIsAccept] = useState("default");
   const list = [];
   const loading = false;
   const Button = (props) => {
@@ -43,13 +37,11 @@ function FriendRequests({ friendsRequest }) {
         {isAccept && isAccept === "default" ? (
           <>
             <button
-              // onClick={() => onSubmitFriendRequest("accept", props.user.id)}
               style={{ backgroundColor: "rgba(0,128,128)", color: "white" }}
             >
               Xác nhận
             </button>
             <button
-            // onClick={() => onSubmitFriendRequest("remove", props.user.id)}
             >
               Cancle
             </button>
@@ -64,24 +56,6 @@ function FriendRequests({ friendsRequest }) {
       </React.Fragment>
     );
   };
-
-  // if (loading && !list.length) {
-  //   return (
-  //     <div className="noti-all">
-  //       <div
-  //         className="noti-container"
-  //         style={{
-  //           display: "flex",
-  //           alignItems: "center",
-  //           justifyContent: "center",
-  //           height: "100vh",
-  //         }}
-  //       >
-  //         <Spin />
-  //       </div>
-  //     </div>
-  //   );
-  // }
 
   if (!loading && !list.length) {
     return (
@@ -112,29 +86,18 @@ function FriendRequests({ friendsRequest }) {
                 <span>View Sent Requests</span>
               </Link>
             </div>
-            {/* {list.map((rq, index) => { */}
-            {/* return ( */}
             <div className="friend-requests-item-container" key={1}>
               <div className="friend-requests-item-left">
                 <div className="friend-requests-item-avatar">
                   <Link to={"/profile/" + "tan"}>
-                    {/* {rq.user_avatar_cropX === null ? (
-                      <img src={logo10} alt="a" />
-                    ) : ( */}
                     <Image
                       cloudName="socia-media"
                       // publicId={rq.user_avatar + ".jpg"}
                       version="1607061343"
                     >
-                      <Transformation
-                      // height={rq.user_avatar_cropH}
-                      // width={rq.user_avatar_cropW}
-                      // x={rq.user_avatar_cropX}
-                      // y={rq.user_avatar_cropY}
-                      // crop="crop"
+                      <Transformation               
                       />
                     </Image>
-                    {/* )} */}
                   </Link>
                 </div>
                 <div className="friend-requests-item-info">
@@ -147,8 +110,6 @@ function FriendRequests({ friendsRequest }) {
                 <Button user={""} />
               </div>
             </div>
-            {/* ); */}
-            {/* })} */}
           </div>
         </div>
       </>
