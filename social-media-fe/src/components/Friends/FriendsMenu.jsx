@@ -8,7 +8,6 @@ import {
   faUsersLine,
   faUser,
   faBirthdayCake,
-  faHouseUser,
 } from "@fortawesome/free-solid-svg-icons";
 const cx = classNames.bind(styles);
 
@@ -22,10 +21,6 @@ function FriendsMenu() {
       <div>
         <div className={cx("friend-list")}>
           <ul>
-            <li className={cx("friend-item")} onClick={() => navigate("/")}>
-              <FontAwesomeIcon icon={faHouseUser} color="#1E90FF" />
-              <span className={cx("friend-text")}>Home</span>
-            </li>
             <li
               className={cx("friend-item")}
               onClick={() => navigate("/friendrequests")}
@@ -33,7 +28,7 @@ function FriendsMenu() {
               <FontAwesomeIcon icon={faUser} color="black" />
               <span className={cx("friend-text")}>Friend Request</span>
             </li>
-            <li className={cx("friend-item")} onClick={() => navigate("/")}>
+            <li className={cx("friend-item")} onClick={() => navigate("/friendyoumayknow")}>
               <FontAwesomeIcon icon={faUserPlus} color="black" />
               <span className={cx("friend-text")}>Suggestions</span>
             </li>

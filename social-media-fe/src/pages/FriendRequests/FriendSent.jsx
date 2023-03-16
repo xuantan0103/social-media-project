@@ -6,7 +6,7 @@ import {
   FaUserPlus,
 } from "react-icons/fa";
 import { Link} from "react-router-dom";
-import "../FriendRequests/FriendRequest.css";
+import "../FriendRequests/FriendRequest.scss";
 import { useSelector } from "react-redux";
 import { Image, Transformation } from "cloudinary-react";
 import axios from "axios";
