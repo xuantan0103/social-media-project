@@ -7,7 +7,7 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  background-color: var(--default-background-color);
+  background-color:aliceblue;
   height: 100vh;
 }
 
