@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Image, Transformation } from "cloudinary-react";
 import { Link, Route } from "react-router-dom";
 import "../FriendRequests/FriendRequest.scss";
-// import "./FriendRequests.css";
 import axios from "axios";
 import Friends from "../../components/Friends/Friend";
 
@@ -63,7 +62,7 @@ function FriendRequests({ friendsRequest }) {
         <div className="noti-container">
           <div className="friend-requests-title">
             <h4>Your friend request</h4>
-            <Link to="/friend-sent">
+            <Link to="/friendsent">
               <span>View Sent Requests</span>
             </Link>
           </div>
