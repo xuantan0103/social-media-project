@@ -5,8 +5,8 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../context/AuthContext";
 import { Link } from "react-router-dom";
-import { API } from "../../constant";
-import { setToken } from "../../helpers";
+import { API } from "../../api/constant";
+import { setToken } from "../../api/helpers";
 const cx = classNames.bind(styles);
 const initFormValue = {
   email: "suongphan@gmail.com",
@@ -135,14 +135,17 @@ function Login() {
                 },
               ]}
             >
-              <Input placeholder="example@test.com" />
+              <Input
+                placeholder="example@test.com"
+                defaultValue="suongphan@gmail.com"
+              />
             </Form.Item>
             <Form.Item
               label="PASSWORD"
               name="password"
               rules={[{ required: true, type: "password" }]}
             >
-              <Input.Password placeholder="Password" />
+              <Input.Password placeholder="Password" defaultValue="123456" />
             </Form.Item>
             <Form.Item>
               <Button
