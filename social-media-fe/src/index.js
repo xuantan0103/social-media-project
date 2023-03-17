@@ -6,15 +6,15 @@ import { Provider } from "react-redux";
 import reportWebVitals from "./reportWebVitals";
 import GlobalStyle from "./components/GlobalStyles";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { store } from "./redux/store";
+import store from "./redux/store";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <GlobalStyle>
-    <Provider store={store}>
+  <Provider store={store}>
+    <GlobalStyle>
       <App />
-    </Provider>
-  </GlobalStyle>
+    </GlobalStyle>
+  </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function

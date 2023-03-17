@@ -5,7 +5,6 @@ function PrivateRoutes({ children, ...rest }) {
   const [currentToken, setCurrentToken] = useState(
     localStorage.getItem("authToken")
   );
-  console.log("a", currentToken);
   return currentToken ? <Outlet /> : <Navigate to="/login" />;
 }
 
