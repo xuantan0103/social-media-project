@@ -14,7 +14,7 @@ import logo10 from "../../assets/logo10.png";
 
 import Button from "../Button/Button";
 import { useNavigate } from "react-router-dom";
-import { removeToken } from "../../helpers";
+import { removeToken } from "../../api/helpers";
 import { useEffect, useState } from "react";
 
 const cx = classNames.bind(styles);

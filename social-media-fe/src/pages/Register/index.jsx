@@ -3,11 +3,10 @@ import { toast } from "react-toastify";
 import { Spin, Typography, Button, Form, Input, Radio } from "antd";
 import styles from "./Register.module.scss";
 import { useNavigate } from "react-router-dom";
-import { useAuthContext } from "../../context/AuthContext";
 import classNames from "classnames/bind";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { API } from "../../constant";
+import { API } from "../../api/constant";
 
 const cx = classNames.bind(styles);
 
@@ -112,6 +111,11 @@ function Register() {
       gender: e.target.value,
     });
   };
+  useEffect(() => {
+    if (localStorage.getItem("authToken")) {
+      navigate("/");
+    }
+  }, []);
   return (
     <div className={cx("form-register")}>
       <div className={cx("register")}>
