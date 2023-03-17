@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./Post.module.scss";
 import classNames from "classnames/bind";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -6,10 +6,17 @@ import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import Button from "../Button/Button";
 import Comment from "../Comment";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { getAllPosts } from "../../redux/slice/postSlice";
 
 const cx = classNames.bind(styles);
 
 function Post() {
+  console.log("render");
+
+  const dispatch = useDispatch();
+  const state = useSelector((state) => state);
   const [like, setLike] = useState(1);
   const [isLiked, setIsLiked] = useState(false);
 
@@ -17,7 +24,10 @@ function Post() {
     setLike(isLiked ? like - 1 : like + 1);
     setIsLiked(!isLiked);
   };
-
+  useEffect(() => {
+    dispatch(getAllPosts());
+    console.log("q", state.post);
+  }, []);
   return (
     <div className={cx("main-container")}>
       <div className={cx("container")}>
