@@ -12,7 +12,7 @@ function Friendyoumayknow({ friendyoumayknow }) {
             <div className="noti-container">
               <div className="friend-requests-title">
                 <h4>Friend you may know</h4>
-                <Link to="/friend-sent">
+                <Link to="/friendsuggestion">
                   <span>See All</span>
                 </Link>
               </div>
