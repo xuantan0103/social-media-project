@@ -12,17 +12,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "user_id": {
-      "type": "integer",
-      "unique": false,
-      "required": true
-    },
-    "users_permissions_user": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "plugin::users-permissions.user",
-      "inversedBy": "posts"
-    },
     "content": {
       "type": "richtext",
       "required": false
@@ -43,6 +32,19 @@
         "Friend"
       ],
       "default": "Public"
+    },
+    "users_permissions_user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "private": true,
+      "inversedBy": "posts"
+    },
+    "author": {
+      "type": "string"
+    },
+    "authorId": {
+      "type": "string"
     }
   }
 }
