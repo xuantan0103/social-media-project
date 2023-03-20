@@ -1,7 +1,11 @@
 import "../editProfile/EditProfile.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faEnvelope, faLocationDot, faPen, faPhone, faUser,
+  faCakeCandles,
+  faEnvelope, 
+  faLocationDot, 
+  faPhone, 
+  faUser,
 } from "@fortawesome/free-solid-svg-icons";
 // import React, {useState} from 'react';
 
@@ -10,7 +14,7 @@ const editProfile = ({ user, onSave }) => {
   // const [email, setEmail] = useState(user.email);
   // const [phone, setPhone] = useState(user.phone);
   // const [address, setAddress] = useState(user.address);
-
+  //const [dayofbirth, setdayofBirth]= useState(user.dayofbirth);
   const handleSubmit = (event) => {
     event.preventDefault();
     // onSave({ fullname, email, phone, address });
@@ -43,6 +47,16 @@ const editProfile = ({ user, onSave }) => {
                   placeholder={"Enter your email"}
                 // value={email}
                 // onChange={(event) => setEmail(event.target.value)}
+                />
+              </div>
+              <div>
+              <FontAwesomeIcon icon={faCakeCandles} color="black" />
+                <label htmlFor="email">Day of birth</label>
+                <input
+                  type="date"
+                  id="dayofbirth"
+                // value={date}
+                // onChange={(event) => setdayofBirth(event.target.value)}
                 />
               </div>
               <div>
