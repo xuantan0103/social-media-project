@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import "../editProfile/EditProfile.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -7,17 +8,23 @@ import {
   faPhone, 
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
-// import React, {useState} from 'react';
+import React, {useEffect,useState} from 'react';
 
-const editProfile = ({ user, onSave }) => {
-  // const [fullname, setFullname] = useState(user.fullname);
-  // const [email, setEmail] = useState(user.email);
-  // const [phone, setPhone] = useState(user.phone);
-  // const [address, setAddress] = useState(user.address);
-  //const [dayofbirth, setdayofBirth]= useState(user.dayofbirth);
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // onSave({ fullname, email, phone, address });
+const editProfile = () => {
+  const [page, setPage] = useState(0);
+
+  useEffect(() => {
+    const url = `https://reqres.in/api/users?page=${page}`;
+  
+    fetch(url)
+      .then((results) => results.json())
+      .then((data) => {
+        console.log("data", data);
+      });
+  }, [page]);
+
+  const handleChange = e => {  
+    setPage(+e.target.value);
   };
 
   return (
@@ -25,7 +32,7 @@ const editProfile = ({ user, onSave }) => {
       <div className="edit-container">
         <div className="edit-profile-title">
           <h9>EDIT PROFILE</h9>
-          <form onSubmit={handleSubmit}>
+          <form onChange={handleChange}>
             <div className="form-profile">
               <div>
               <FontAwesomeIcon icon={faUser} color="black" />
