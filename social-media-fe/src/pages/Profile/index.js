@@ -3,14 +3,21 @@ import classNames from "classnames/bind";
 import NewPost from "../../components/NewPost";
 import Post from "../../components/Post";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCamera, faImages, faXmark } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCamera,
+  faImages,
+  faPen,
+  faXmark,
+} from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { faCircleXmark, faImage } from "@fortawesome/free-regular-svg-icons";
 import Button from "../../components/Button/Button";
+import { useNavigate } from "react-router-dom";
 
 const cx = classNames.bind(styles);
 
 function Profile() {
+  const navigate = useNavigate();
   const [image, setImage] = useState();
   const handlePreviewAvatar = (e) => {
     const file = e.target.files[0];
@@ -105,7 +112,14 @@ function Profile() {
             </div>
           </div>
         </div>
-        <h4 className={cx("username")}>Stephen Myburgh</h4>
+        <h4 className={cx("username")}>
+          Stephen Myburgh{" "}
+          <FontAwesomeIcon
+            icon={faPen}
+            className={cx("icon-pen")}
+            onClick={() => navigate("/editprofile")}
+          />
+        </h4>
       </div>
       <div className="mt-5">
         <NewPost />

@@ -12,11 +12,8 @@ import { getAllPosts } from "../../redux/slice/postSlice";
 
 const cx = classNames.bind(styles);
 
-function Post() {
-  console.log("render");
-
-  const dispatch = useDispatch();
-  const state = useSelector((state) => state);
+function Post({ post }) {
+  console.log("qa", post);
   const [like, setLike] = useState(1);
   const [isLiked, setIsLiked] = useState(false);
 
@@ -24,10 +21,7 @@ function Post() {
     setLike(isLiked ? like - 1 : like + 1);
     setIsLiked(!isLiked);
   };
-  useEffect(() => {
-    dispatch(getAllPosts());
-    console.log("q", state.post);
-  }, []);
+
   return (
     <div className={cx("main-container")}>
       <div className={cx("container")}>

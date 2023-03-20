@@ -3,22 +3,24 @@ import axios from "axios";
 import { API } from "../../api/constant";
 
 // Action
-export const getAllPosts = createAsyncThunk("getAllPosts", async () => {
-  axios
-    .get(API + "/posts")
-    .then((res) => {
-      console.log("s", res.data);
-      return res.data;
-    })
-    .catch((err) => {
-      console.log("222", err);
-    });
-});
+export const getAllPosts = createAsyncThunk(
+  "post/getAllPosts",
+  async (page, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.get(API + "/posts");
+      console.log("s", data.data);
+
+      return data.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
 const postSlice = createSlice({
   name: "post",
   initialState: {
     isLoading: false,
-    data: null,
+    data: [],
     isError: false,
   },
   extraReducers: (builder) => {
@@ -28,6 +30,8 @@ const postSlice = createSlice({
     builder.addCase(getAllPosts.fulfilled, (state, action) => {
       state.isLoading = false;
       state.data = action.payload;
+      console.log("p", action.payload);
+      console.log("d", state.data);
     });
     builder.addCase(getAllPosts.rejected, (state, action) => {
       console.log("Error", action.payload);

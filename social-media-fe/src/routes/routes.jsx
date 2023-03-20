@@ -13,7 +13,7 @@ import FriendRequests from "../pages/FriendRequests/FriendRequest";
 import FriendSent from "../pages/FriendRequests/FriendSent";
 import EditProfile from "../pages/editProfile/EditProfile";
 import Friends from "../components/Friends/Friend";
-import Friendsuggestion from"../components/Friends/Friendsuggestion";
+import Friendsuggestion from "../components/Friends/Friendsuggestion";
 import Friendyoumayknow from "../pages/FriendRequests/Friendyoumayknow";
 
 const publicRoutes = [
@@ -31,33 +31,29 @@ const publicRoutes = [
     layout: DefaultLayout,
   },
 
-  {
-    path: routes.editprofile,
-    component: EditProfile,
-    layout: DefaultLayout,
-  },
+  { path: routes.friends, component: Friends, layout: FriendLayout },
 
-  { path: routes.friends, 
-    component: Friends,
+  {
+    path: routes.friendsuggestion,
+    component: Friendsuggestion,
     layout: FriendLayout,
-  },
-
-  {
-  path: routes.friendsuggestion,
-  component: Friendsuggestion,
-  layout: FriendLayout,
   },
 
   {
     path: routes.friendyoumayknow,
     component: Friendyoumayknow,
     layout: FriendLayout,
-  }
+  },
 ];
 
 const privateRoutes = [
   { path: routes.home, component: Home, layout: DefaultLayout },
   { path: routes.profile, component: Profile, layout: DefaultLayout },
+  {
+    path: routes.editprofile,
+    component: EditProfile,
+    layout: DefaultLayout,
+  },
 ];
 
 export { publicRoutes, privateRoutes };
