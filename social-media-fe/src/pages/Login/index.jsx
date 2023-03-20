@@ -153,7 +153,7 @@ function Login() {
                 htmlType="submit"
                 className="login_submit_btn"
               >
-                LOGIN {isLoading && <Spin size="small" />}
+                {isLoading ? <Spin size="small" /> : "LOGIN"}
               </Button>
             </Form.Item>
             <p className="text-center">
