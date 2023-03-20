@@ -7,9 +7,8 @@ export const getAllPosts = createAsyncThunk(
   "post/getAllPosts",
   async (page, { rejectWithValue }) => {
     try {
-      const { data } = await axios.get(API + "/posts");
+      const { data } = await axios.get(API + `/posts?populate=*`);
       console.log("s", data.data);
-
       return data.data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -30,8 +29,6 @@ const postSlice = createSlice({
     builder.addCase(getAllPosts.fulfilled, (state, action) => {
       state.isLoading = false;
       state.data = action.payload;
-      console.log("p", action.payload);
-      console.log("d", state.data);
     });
     builder.addCase(getAllPosts.rejected, (state, action) => {
       console.log("Error", action.payload);
