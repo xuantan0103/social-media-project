@@ -9,7 +9,11 @@ export const setToken = (token) => {
     localStorage.setItem(AUTH_TOKEN, token);
   }
 };
-
+export const setIdUser = (id) => {
+  if (id) {
+    localStorage.setItem("id", id);
+  }
+};
 export const removeToken = () => {
   localStorage.removeItem(AUTH_TOKEN);
 };

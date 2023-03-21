@@ -3,14 +3,9 @@ import classNames from "classnames/bind";
 import NewPost from "../../components/NewPost";
 import Post from "../../components/Post";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCamera,
-  faImages,
-  faPen,
-  faXmark,
-} from "@fortawesome/free-solid-svg-icons";
+import { faCamera, faPen, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
-import { faCircleXmark, faImage } from "@fortawesome/free-regular-svg-icons";
+import { faImage } from "@fortawesome/free-regular-svg-icons";
 import Button from "../../components/Button/Button";
 import { useNavigate } from "react-router-dom";
 
@@ -123,7 +118,7 @@ function Profile() {
       </div>
       <div className="mt-5">
         <NewPost />
-        <Post />
+        {/* <Post post={""} /> */}
       </div>
     </>
   );

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styles from "./Post.module.scss";
 import classNames from "classnames/bind";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -6,9 +6,7 @@ import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import Button from "../Button/Button";
 import Comment from "../Comment";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
-import { getAllPosts } from "../../redux/slice/postSlice";
+import moment from "moment";
 
 const cx = classNames.bind(styles);
 
@@ -32,8 +30,10 @@ function Post({ post }) {
               alt=""
               className={cx("profile-img")}
             />
-            <span className={cx("username")}>Suong</span>
-            <span className={cx("date")}>22/2/2023</span>
+            <span className={cx("username")}>{post?.attributes?.author}</span>
+            <span className={cx("date")}>
+              {moment(post?.attributes?.createdAt).utc().format("DD/MM/YYYY")}
+            </span>
           </div>
           <div className={cx("top-right")}>
             <Button>
@@ -46,9 +46,12 @@ function Post({ post }) {
           </div>
         </div>
         <div className={cx("content")}>
-          <span className={cx("content-text")}>Description</span>
+          <span className={cx("content-text")}>{post.attributes.content}</span>
           <img
-            src="https://www.templepurohit.com/wp-content/uploads/2016/04/Brihadeeswarar-Temple-Thanjavur-Tamil-Nadu-1.jpg"
+            src={
+              "http://localhost:1337" +
+              `${post.attributes.images.data[0].attributes.url}`
+            }
             className={cx("post-img")}
             alt=""
           />

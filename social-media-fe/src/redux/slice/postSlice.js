@@ -1,14 +1,13 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { API } from "../../api/constant";
-
+import * as api from "../../api";
 // Action
 export const getAllPosts = createAsyncThunk(
   "post/getAllPosts",
   async (page, { rejectWithValue }) => {
     try {
-      const { data } = await axios.get(API + `/posts?populate=*`);
-      console.log("s", data.data);
+      const { data } = await api.getAllPosts();
+      console.log("all post", data.data);
       return data.data;
     } catch (error) {
       return rejectWithValue(error.message);
