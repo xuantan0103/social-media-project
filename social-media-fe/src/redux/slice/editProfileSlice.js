@@ -1,31 +1,38 @@
 import axios from 'axios';
+import {
+  updateStart,
+  updateSuccess,
+  updateError,
+  getUserStart,
+  getUserSuccess,
+  getUserFailed,
+} from "./userSlice";
 
-export default function editInfo(payload){
-  let initialData = {
-    fullname:"",
-    email:"",
-    dayofbirth:"",
-    phone:"",
-    address:"",
+export const updateUser = async (user, id, token) => {
+ (updateStart());
+  try {
+    // eslint-disable-next-line no-undef
+    const res = await axios.put(`${baseURL}/users/${id}`, user, {
+      headers: { token: `Bearer ${token}` },
+    });
+    (updateSuccess(res.data));
+  } catch (err) {
+    console.log(err);
+    (updateError());
   }
-
-  switch (payload.type) {
-    case "fullname":
-      initialData.fullname = payload.value;
-      break;
-    case "email":
-      initialData.email = payload.value;
-      break;
-    case "dayofbirth":
-      initialData.dayofbirth = payload.value;
-      break;
-    case "phone":
-      initialData.phone = payload.value;
-      break;
-    case "address":
-      initialData.address = payload.value;
-      break;
-    }
-
-    return axios.post("auth/local/editproffile", initialData)
+};
+export const getUser = async (id, token) => {
+  (getUserStart());
+  try {
+    // eslint-disable-next-line no-undef
+    const res = await axios.get(`${baseURL}/users/${id}`, {
+      headers: { token: `Bearer ${token}` },
+    });
+    (getUserSuccess(res.data));
+  } catch (err) {
+    (getUserFailed());
   }
+};
+
+
+  
