@@ -17,7 +17,7 @@ function Friends() {
   //       setIsAccept(false)
   //       await axios.post('/auth/local/friendrequest', {follow_users_UserId: id})
   //     }
-    // }
+  //   }
   return (
     <div className={cx("fr-card")}>
       <div className={cx("fr-card")}>
@@ -27,10 +27,10 @@ function Friends() {
             <h5 className="card-title">Phạm Xuân Tân</h5>
             <p className="card-text">100 bạn chung</p>
             {/* {isAccept && isAccept === 'default'} */}
-            <a href="#" className="btn btn-primary">
+            <a className="btn btn-primary">
               Accept
             </a>
-            <a href="#" className="btn btn-remove">
+            <a className="btn btn-remove">
               Remove
             </a>
           </div>
