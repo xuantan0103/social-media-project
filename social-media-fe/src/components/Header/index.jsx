@@ -16,10 +16,18 @@ import Button from "../Button/Button";
 import { useNavigate } from "react-router-dom";
 import { removeToken } from "../../api/helpers";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { getUserById } from "../../redux/slice/userSlice";
+import { Spin } from "antd";
+import { BASE_URL } from "../../api/constant";
 
 const cx = classNames.bind(styles);
 
 function Header() {
+  const dispatch = useDispatch();
+  const state = useSelector((state) => state);
+
   const [authToken, setAuthToken] = useState(localStorage.getItem("authToken"));
   const navigate = useNavigate();
   useEffect(() => {
@@ -27,6 +35,10 @@ function Header() {
       navigate("/login");
     }
   }, [authToken]);
+  useEffect(() => {
+    dispatch(getUserById(localStorage.getItem("id")));
+    console.log("user1", state.user.user);
+  }, []);
   const handleLogout = () => {
     removeToken();
     setAuthToken(localStorage.getItem("authToken"));
@@ -40,7 +52,16 @@ function Header() {
     >
       <div className="col-lg-2">
         <Button onClick={() => navigate("/")}>
-          <img src={logo10} alt="logo" className={cx("logo")} />
+          {state.user.isLoading ? (
+            <Spin size="small" />
+          ) : (
+            <img
+              // src={"http://localhost:1337" + `${state.user.avatar.url}`}
+              src={logo10}
+              alt="logo"
+              className={cx("logo")}
+            />
+          )}
         </Button>
       </div>
       <div className=" col-lg-8">

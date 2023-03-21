@@ -3,10 +3,9 @@ import styles from "./Login.module.scss";
 import classNames from "classnames/bind";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuthContext } from "../../context/AuthContext";
 import { Link } from "react-router-dom";
 import { API } from "../../api/constant";
-import { setToken } from "../../api/helpers";
+import { setIdUser, setToken } from "../../api/helpers";
 const cx = classNames.bind(styles);
 const initFormValue = {
   email: "suongphan@gmail.com",
@@ -56,8 +55,6 @@ function Login() {
 
   const navigate = useNavigate();
 
-  const { setUser } = useAuthContext();
-
   const [isLoading, setIsLoading] = useState(false);
 
   const [error, setError] = useState("");
@@ -83,9 +80,9 @@ function Login() {
       } else {
         // set the token
         setToken(data.jwt);
-
+        console.log(data.user.id);
         // set the user
-        setUser(data.user);
+        setIdUser(data.user.id);
 
         message.success(`Welcome back ${data.user.username}!`);
         navigate("/", { replace: true });
