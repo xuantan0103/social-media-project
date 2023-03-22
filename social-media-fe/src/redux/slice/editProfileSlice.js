@@ -11,8 +11,7 @@ import {
 export const updateUser = async (user, id, token) => {
  (updateStart());
   try {
-    // eslint-disable-next-line no-undef
-    const res = await axios.put(`${baseURL}/users/${id}`, user, {
+    const res = await axios.put(`${URL}/users/${id}`, user, {
       headers: { token: `Bearer ${token}` },
     });
     (updateSuccess(res.data));
@@ -24,8 +23,7 @@ export const updateUser = async (user, id, token) => {
 export const getUser = async (id, token) => {
   (getUserStart());
   try {
-    // eslint-disable-next-line no-undef
-    const res = await axios.get(`${baseURL}/users/${id}`, {
+    const res = await axios.get(`${URL}/users/${id}`, {
       headers: { token: `Bearer ${token}` },
     });
     (getUserSuccess(res.data));
