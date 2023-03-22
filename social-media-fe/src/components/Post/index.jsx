@@ -18,7 +18,6 @@ function Post({ post }) {
     setLike(isLiked ? like - 1 : like + 1);
     setIsLiked(!isLiked);
   };
-
   return (
     <div className={cx("main-container")}>
       <div className={cx("container")}>
@@ -45,11 +44,13 @@ function Post({ post }) {
           </div>
         </div>
         <div className={cx("content")}>
-          <span className={cx("content-text")}>{post.attributes.content}</span>
+          <span className={cx("content-text")}>
+            {post?.attributes?.content}
+          </span>
           <img
             src={
               "http://localhost:1337" +
-              `${post.attributes.images.data[0].attributes.url}`
+              `${post?.attributes?.images?.data[0]?.attributes?.url}`
             }
             className={cx("post-img")}
             alt=""

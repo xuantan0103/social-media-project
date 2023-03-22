@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import NewPost from "../../components/NewPost";
 import Post from "../../components/Post";
-import { getAllPosts } from "../../redux/slice/postSlice";
+import { getAllPosts } from "../../redux/action/postAction";
 
 function Home() {
   const dispatch = useDispatch();
@@ -17,7 +17,7 @@ function Home() {
       <NewPost />
       {state.post.isLoading && <h1>Loading..</h1>}
       {state?.post?.data?.map((item) => {
-        return <Post post={item} />;
+        return <Post key={item.id} post={item} />;
       })}
     </div>
   );

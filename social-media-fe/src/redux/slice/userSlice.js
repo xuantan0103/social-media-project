@@ -2,11 +2,10 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import * as api from "../../api";
 // Action
 export const getUserById = createAsyncThunk(
-  "user/getCurrentUser",
+  "user/getUserById",
   async (userId, { rejectWithValue }) => {
     try {
       const data = await api.getUserById(userId);
-      console.log("user", data.data);
       return data.data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -26,11 +25,9 @@ const userSlice = createSlice({
     });
     builder.addCase(getUserById.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.user = action.payload;
-      console.log("state.user", action.payload);
+      state.data = action.payload;
     });
     builder.addCase(getUserById.rejected, (state, action) => {
-      console.log("Error", action.payload);
       state.isError = true;
     });
   },
@@ -59,7 +56,7 @@ const userSlice = createSlice({
       state.otherUser.pending = false;
       state.otherUser.error = true;
     },
-},
+  },
 });
 export const {
   updateStart,

@@ -37,7 +37,6 @@ function Header() {
   }, [authToken]);
   useEffect(() => {
     dispatch(getUserById(localStorage.getItem("id")));
-    console.log("user1", state.user.user);
   }, []);
   const handleLogout = () => {
     removeToken();
@@ -90,7 +89,7 @@ function Header() {
             <Spin size="small" />
           ) : (
             <img
-              src={`http://localhost:1337${state?.user?.user?.avatar?.url}`}
+              src={`http://localhost:1337${state?.user?.data?.avatar?.url}`}
               alt=""
               className={cx("avatar")}
             />
