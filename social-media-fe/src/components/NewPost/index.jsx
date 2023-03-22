@@ -23,7 +23,6 @@ function NewPost() {
     file.preview = URL.createObjectURL(file);
     setImage(file);
   };
-  console.log(image);
   return (
     <div className={cx("main-container")}>
       <div className={cx("container")}>

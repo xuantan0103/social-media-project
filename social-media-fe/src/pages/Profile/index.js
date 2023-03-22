@@ -10,21 +10,21 @@ import Button from "../../components/Button/Button";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { getPostByUseId } from "../../redux/slice/postSlice";
 import { Spin } from "antd";
+import { getPostByUserId } from "../../redux/action/postAction";
 
 const cx = classNames.bind(styles);
 
 function Profile() {
   const state = useSelector((state) => state);
-
+  const dispatch = useDispatch();
   useEffect(() => {
-    // dispatch(getPostByUseId());
+    dispatch(getPostByUserId(localStorage.getItem("id")));
   }, []);
   const navigate = useNavigate();
   const [image, setImage] = useState();
   const handlePreviewAvatar = (e) => {
-    const file = e.target.files[0];
+    const file = e.target?.files[0];
     file.preview = URL.createObjectURL(file);
     setImage(file);
   };
@@ -35,7 +35,7 @@ function Profile() {
           <Spin size="small" />
         ) : (
           <img
-            src={`http://localhost:1337${state?.user?.user?.cover_image?.url}`}
+            src={`http://localhost:1337${state?.user?.data?.cover_image?.url}`}
             alt="cover"
             className={cx("cover-img")}
           />
@@ -44,7 +44,7 @@ function Profile() {
           <Spin size="small" />
         ) : (
           <img
-            src={`http://localhost:1337${state?.user?.user?.avatar?.url}`}
+            src={`http://localhost:1337${state?.user?.data?.avatar?.url}`}
             alt="avatar"
             className={cx("user-img")}
           />
@@ -125,7 +125,7 @@ function Profile() {
           </div>
         </div>
         <h4 className={cx("username")}>
-          {state?.user?.user?.username}
+          {state?.user?.data?.username}
           <FontAwesomeIcon
             icon={faPen}
             className={cx("icon-pen") + " ps-1"}
@@ -135,10 +135,10 @@ function Profile() {
       </div>
       <div className="mt-5">
         <NewPost />
-        {console.log("posts", state.user.data.posts)}
-        {state.user.isLoading && <h1>Loading..</h1>}
-        {state?.user?.data?.posts.map((item) => {
-          return <Post post={item} />;
+        {console.log("posts", state?.user?.data?.posts)}
+        {state.post.isLoading && <h1>Loading..</h1>}
+        {state?.post?.data?.map((item) => {
+          return <Post key={item.id} post={item} />;
         })}
       </div>
     </>
