@@ -1,6 +1,8 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import "../editProfile/EditProfile.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { updateUser } from "../../redux/slice/editProfileSlice";
+import { useParams } from "react-router-dom";
 import {
   faCakeCandles,
   faEnvelope, 
@@ -8,31 +10,42 @@ import {
   faPhone, 
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
-import React, {useEffect,useState} from 'react';
+import React, {useState} from 'react';
 
-const editProfile = () => {
-  const [page, setPage] = useState(0);
-
-  useEffect(() => {
-    const url = `https://reqres.in/api/users?page=${page}`;
+const editProfile = (props) => {
+    const { setEdit } = props;
+    const { id } = useParams();
+    // eslint-disable-next-line no-undef
+    const [fullname, setFullname] = useState(user?.displayName);
+    // eslint-disable-next-line no-undef
+    const [email, setEmail] = useState(user?.email);
+    // eslint-disable-next-line no-undef
+    const [phone, setPhone] = useState(user?.phone);
+    // eslint-disable-next-line no-undef
+    const [dayofbirth, setdayofBirth] = useState(user?.dayofbirth);
+    // eslint-disable-next-line no-undef
+    const [address, setAddress] = useState(user?.address );
   
-    fetch(url)
-      .then((results) => results.json())
-      .then((data) => {
-        console.log("data", data);
-      });
-  }, [page]);
-
-  const handleChange = e => {  
-    setPage(+e.target.value);
-  };
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      setEdit(false);
+      const updatedUser = {
+        fullname: fullname,
+        Email: email,
+        phone: phone,
+        dayofbirth: dayofbirth,
+        address: address,
+      };
+      // eslint-disable-next-line no-undef
+      updateUser( updatedUser, id, user?.accessToken);
+    };
 
   return (
     <div className="edit-profile ">
       <div className="edit-container">
         <div className="edit-profile-title">
           <h9>EDIT PROFILE</h9>
-          <form onChange={handleChange}>
+          <form onSubmit={handleSubmit}>
             <div className="form-profile">
               <div>
               <FontAwesomeIcon icon={faUser} color="black" />
@@ -41,8 +54,8 @@ const editProfile = () => {
                   type="text"
                   id="fullname"
                   placeholder={"Enter your full name"}
-                // value={fullname}
-                // onChange={(event) => setFullname(event.target.value)}
+                value={fullname}
+                onChange={(event) => setFullname(event.target.value)}
                 />
               </div>
               <div>
@@ -52,8 +65,8 @@ const editProfile = () => {
                   type="email"
                   id="email"
                   placeholder={"Enter your email"}
-                // value={email}
-                // onChange={(event) => setEmail(event.target.value)}
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
                 />
               </div>
               <div>
@@ -62,8 +75,8 @@ const editProfile = () => {
                 <input
                   type="date"
                   id="dayofbirth"
-                // value={date}
-                // onChange={(event) => setdayofBirth(event.target.value)}
+                value={dayofbirth}
+                onChange={(event) => setdayofBirth(event.target.value)}
                 />
               </div>
               <div>
@@ -75,8 +88,8 @@ const editProfile = () => {
                   pattern="[0-9]*"
                   maxLength="10"
                   placeholder={"Enter your phone number"}
-                // value={phone}
-                // onChange={(event) => setPhone(event.target.value)}
+                value={phone}
+                onChange={(event) => setPhone(event.target.value)}
                 />
               </div>
               <div>
@@ -86,8 +99,8 @@ const editProfile = () => {
                   type="text"
                   id="address"
                   placeholder={"Enter your address"}
-                // value={address}
-                // onChange={(event) => setAddress(event.target.value)}
+                value={address}
+                onChange={(event) => setAddress(event.target.value)}
                 />
               </div>
               <button type="submit" className="btn-save">Save Changes</button>
