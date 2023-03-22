@@ -1,52 +1,72 @@
-
+import React, { useEffect, useState } from 'react';
 import "../editProfile/EditProfile.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { updateUser } from "../../redux/slice/editProfileSlice";
-import { useParams } from "react-router-dom";
+// import { updateUser } from "../../redux/slice/editProfileSlice";
+import { useParams, useHistory } from "react-router-dom";
+import axios from 'axios';
+import { getIdUser } from '../../api/helpers';
 import {
   faCakeCandles,
-  faEnvelope, 
-  faLocationDot, 
-  faPhone, 
+  faEnvelope,
+  faLocationDot,
+  faPhone,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
-import React, {useState} from 'react';
+import { AUTH_TOKEN } from '../../api/constant';
+const info = { fullname: '', email: '', phone: '', dayofbirth: '', address: '' }
+function editProfile() {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const [editProfile, seteditProfile] = useState(info);
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  // const history = useHistory();
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const id = getIdUser();
 
-const user = {
-  fullname: "a",
-  email: "",
-  dayofbirth: new Date(),
-  phone: "",
-  address:"",
-};
-function editProfile({props}) {
-  const { setEdit } = props;
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const { id } = useParams();
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [fullname, setFullname] = useState(user?.displayName);
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [email, setEmail] = useState(user?.email);
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [phone, setPhone] = useState(user?.phone);
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [dayofbirth, setdayofBirth] = useState(user?.dayofbirth);
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [address, setAddress] = useState(user?.address );
-  
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      setEdit(false);
-      const updatedUser = {
-        fullname: fullname,
-        Email: email,
-        phone: phone,
-        dayofbirth: dayofbirth,
-        address: address,
-      };
-      updateUser( updatedUser, id, user?.accessToken);
-    };
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  // useEffect(() => {
+  //   const editprofileid = async () => {
+  //     const reqdata = await fetch('users/$(id)');
+  //     const res = await reqdata.json();
+  //     seteditProfile(await res);
+  //   }
+  //   editprofileid();
+  // }, []);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+  const handleEdit = (e) => {
+
+    seteditProfile(e)
+  }
+  console.log(editProfile)
+  const handleUserupdate = async (e) => {
+    e.preventDefault();
+    console.log(editProfile)
+    const { res } = await axios.put(
+      'users/id',
+      editProfile,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Basic` + localStorage.getItem(AUTH_TOKEN),
+        },
+      }
+    );
+    // const response = await axios.put('users/id', { data: editprofile },
+    //   {
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //       Authorization: `Basic` + localStorage.getItem(AUTH_TOKEN),
+    //     }
+    //   }
+    // );
+    // eslint-disable-next-line no-undef
+    setMsg(response.data.msg);
+    // setTimeout(() => {
+    //   history.push("/user");
+    // }, 20000);
+  }
   return (
     <div className="edit-profile ">
       <div className="edit-container">
@@ -55,39 +75,39 @@ function editProfile({props}) {
           <form onSubmit={handleSubmit}>
             <div className="form-profile">
               <div>
-              <FontAwesomeIcon icon={faUser} color="black" />
+                <FontAwesomeIcon icon={faUser} color="black" />
                 <label htmlFor="fullname">Full Name</label>
                 <input
                   type="text"
                   id="fullname"
                   placeholder={"Enter your full name"}
-                value={fullname}
-                onChange={(event) => setFullname(event.target.value)}
+                  // value={fullname}
+                  onChange={(event) => handleEdit(event.target.value)}
                 />
               </div>
               <div>
-              <FontAwesomeIcon icon={faEnvelope} color="black" />
+                <FontAwesomeIcon icon={faEnvelope} color="black" />
                 <label htmlFor="email">Email</label>
                 <input
                   type="email"
                   id="email"
                   placeholder={"Enter your email"}
-                value={email}
-                onChange={(event) => setEmail(event.target.value)}
+                  // value={email}
+                  onChange={(event) => handleEdit(event.target.value)}
                 />
               </div>
               <div>
-              <FontAwesomeIcon icon={faCakeCandles} color="black" />
+                <FontAwesomeIcon icon={faCakeCandles} color="black" />
                 <label htmlFor="email">Day of birth</label>
                 <input
                   type="date"
                   id="dayofbirth"
-                value={dayofbirth}
-                onChange={(event) => setdayofBirth(event.target.value)}
+                  // value={dayofbirth}
+                  onChange={(event) => handleEdit(event.target.value)}
                 />
               </div>
               <div>
-              <FontAwesomeIcon icon={faPhone} color="black" />
+                <FontAwesomeIcon icon={faPhone} color="black" />
                 <label htmlFor="phone">Phone</label>
                 <input
                   type="text"
@@ -95,22 +115,22 @@ function editProfile({props}) {
                   pattern="[0-9]*"
                   maxLength="10"
                   placeholder={"Enter your phone number"}
-                value={phone}
-                onChange={(event) => setPhone(event.target.value)}
+                  // value={phone}
+                  onChange={(event) => handleEdit(event.target.value)}
                 />
               </div>
               <div>
-              <FontAwesomeIcon icon={faLocationDot} color="black" />
+                <FontAwesomeIcon icon={faLocationDot} color="black" />
                 <label htmlFor="address">Address</label>
                 <input
                   type="text"
                   id="address"
                   placeholder={"Enter your address"}
-                value={address}
-                onChange={(event) => setAddress(event.target.value)}
+                  // value={address}
+                  onChange={(event) => handleEdit(event.target.value)}
                 />
               </div>
-              <button type="submit" className="btn-save">Save Changes</button>
+              <button onClick={handleUserupdate} type="submit" className="btn-save">Save Changes</button>
             </div>
           </form>
         </div>
