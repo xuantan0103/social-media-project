@@ -16,4 +16,5 @@ export const setIdUser = (id) => {
 };
 export const removeToken = () => {
   localStorage.removeItem(AUTH_TOKEN);
+  localStorage.removeItem("id");
 };

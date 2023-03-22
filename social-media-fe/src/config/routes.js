@@ -2,11 +2,11 @@ const routes = {
   home: "/",
   login: "/login",
   register: "/register",
-  profile: "/profile",
+  profile: "/profile/:id",
   editprofile: "/editprofile",
   friendrequests: "/friendrequests",
   sentrequests: "/sentrequests",
   friendsmenu: "/friendsmenu",
-  friendyoumayknow: "/friendyoumayknow"
+  friendyoumayknow: "/friendyoumayknow",
 };
 export default routes;

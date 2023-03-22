@@ -52,16 +52,7 @@ function Header() {
     >
       <div className="col-lg-2">
         <Button onClick={() => navigate("/")}>
-          {state.user.isLoading ? (
-            <Spin size="small" />
-          ) : (
-            <img
-              // src={"http://localhost:1337" + `${state.user.avatar.url}`}
-              src={logo10}
-              alt="logo"
-              className={cx("logo")}
-            />
-          )}
+          <img src={logo10} alt="logo" className={cx("logo")} />
         </Button>
       </div>
       <div className=" col-lg-8">
@@ -95,18 +86,20 @@ function Header() {
           </div>
         </Button>
         <Button circle className={cx("user-image")}>
-          <img
-            src={
-              "https://firebasestorage.googleapis.com/v0/b/plant-seeds-home.appspot.com/o/images%2Fdefaultuser.png?alt=media&token=da4c4242-2573-4c9a-b6cb-68673c9c547f"
-            }
-            alt=""
-            className={cx("avatar")}
-          />
+          {state.user.isLoading ? (
+            <Spin size="small" />
+          ) : (
+            <img
+              src={`http://localhost:1337${state?.user?.user?.avatar?.url}`}
+              alt=""
+              className={cx("avatar")}
+            />
+          )}
           <FontAwesomeIcon icon={faAngleDown} className={cx("user-icon")} />
           <div className={cx("user-action")}>
             <Button
               onClick={() => {
-                navigate("/profile");
+                navigate(`/profile/${localStorage.getItem("id")}`);
               }}
               textLeft
               leftIcon={<FontAwesomeIcon icon={faUser} />}
