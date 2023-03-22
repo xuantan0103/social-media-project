@@ -11,7 +11,6 @@ import moment from "moment";
 const cx = classNames.bind(styles);
 
 function Post({ post }) {
-  console.log("qa", post);
   const [like, setLike] = useState(1);
   const [isLiked, setIsLiked] = useState(false);
 

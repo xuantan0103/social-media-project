@@ -35,7 +35,7 @@ function LeftBar({ collapse = false }) {
           </li>
           <li
             className={cx("sidebar-item")}
-            onClick={() => navigate("/profile")}
+            onClick={() => navigate(`/profile/${localStorage.getItem("id")}`)}
           >
             <FontAwesomeIcon
               icon={faUser}

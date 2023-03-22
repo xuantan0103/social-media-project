@@ -4,14 +4,23 @@ import NewPost from "../../components/NewPost";
 import Post from "../../components/Post";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCamera, faPen, faXmark } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { faImage } from "@fortawesome/free-regular-svg-icons";
 import Button from "../../components/Button/Button";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { getPostByUseId } from "../../redux/slice/postSlice";
+import { Spin } from "antd";
 
 const cx = classNames.bind(styles);
 
 function Profile() {
+  const state = useSelector((state) => state);
+
+  useEffect(() => {
+    // dispatch(getPostByUseId());
+  }, []);
   const navigate = useNavigate();
   const [image, setImage] = useState();
   const handlePreviewAvatar = (e) => {
@@ -22,16 +31,24 @@ function Profile() {
   return (
     <>
       <div className={cx("profile-container")}>
-        <img
-          className={cx("cover-img")}
-          src="https://1.bp.blogspot.com/-W1swAyDEpKM/X0AamDSp0vI/AAAAAAAAdUw/NQQiPzGIiUsoTcufNKKW3NPCEvC1WWQtACLcBGAsYHQ/s1600/flower%2Bimages%2Bfor%2Bwhatsapp%2Bprofile%2B%252831%2529.jpg"
-          alt=""
-        />
-        <img
-          className={cx("user-img")}
-          src="https://1.bp.blogspot.com/-W1swAyDEpKM/X0AamDSp0vI/AAAAAAAAdUw/NQQiPzGIiUsoTcufNKKW3NPCEvC1WWQtACLcBGAsYHQ/s1600/flower%2Bimages%2Bfor%2Bwhatsapp%2Bprofile%2B%252831%2529.jpg"
-          alt=""
-        />
+        {state.user.isLoading ? (
+          <Spin size="small" />
+        ) : (
+          <img
+            src={`http://localhost:1337${state?.user?.user?.cover_image?.url}`}
+            alt="cover"
+            className={cx("cover-img")}
+          />
+        )}
+        {state.user.isLoading ? (
+          <Spin size="small" />
+        ) : (
+          <img
+            src={`http://localhost:1337${state?.user?.user?.avatar?.url}`}
+            alt="avatar"
+            className={cx("user-img")}
+          />
+        )}
         <FontAwesomeIcon
           icon={faCamera}
           className={cx("edit-avatar")}
@@ -108,22 +125,24 @@ function Profile() {
           </div>
         </div>
         <h4 className={cx("username")}>
-          Stephen Myburgh{" "}
+          {state?.user?.user?.username}
           <FontAwesomeIcon
             icon={faPen}
-            className={cx("icon-pen")}
+            className={cx("icon-pen") + " ps-1"}
             onClick={() => navigate("/editprofile")}
           />
         </h4>
       </div>
       <div className="mt-5">
         <NewPost />
-        {/* <Post post={""} /> */}
+        {console.log("posts", state.user.data.posts)}
+        {state.user.isLoading && <h1>Loading..</h1>}
+        {state?.user?.data?.posts.map((item) => {
+          return <Post post={item} />;
+        })}
       </div>
     </>
   );
 }
 
 export default Profile;
-gfgf;
-5
