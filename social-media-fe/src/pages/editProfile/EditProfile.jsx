@@ -1,4 +1,4 @@
-/* eslint-disable react-hooks/rules-of-hooks */
+
 import "../editProfile/EditProfile.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { updateUser } from "../../redux/slice/editProfileSlice";
@@ -12,18 +12,26 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import React, {useState} from 'react';
 
-const editProfile = (props) => {
-    const { setEdit } = props;
+const user = {
+  fullname: "a",
+  email: "",
+  dayofbirth: new Date(),
+  phone: "",
+  address:"",
+};
+function editProfile({props}) {
+  const { setEdit } = props;
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const { id } = useParams();
-    // eslint-disable-next-line no-undef
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [fullname, setFullname] = useState(user?.displayName);
-    // eslint-disable-next-line no-undef
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [email, setEmail] = useState(user?.email);
-    // eslint-disable-next-line no-undef
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [phone, setPhone] = useState(user?.phone);
-    // eslint-disable-next-line no-undef
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [dayofbirth, setdayofBirth] = useState(user?.dayofbirth);
-    // eslint-disable-next-line no-undef
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [address, setAddress] = useState(user?.address );
   
     const handleSubmit = (e) => {
@@ -36,7 +44,6 @@ const editProfile = (props) => {
         dayofbirth: dayofbirth,
         address: address,
       };
-      // eslint-disable-next-line no-undef
       updateUser( updatedUser, id, user?.accessToken);
     };
 
