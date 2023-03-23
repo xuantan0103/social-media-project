@@ -2,12 +2,20 @@
     border-radius: 7px !important;
     border-color: #e1e7ec;
 }
-a.btn.btn-remove {
-    background-color: #D3D3D3;
-    width: 100%;
-}
-a.btn.btn-primary {
+.btn-addfr {
     background-color: #5997f3;
     width: 100%;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
+    border-radius: 4px;
+}
+.btn-sent {
+    background-color: #87CEFA;
+    width: 100%;
+    margin-bottom: 8px;
+    border-radius: 4px;
+}
+.btn-remove {
+    background-color: #D3D3D3;
+    width: 100%;
+    border-radius: 4px;
 }
