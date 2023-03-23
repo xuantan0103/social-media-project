@@ -18,9 +18,8 @@ import { removeToken } from "../../api/helpers";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { getUserById } from "../../redux/slice/userSlice";
 import { Spin } from "antd";
-import { BASE_URL } from "../../api/constant";
+import { getUserById } from "../../redux/action/userAction";
 
 const cx = classNames.bind(styles);
 
