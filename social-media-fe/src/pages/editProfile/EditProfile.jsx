@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import "../editProfile/EditProfile.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { updateUser } from "../../redux/slice/editProfileSlice";
-import { useParams, useHistory } from "react-router-dom";
-import axios from 'axios';
-import { getIdUser } from '../../api/helpers';
+import { updateUser } from "../../redux/slice/editProfileSlice";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { getPostByUserId } from "../../redux/action/postAction";
 import {
   faCakeCandles,
   faEnvelope,
@@ -13,59 +14,22 @@ import {
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { AUTH_TOKEN } from '../../api/constant';
-const info = { fullname: '', email: '', phone: '', dayofbirth: '', address: '' }
+
 function editProfile() {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [editProfile, seteditProfile] = useState(info);
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  // const history = useHistory();
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const id = getIdUser();
-
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  // useEffect(() => {
-  //   const editprofileid = async () => {
-  //     const reqdata = await fetch('users/$(id)');
-  //     const res = await reqdata.json();
-  //     seteditProfile(await res);
-  //   }
-  //   editprofileid();
-  // }, []);
-
+  const state = useSelector((state) => state);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getPostByUserId(localStorage.getItem("id")));
+  }, []);
+  const navigate = useNavigate();
+  const [fullname, setFullName] = useState();
+  const [email, setEmail] = useState();
+  const [phone, setPhone] = useState();
+  const [dayofbirth, setDayofbirth] = useState();
+  const [address, setAddress] = useState();
+  updateUser(editProfile, id, localStorage.getItem(AUTH_TOKEN))
   const handleSubmit = (e) => {
     e.preventDefault();
-  };
-  const handleEdit = (e) => {
-
-    seteditProfile(e)
-  }
-  console.log(editProfile)
-  const handleUserupdate = async (e) => {
-    e.preventDefault();
-    console.log(editProfile)
-    const { res } = await axios.put(
-      'users/id',
-      editProfile,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Basic` + localStorage.getItem(AUTH_TOKEN),
-        },
-      }
-    );
-    // const response = await axios.put('users/id', { data: editprofile },
-    //   {
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //       Authorization: `Basic` + localStorage.getItem(AUTH_TOKEN),
-    //     }
-    //   }
-    // );
-    // eslint-disable-next-line no-undef
-    setMsg(response.data.msg);
-    // setTimeout(() => {
-    //   history.push("/user");
-    // }, 20000);
   }
   return (
     <div className="edit-profile ">
@@ -82,7 +46,7 @@ function editProfile() {
                   id="fullname"
                   placeholder={"Enter your full name"}
                   // value={fullname}
-                  onChange={(event) => handleEdit(event.target.value)}
+                  onChange={e => setFullName(e.target.value)}
                 />
               </div>
               <div>
@@ -93,7 +57,7 @@ function editProfile() {
                   id="email"
                   placeholder={"Enter your email"}
                   // value={email}
-                  onChange={(event) => handleEdit(event.target.value)}
+                  onChange={e => setEmail(e.target.value)}
                 />
               </div>
               <div>
@@ -103,7 +67,7 @@ function editProfile() {
                   type="date"
                   id="dayofbirth"
                   // value={dayofbirth}
-                  onChange={(event) => handleEdit(event.target.value)}
+                  onChange={e => setDayofbirth(e.target.value)}
                 />
               </div>
               <div>
@@ -116,7 +80,7 @@ function editProfile() {
                   maxLength="10"
                   placeholder={"Enter your phone number"}
                   // value={phone}
-                  onChange={(event) => handleEdit(event.target.value)}
+                  onChange={e => setPhone(e.target.value)}
                 />
               </div>
               <div>
@@ -127,7 +91,7 @@ function editProfile() {
                   id="address"
                   placeholder={"Enter your address"}
                   // value={address}
-                  onChange={(event) => handleEdit(event.target.value)}
+                  onChange={e => setAddress(e.target.value)}
                 />
               </div>
               <button onClick={handleUserupdate} type="submit" className="btn-save">Save Changes</button>
@@ -137,6 +101,5 @@ function editProfile() {
       </div>
     </div>
   );
-};
 
 export default editProfile;
