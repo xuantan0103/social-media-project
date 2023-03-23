@@ -10,8 +10,9 @@ import Button from "../../components/Button/Button";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { Spin } from "antd";
 import { getPostByUserId } from "../../redux/action/postAction";
+import defaultCover from "../../assets/default-cover.png";
+import defaultUserImg from "../../assets/default-user-image.png";
 
 const cx = classNames.bind(styles);
 
@@ -32,7 +33,7 @@ function Profile() {
     <>
       <div className={cx("profile-container")}>
         {state.user.isLoading ? (
-          <Spin size="small" />
+          <img src={defaultCover} alt="cover" className={cx("cover-img")} />
         ) : (
           <img
             src={`http://localhost:1337${state?.user?.data?.cover_image?.url}`}
@@ -41,7 +42,7 @@ function Profile() {
           />
         )}
         {state.user.isLoading ? (
-          <Spin size="small" />
+          <img src={defaultUserImg} alt="cover" className={cx("cover-img")} />
         ) : (
           <img
             src={`http://localhost:1337${state?.user?.data?.avatar?.url}`}

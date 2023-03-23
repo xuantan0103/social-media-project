@@ -6,6 +6,7 @@ const headers = {
     "Content-Type": "application/json",
   },
 };
+
 //Auth API
 export const login = (data) => axios.post(BASE_URL + "/auth/local", data);
 export const register = (data) => {
@@ -22,6 +23,16 @@ export const getUserById = (userId) => {
   return axios.get(BASE_URL + `/users/${userId}?populate=*`);
 };
 
+// User
+export const editUser = (data) => {
+  return axios.put(BASE_URL + `/user/me`, data, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+    },
+  });
+};
+
 // Post
 export const getAllPosts = () => {
   return axios.get(BASE_URL + `/posts?populate=*`);
@@ -35,14 +46,10 @@ export const getPostByUserId = (userId) => {
   );
 };
 export const addNewPost = (post) => {
-  return axios.post(
-    BASE_URL + "/posts",
-    { post },
-    {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("authToken")}`,
-      },
-    }
-  );
+  return axios.post(BASE_URL + "/posts", post, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+    },
+  });
 };
