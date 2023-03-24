@@ -23,8 +23,8 @@ const requestRemove = (id) => {
           <div className="card-body">
             <h5 className="card-title">Phạm Xuân Tân</h5>
             <p className="card-text">50 bạn chung</p>
-            <button onClick={() => requestAdd(props.id)} className="btn-addfr">{isShowaddfr ? "Invitation sent" : "Addfriend"}</button>
-            <button onClick={() => requestRemove(props.id)} className="btn-remove">{isShowremove ? "Removed" : "Remove"}</button>
+            <button onClick={() => requestAdd(props.id)} className="btn-addfr">{isShowaddfr ? "Send Friend Request" : "Add Friend"}</button>
+            <button onClick={() => requestRemove(props.id)} className="btn-remove">{isShowremove ? "Removed Friend" : "Remove Friend"}</button>
 
             </div>
           </div>
