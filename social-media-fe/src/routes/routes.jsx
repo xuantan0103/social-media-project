@@ -11,7 +11,7 @@ import routes from "../config/routes";
 import Profile from "../pages/Profile";
 import FriendRequests from "../pages/FriendRequests/FriendRequest";
 import FriendSent from "../pages/FriendRequests/FriendSent";
-import EditProfile from "../pages/editProfile/EditUer";
+import EditProfile from "../pages/Editprofile/EditUer";
 import Friends from "../components/Friends/Friend";
 import Friendsuggestion from "../components/Friends/Friendsuggestion";
 import Friendyoumayknow from "../pages/FriendRequests/Friendyoumayknow";
@@ -50,7 +50,7 @@ const privateRoutes = [
   { path: routes.home, component: Home, layout: DefaultLayout },
   { path: routes.profile, component: Profile, layout: DefaultLayout },
   {
-    path: routes.editprofile,
+    path: routes.Editprofile,
     component: EditProfile,
     layout: DefaultLayout,
   },
