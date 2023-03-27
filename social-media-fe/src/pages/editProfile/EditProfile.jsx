@@ -45,7 +45,7 @@ function EditProfile() {
           <h9>EDIT PROFILE</h9>
           <form onSubmit={handleSubmit}>
             <div className="form-profile">
-              {/* <div>
+              <div>
                 <FontAwesomeIcon icon={faUser} color="black" />
                 <label htmlFor="fullname">Full Name</label>
                 <input
@@ -60,7 +60,7 @@ function EditProfile() {
                     })
                   }
                 />
-              </div> */}
+              </div>
               <div>
                 <FontAwesomeIcon icon={faEnvelope} color="black" />
                 <label htmlFor="email">Email</label>

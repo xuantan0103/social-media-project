@@ -41,7 +41,7 @@ const postSlice = createSlice({
     });
     builder.addCase(action.addNewPost.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.data = action.payload;
+      state.data.push(action.payload);
     });
     builder.addCase(action.addNewPost.rejected, (state, action) => {
       console.log("Error", action.payload);

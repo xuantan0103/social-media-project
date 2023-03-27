@@ -7,29 +7,55 @@ import {
   faFaceSmile,
   faImages,
 } from "@fortawesome/free-regular-svg-icons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { LOCAL_HOST } from "../../api/constant";
+import { uploadImage } from "../../redux/action/imageAction";
 
 const cx = classNames.bind(styles);
 
-function NewPost() {
+function NewPost({ type, data }) {
+  const dispatch = useDispatch();
+  const state = useSelector((state) => state);
+  const [post, setPost] = useState(
+    type === "update"
+      ? data
+      : {
+          content: "hello",
+          images: {},
+          audition: "Public",
+          author: "suongphan",
+          authorId: 2,
+          users_permissions_user: 2,
+        }
+  );
   const [isShowAddImg, setIsShowAddImg] = useState(false);
+  const [image, setImage] = useState();
   const handleShowAddImage = (value) => {
     value === true ? setIsShowAddImg(true) : setIsShowAddImg(false);
   };
-
-  const [image, setImage] = useState();
   const handlePreviewAvatar = (e) => {
     const file = e.target.files[0];
     file.preview = URL.createObjectURL(file);
     setImage(file);
   };
+  const handleAddNewPost = () => {
+    let formData = new FormData();
+    formData.append("files", image);
+    dispatch(uploadImage(formData));
+    console.log("post", post);
+  };
+  useEffect(() => {
+    console.log("image", image);
+  }, [image]);
   return (
     <div className={cx("main-container")}>
       <div className={cx("container")}>
         <div className={cx("top")}>
           <img
-            src="https://1.bp.blogspot.com/-W1swAyDEpKM/X0AamDSp0vI/AAAAAAAAdUw/NQQiPzGIiUsoTcufNKKW3NPCEvC1WWQtACLcBGAsYHQ/s1600/flower%2Bimages%2Bfor%2Bwhatsapp%2Bprofile%2B%252831%2529.jpg"
-            alt=""
+            src={`${LOCAL_HOST}${state?.user?.data?.avatar?.url}`}
+            alt="profile-img"
             className={cx("profile-img")}
           />
           <input
@@ -97,19 +123,25 @@ function NewPost() {
               <div className={cx("modal-body")}>
                 <div className="d-flex align-items-center">
                   <img
-                    src="https://1.bp.blogspot.com/-W1swAyDEpKM/X0AamDSp0vI/AAAAAAAAdUw/NQQiPzGIiUsoTcufNKKW3NPCEvC1WWQtACLcBGAsYHQ/s1600/flower%2Bimages%2Bfor%2Bwhatsapp%2Bprofile%2B%252831%2529.jpg"
+                    src={`${LOCAL_HOST}${state?.user?.data?.avatar?.url}`}
                     alt=""
                     className={cx("profile-img") + " m-2"}
                   />
                   <div>
-                    <div className={cx("username")}>Suong</div>
+                    <div className={cx("username")}>
+                      {state?.user?.data?.username}
+                    </div>
                     <select
                       className={cx("select-wrapper") + " form-select"}
                       aria-label="select"
+                      onSelect={() => post?.audition}
+                      onChange={(e) =>
+                        setPost({ ...post, audition: e.target.value })
+                      }
                     >
-                      <option defaultValue>Public</option>
-                      <option value="1">Private</option>
-                      <option value="2">Friend</option>
+                      <option value="Public">Public</option>
+                      <option value="Private">Private</option>
+                      <option value="Friend">Friend</option>
                     </select>
                   </div>
                 </div>
@@ -118,6 +150,10 @@ function NewPost() {
                   className={cx("form-control") + " my-2"}
                   id="post"
                   rows="5"
+                  onChange={(e) =>
+                    setPost({ ...post, content: e.target.value })
+                  }
+                  value={post?.content}
                 ></textarea>
 
                 {isShowAddImg && !image && (
@@ -167,7 +203,11 @@ function NewPost() {
                 >
                   Photo/Video
                 </Button>
-                <Button primary type="button">
+                <Button
+                  primary
+                  type="button"
+                  onClick={() => handleAddNewPost()}
+                >
                   Post
                 </Button>
               </div>

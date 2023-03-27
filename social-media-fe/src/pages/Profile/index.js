@@ -13,6 +13,7 @@ import { useSelector } from "react-redux";
 import { getPostByUserId } from "../../redux/action/postAction";
 import defaultCover from "../../assets/default-cover.png";
 import defaultUserImg from "../../assets/default-user-image.png";
+import { LOCAL_HOST } from "../../api/constant";
 
 const cx = classNames.bind(styles);
 
@@ -36,7 +37,7 @@ function Profile() {
           <img src={defaultCover} alt="cover" className={cx("cover-img")} />
         ) : (
           <img
-            src={`http://localhost:1337${state?.user?.data?.cover_image?.url}`}
+            src={`${LOCAL_HOST}${state?.user?.data?.cover_image?.url}`}
             alt="cover"
             className={cx("cover-img")}
           />
@@ -45,7 +46,7 @@ function Profile() {
           <img src={defaultUserImg} alt="cover" className={cx("cover-img")} />
         ) : (
           <img
-            src={`http://localhost:1337${state?.user?.data?.avatar?.url}`}
+            src={`${LOCAL_HOST}${state?.user?.data?.avatar?.url}`}
             alt="avatar"
             className={cx("user-img")}
           />
@@ -135,7 +136,7 @@ function Profile() {
         </h4>
       </div>
       <div className="mt-5">
-        <NewPost />
+        <NewPost type="create" />
         {console.log("posts", state?.user?.data?.posts)}
         {state.post.isLoading && <h1>Loading..</h1>}
         {state?.post?.data?.map((item) => {
