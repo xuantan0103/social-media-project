@@ -1,5 +1,6 @@
-import axios, { Axios } from "axios";
-import { BASE_URL } from "./constant";
+import axios from "axios";
+import { BASE_URL, LOCAL_HOST } from "./constant";
+
 
 const headers = {
   headers: {
@@ -46,9 +47,21 @@ export const getPostByUserId = (userId) => {
   );
 };
 export const addNewPost = (post) => {
-  return axios.post(BASE_URL + "/posts", post, {
+  return axios.post(
+    BASE_URL + "/posts?populate=*",
+    { data: post },
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+      },
+    }
+  );
+};
+export const uploadImage = (formData) => {
+  return axios.post(`${LOCAL_HOST}/api/upload`, formData, {
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "multipart/form-data",
       Authorization: `Bearer ${localStorage.getItem("authToken")}`,
     },
   });
