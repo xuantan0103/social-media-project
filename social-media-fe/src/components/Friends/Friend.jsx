@@ -12,11 +12,10 @@ export default class Friend extends Component  {
   constructor(props) {
     super(props);
     getUserById(localStorage.getItem("id"));
-    this.state = {
-        userName: this.props.item.username,
+    this.setState = {
+        fullname: this.props.item.fullname,
         userEmail: this.props.item.email,
         relation: this.props.item.relation,
-        relationshipID: this.props.item.relationshipID,
         expanded: this.props.item.expanded,
         profileInfo: this.props.item.profileInfo,
         showLoading: this.props.item.showLoading,
@@ -24,42 +23,15 @@ export default class Friend extends Component  {
         delete: false,
     };
   }
-// export default class Friend extends Component  {
-//   constructor(props) {
-//   const state = useSelector((state) => state);
-//   const dispatch = useDispatch();
-//   console.log(state?.user);
-//   const [user, setUser] = useState({
-//     fullname: state?.user?.data?.fullname,
-//     email: state?.user?.data?.email,
-//     // birthday: state?.user?.data?.birthday,
-//     // phone: state?.user?.data?.phone,
-//     // address: state?.user?.data?.address,
-//   });
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     dispatch(Friend(user));
-//   };
-//   useEffect(() => {
-//     dispatch(getUserById(localStorage.getItem("id")));
-//     setUser({
-//       fullname: state?.user?.data?.fullname,
-//       email: state?.user?.data?.email,
-//       // birthday: state?.user?.data?.birthday,
-//       // phone: state?.user?.data?.phone,
-//       // address: state?.user?.data?.address,
-//     });
-//     console.log("user", user);
-//   }, []);
-
+  
   rowPressed = () => {
 
-    if (!this.state.deletingUser) {
+    if (!this.setState.deletingUser) {
         this.setState({
-            showLoading: !this.state.expanded,
+            showLoading: !this.setState.expanded,
             expanded: !this.state.expanded,
         }, () => {
-            if (this.state.expanded) {
+            if (this.setState.expanded) {
                 this.getProfileHelper();
             }
         })
@@ -102,7 +74,7 @@ export default class Friend extends Component  {
       })
     }
 
-    getProfile(this.state.userID, onSuccess, onFailure)
+    getProfile(this.state.id, onSuccess, onFailure)
   } 
 
   removeFriendHelper = () =>{
@@ -122,7 +94,8 @@ export default class Friend extends Component  {
       })
     }
 
-    removeFriend(this.state.relationshipID, onSuccess, onFailure)
+    removeFriend(this.state.relation.id
+      , onSuccess, onFailure)
   }
 }
 
