@@ -7,11 +7,12 @@ import {
   faFaceSmile,
   faImages,
 } from "@fortawesome/free-regular-svg-icons";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { LOCAL_HOST } from "../../api/constant";
-import { uploadImage } from "../../redux/action/imageAction";
+import { addNewPost } from "../../redux/action/postAction";
+import { uploadImage } from "../../api";
 
 const cx = classNames.bind(styles);
 
@@ -22,12 +23,12 @@ function NewPost({ type, data }) {
     type === "update"
       ? data
       : {
-          content: "hello",
-          images: {},
+          content: "",
+          images: { data: [state.image.data] },
           audition: "Public",
-          author: "suongphan",
-          authorId: 2,
-          users_permissions_user: 2,
+          author: localStorage.getItem("username"),
+          authorId: localStorage.getItem("id"),
+          users_permissions_user: localStorage.getItem("id"),
         }
   );
   const [isShowAddImg, setIsShowAddImg] = useState(false);
@@ -41,14 +42,28 @@ function NewPost({ type, data }) {
     setImage(file);
   };
   const handleAddNewPost = () => {
-    let formData = new FormData();
-    formData.append("files", image);
-    dispatch(uploadImage(formData));
-    console.log("post", post);
+    const addImage = () => {
+      let formData = new FormData();
+      formData.append("files", image);
+      let images = uploadImage(formData);
+
+      setPost({
+        ...post,
+        images: { data: images },
+      });
+      console.log("post", post);
+    };
+    const addPost = (post) => {
+      dispatch(addNewPost(post));
+    };
+    addImage();
+    addPost(post);
+    console.log("add1", post);
+    console.log("add2", state.post.data);
   };
-  useEffect(() => {
-    console.log("image", image);
-  }, [image]);
+  // useEffect(() => {
+  //   setPost({ ...post, author: state?.user?.data?.username });
+  // }, [post, state?.user?.data?.username]);
   return (
     <div className={cx("main-container")}>
       <div className={cx("container")}>

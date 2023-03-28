@@ -7,6 +7,7 @@ import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import Button from "../Button/Button";
 import Comment from "../Comment";
 import moment from "moment";
+import { BASE_URL } from "../../api/constant";
 
 const cx = classNames.bind(styles);
 
@@ -47,14 +48,13 @@ function Post({ post }) {
           <span className={cx("content-text")}>
             {post?.attributes?.content}
           </span>
-          <img
-            src={
-              "http://localhost:1337" +
-              `${post?.attributes?.images?.data[0]?.attributes?.url}`
-            }
-            className={cx("post-img")}
-            alt=""
-          />
+          {post?.attributes?.images?.data && (
+            <img
+              src={`${BASE_URL}${post?.attributes?.images?.data[0]?.attributes?.url}`}
+              className={cx("post-img")}
+              alt=""
+            />
+          )}
         </div>
         <div className={cx("bottom")}>
           <div className={cx("bottom-left")}>
