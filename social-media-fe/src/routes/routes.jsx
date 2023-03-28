@@ -50,7 +50,7 @@ const privateRoutes = [
   { path: routes.home, component: Home, layout: DefaultLayout },
   { path: routes.profile, component: Profile, layout: DefaultLayout },
   {
-    path: routes.Editprofile,
+    path: routes.editprofile,
     component: EditProfile,
     layout: DefaultLayout,
   },
