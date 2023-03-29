@@ -47,6 +47,18 @@ const postSlice = createSlice({
       console.log("Error", action.payload);
       state.isError = true;
     });
+
+    /* uploadPostImage */
+    builder.addCase(action.uploadPostImage.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(action.uploadPostImage.fulfilled, (state, action) => {
+      state.isLoading = false;
+    });
+    builder.addCase(action.uploadPostImage.rejected, (state, action) => {
+      console.log("Error", action.payload);
+      state.isError = true;
+    });
   },
 });
 
