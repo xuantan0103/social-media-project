@@ -57,6 +57,18 @@ export const addNewPost = (post) => {
     }
   );
 };
+export const uploadPostImage = (postId, image) => {
+  return axios.put(
+    BASE_URL + `/posts/${postId}?populate=*`,
+    { images: image },
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+      },
+    }
+  );
+};
 export const uploadImage = (formData) => {
   return axios.post(`${LOCAL_HOST}/api/upload`, formData, {
     headers: {
@@ -288,21 +300,40 @@ export function getProfile(userID, onSuccess, onFailure, recurseCount) {
   );
 }
 
-export function search(searchText, limit, skip, onSuccess, onFailure, recurseCount) {
-  recurseCount = recurseCount || 1
+export function search(
+  searchText,
+  limit,
+  skip,
+  onSuccess,
+  onFailure,
+  recurseCount
+) {
+  recurseCount = recurseCount || 1;
 
-  axios(BASE_URL + '/' + searchText + '?$limit=' + limit + '&$skip=' + skip, {
-    method: 'GET',
+  axios(BASE_URL + "/" + searchText + "?$limit=" + limit + "&$skip=" + skip, {
+    method: "GET",
     headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
+      Accept: "application/json",
+      "Content-Type": "application/json",
       Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+    },
+  }).then(
+    function (response) {
+      handleResponse(response, onSuccess, onFailure);
+    },
+    function (error) {
+      setTimeout(
+        () =>
+          search(
+            searchText,
+            limit,
+            skip,
+            onSuccess,
+            onFailure,
+            recurseCount + 1
+          ),
+        1000 * recurseCount
+      );
     }
-  }).then(function(response) {
-    handleResponse(response, onSuccess, onFailure)
-  }, function(error) {
-    setTimeout(() => search(searchText, limit, skip, onSuccess, onFailure, recurseCount+1), 1000 * recurseCount)
-  })
+  );
 }
-
-

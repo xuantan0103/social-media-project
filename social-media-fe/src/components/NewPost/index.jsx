@@ -2,29 +2,27 @@ import styles from "./NewPost.module.scss";
 import classNames from "classnames/bind";
 import Button from "../Button/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCircleXmark,
-  faFaceSmile,
-  faImages,
-} from "@fortawesome/free-regular-svg-icons";
+import { faFaceSmile, faImages } from "@fortawesome/free-regular-svg-icons";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { LOCAL_HOST } from "../../api/constant";
-import { addNewPost } from "../../redux/action/postAction";
 import { uploadImage } from "../../api";
+import { addNewPost } from "../../redux/action/postAction";
+import PostItem from "./PostItem";
 
 const cx = classNames.bind(styles);
 
-function NewPost({ type, data }) {
+function NewPost({ data }) {
+  console.log(data);
   const dispatch = useDispatch();
   const state = useSelector((state) => state);
   const [post, setPost] = useState(
-    type === "update"
+    data
       ? data
       : {
           content: "",
-          images: { data: [state.image.data] },
+          imageURL: "",
           audition: "Public",
           author: localStorage.getItem("username"),
           authorId: localStorage.getItem("id"),
@@ -41,29 +39,44 @@ function NewPost({ type, data }) {
     file.preview = URL.createObjectURL(file);
     setImage(file);
   };
+
   const handleAddNewPost = () => {
-    const addImage = () => {
+    const addImage = async () => {
       let formData = new FormData();
       formData.append("files", image);
-      let images = uploadImage(formData);
-
-      setPost({
-        ...post,
-        images: { data: images },
-      });
-      console.log("post", post);
+      await uploadImage(formData)
+        .then((res) => {
+          dispatch(
+            addNewPost({ ...post, imageURL: `${LOCAL_HOST}${res.data[0].url}` })
+          );
+          console.log("img", post);
+        })
+        .catch((err) => {
+          console.log("err", err);
+        });
     };
-    const addPost = (post) => {
+    if (!image) {
       dispatch(addNewPost(post));
-    };
-    addImage();
-    addPost(post);
-    console.log("add1", post);
-    console.log("add2", state.post.data);
+      setPost({
+        content: "",
+        imageURL: "",
+        audition: "Public",
+        author: localStorage.getItem("username"),
+        authorId: localStorage.getItem("id"),
+        users_permissions_user: localStorage.getItem("id"),
+      });
+    } else {
+      addImage();
+      setPost({
+        content: "",
+        imageURL: "",
+        audition: "Public",
+        author: localStorage.getItem("username"),
+        authorId: localStorage.getItem("id"),
+        users_permissions_user: localStorage.getItem("id"),
+      });
+    }
   };
-  // useEffect(() => {
-  //   setPost({ ...post, author: state?.user?.data?.username });
-  // }, [post, state?.user?.data?.username]);
   return (
     <div className={cx("main-container")}>
       <div className={cx("container")}>
@@ -78,6 +91,7 @@ function NewPost({ type, data }) {
             placeholder="What's in your mind?"
             data-bs-toggle="modal"
             data-bs-target="#newPostModal"
+            required
           />
         </div>
         <hr className={cx("line")} />
@@ -113,123 +127,15 @@ function NewPost({ type, data }) {
           </Button>
         </div>
       </div>
-
-      <div>
-        <div
-          className="modal fade"
-          id="newPostModal"
-          tabIndex="-1"
-          aria-labelledby="newPostModalLabel"
-          aria-hidden="true"
-        >
-          <div className="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title" id="newPostModalLabel">
-                  New Post
-                </h5>
-                <button
-                  type="button"
-                  className="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                ></button>
-              </div>
-              <div className={cx("modal-body")}>
-                <div className="d-flex align-items-center">
-                  <img
-                    src={`${LOCAL_HOST}${state?.user?.data?.avatar?.url}`}
-                    alt=""
-                    className={cx("profile-img") + " m-2"}
-                  />
-                  <div>
-                    <div className={cx("username")}>
-                      {state?.user?.data?.username}
-                    </div>
-                    <select
-                      className={cx("select-wrapper") + " form-select"}
-                      aria-label="select"
-                      onSelect={() => post?.audition}
-                      onChange={(e) =>
-                        setPost({ ...post, audition: e.target.value })
-                      }
-                    >
-                      <option value="Public">Public</option>
-                      <option value="Private">Private</option>
-                      <option value="Friend">Friend</option>
-                    </select>
-                  </div>
-                </div>
-                <textarea
-                  placeholder="What's in your mind?"
-                  className={cx("form-control") + " my-2"}
-                  id="post"
-                  rows="5"
-                  onChange={(e) =>
-                    setPost({ ...post, content: e.target.value })
-                  }
-                  value={post?.content}
-                ></textarea>
-
-                {isShowAddImg && !image && (
-                  <div
-                    className={
-                      cx("add-image") +
-                      " btn btn-primary btn-rounded p-5 w-100 h-100"
-                    }
-                  >
-                    <label
-                      className="form-label text-white m-1 d-flex flex-column align-items-center justify-content-center"
-                      htmlFor="customFile1"
-                    >
-                      <FontAwesomeIcon
-                        icon={faImages}
-                        className={cx("image-icon")}
-                      />
-                      <span>Add Image</span>
-                    </label>
-                    <input
-                      type="file"
-                      className="form-control d-none"
-                      id="customFile1"
-                      onChange={(e) => handlePreviewAvatar(e)}
-                    />
-                    <Button onClick={() => handleShowAddImage(false)}>
-                      <FontAwesomeIcon
-                        icon={faCircleXmark}
-                        className={cx("xmark")}
-                      />
-                    </Button>
-                  </div>
-                )}
-                {image && (
-                  <img
-                    src={image.preview}
-                    alt=""
-                    className={cx("post-image")}
-                  />
-                )}
-              </div>
-              <div className={cx("modal-footer")}>
-                <Button
-                  onClick={() => handleShowAddImage(!isShowAddImg)}
-                  text
-                  leftIcon={<FontAwesomeIcon icon={faImages} color="#ef4c4c" />}
-                >
-                  Photo/Video
-                </Button>
-                <Button
-                  primary
-                  type="button"
-                  onClick={() => handleAddNewPost()}
-                >
-                  Post
-                </Button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <PostItem
+        post={post}
+        image={image}
+        setPost={setPost}
+        isShowAddImg={isShowAddImg}
+        handlePreviewAvatar={handlePreviewAvatar}
+        handleShowAddImage={handleShowAddImage}
+        handleAddNewPost={handleAddNewPost}
+      />
     </div>
   );
 }

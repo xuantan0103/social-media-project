@@ -34,3 +34,14 @@ export const addNewPost = createAsyncThunk(
     }
   }
 );
+export const uploadPostImage = createAsyncThunk(
+  "post/uploadPostImage",
+  async (post, { rejectWithValue }) => {
+    try {
+      const { data } = await api.uploadPostImage(post);
+      return data.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);

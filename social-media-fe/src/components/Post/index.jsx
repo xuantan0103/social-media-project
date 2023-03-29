@@ -14,10 +14,14 @@ const cx = classNames.bind(styles);
 function Post({ post }) {
   const [like, setLike] = useState(1);
   const [isLiked, setIsLiked] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
 
   const handleLike = () => {
     setLike(isLiked ? like - 1 : like + 1);
     setIsLiked(!isLiked);
+  };
+  const handleEditPost = () => {
+    setIsEdit(true);
   };
   return (
     <div className={cx("main-container")}>
@@ -39,7 +43,13 @@ function Post({ post }) {
               <FontAwesomeIcon icon={faEllipsisVertical} />
             </Button>
             <div className={cx("show-action")}>
-              <Button textLeft>Edit</Button>
+              <Button
+                textLeft
+                data-bs-toggle="modal"
+                data-bs-target="#newPostModal"
+              >
+                Edit
+              </Button>
               <Button textLeft>Delete</Button>
             </div>
           </div>
@@ -48,13 +58,11 @@ function Post({ post }) {
           <span className={cx("content-text")}>
             {post?.attributes?.content}
           </span>
-          {post?.attributes?.images?.data && (
-            <img
-              src={`${BASE_URL}${post?.attributes?.images?.data[0]?.attributes?.url}`}
-              className={cx("post-img")}
-              alt=""
-            />
-          )}
+          <img
+            src={`${post?.attributes?.imageURL}`}
+            className={cx("post-img")}
+            alt=""
+          />
         </div>
         <div className={cx("bottom")}>
           <div className={cx("bottom-left")}>
