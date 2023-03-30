@@ -137,7 +137,6 @@ function Profile() {
       </div>
       <div className="mt-5">
         <NewPost />
-        {console.log("posts", state?.user?.data?.posts)}
         {state.post.isLoading && <h1>Loading..</h1>}
         {state?.post?.data?.map((item) => {
           return <Post key={item.id} post={item} />;

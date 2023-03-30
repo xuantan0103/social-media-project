@@ -57,6 +57,19 @@ export const addNewPost = (post) => {
     }
   );
 };
+export const updatePost = (postId, post) => {
+  console.log("postq", post);
+  return axios.put(
+    BASE_URL + `/posts/${postId}?populate=*`,
+    { data: post },
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+      },
+    }
+  );
+};
 export const uploadPostImage = (postId, image) => {
   return axios.put(
     BASE_URL + `/posts/${postId}?populate=*`,

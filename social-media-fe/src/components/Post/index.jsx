@@ -7,24 +7,22 @@ import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import Button from "../Button/Button";
 import Comment from "../Comment";
 import moment from "moment";
-import { BASE_URL } from "../../api/constant";
+import PostItem from "./PostItem";
 
 const cx = classNames.bind(styles);
 
-function Post({ post }) {
+function Post({ id, post }) {
   const [like, setLike] = useState(1);
   const [isLiked, setIsLiked] = useState(false);
-  const [isEdit, setIsEdit] = useState(false);
 
   const handleLike = () => {
     setLike(isLiked ? like - 1 : like + 1);
     setIsLiked(!isLiked);
   };
-  const handleEditPost = () => {
-    setIsEdit(true);
-  };
+
   return (
     <div className={cx("main-container")}>
+      <PostItem data={post} id={id} />
       <div className={cx("container")}>
         <div className={cx("top")}>
           <div className={cx("top-left")}>
@@ -46,7 +44,7 @@ function Post({ post }) {
               <Button
                 textLeft
                 data-bs-toggle="modal"
-                data-bs-target="#newPostModal"
+                data-bs-target={`#updatePost${id}`}
               >
                 Edit
               </Button>
