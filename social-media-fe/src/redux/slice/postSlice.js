@@ -48,6 +48,23 @@ const postSlice = createSlice({
       state.isError = true;
     });
 
+    /* updatePost */
+    builder.addCase(action.updatePost.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(action.updatePost.fulfilled, (state, action) => {
+      state.isLoading = false;
+      const index = state.findIndex((post) => post.id === action.payload.id);
+      state[index] = {
+        ...state[index],
+        ...action.payload,
+      };
+    });
+    builder.addCase(action.updatePost.rejected, (state, action) => {
+      console.log("Error", action.payload);
+      state.isError = true;
+    });
+
     /* uploadPostImage */
     builder.addCase(action.uploadPostImage.pending, (state, action) => {
       state.isLoading = true;
