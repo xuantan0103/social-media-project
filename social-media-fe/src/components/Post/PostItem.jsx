@@ -41,7 +41,7 @@ function PostItem({ id, data }) {
       formData.append("files", image);
       console.log("image", image);
       await uploadImage(formData)
-        .then((res) => {s
+        .then((res) => {
           dispatch(updatePost({ ...post, images: [res?.data[0]?.id] }));
           console.log("img", post);
         })
