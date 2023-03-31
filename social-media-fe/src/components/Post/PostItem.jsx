@@ -14,11 +14,9 @@ import { updatePost } from "../../redux/action/postAction";
 const cx = classNames.bind(styles);
 
 function PostItem({ id, data }) {
-  console.log(data);
   const state = useSelector((state) => state);
   const dispatch = useDispatch();
   const [post, setPost] = useState(data?.attributes);
-  console.log("post", post);
   const [isShowAddImg, setIsShowAddImg] = useState(false);
   const [image, setImage] = useState();
   const handleShowAddImage = (value) => {
@@ -42,15 +40,9 @@ function PostItem({ id, data }) {
       let formData = new FormData();
       formData.append("files", image);
       console.log("image", image);
-
       await uploadImage(formData)
-        .then((res) => {
-          dispatch(
-            updatePost(data.id, {
-              ...post,
-              imageURL: `${LOCAL_HOST}${res.data[0].url}`,
-            })
-          );
+        .then((res) => {s
+          dispatch(updatePost({ ...post, images: [res?.data[0]?.id] }));
           console.log("img", post);
         })
         .catch((err) => {
@@ -58,12 +50,11 @@ function PostItem({ id, data }) {
         });
     };
     if (!image) {
-      dispatch(updatePost(data.id, post));
+      dispatch(updatePost({ id: data.id, attributes: post }));
       console.log("1");
-
       setPost({
         content: "",
-        imageURL: "",
+        images: [],
         audition: "Public",
         author: localStorage.getItem("username"),
         authorId: localStorage.getItem("id"),
@@ -72,10 +63,10 @@ function PostItem({ id, data }) {
       setImage();
     } else {
       addImage();
-      console.log("1");
+      console.log("2");
       setPost({
         content: "",
-        imageURL: "",
+        images: [],
         audition: "Public",
         author: localStorage.getItem("username"),
         authorId: localStorage.getItem("id"),
@@ -141,7 +132,7 @@ function PostItem({ id, data }) {
               value={post?.content}
             ></textarea>
 
-            {isShowAddImg && !image && !post.imageURL && (
+            {isShowAddImg && !image && !post.images.length && (
               <div
                 className={
                   cx("add-image") +
@@ -161,7 +152,7 @@ function PostItem({ id, data }) {
                 <input
                   type="file"
                   className="form-control d-none"
-                  id="customFile1"
+                  id="customFile"
                   onChange={(e) => handlePreviewAvatar(e)}
                 />
                 <Button onClick={() => handleShowAddImage(false)}>
@@ -182,9 +173,14 @@ function PostItem({ id, data }) {
                 />
               </div>
             )}
-            {post.imageURL && (
+            {console.log("len", post.images.length)}
+            {post.images && (
               <div className={cx("image-wrapper")}>
-                <img src={post.imageURL} alt="" className={cx("post-image")} />
+                <img
+                  src={post?.images[0]?.data?.attributes?.url}
+                  alt=""
+                  className={cx("post-image")}
+                />
                 <FontAwesomeIcon
                   icon={faCircleXmark}
                   className={cx("clear")}

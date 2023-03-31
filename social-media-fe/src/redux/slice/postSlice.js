@@ -54,13 +54,32 @@ const postSlice = createSlice({
     });
     builder.addCase(action.updatePost.fulfilled, (state, action) => {
       state.isLoading = false;
-      const index = state.findIndex((post) => post.id === action.payload.id);
-      state[index] = {
-        ...state[index],
+      const index = state.data.findIndex(
+        (post) => post.id === action.payload.id
+      );
+      state.data[index] = {
+        ...state.data[index],
         ...action.payload,
       };
     });
     builder.addCase(action.updatePost.rejected, (state, action) => {
+      console.log("Error", action.payload);
+      state.isError = true;
+    });
+
+    /* deletePost */
+    builder.addCase(action.deletePost.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(action.deletePost.fulfilled, (state, action) => {
+      state.isLoading = false;
+
+      const index = state.data.findIndex(
+        (post) => post.id === action.payload.id
+      );
+      state.data.splice(index, 1);
+    });
+    builder.addCase(action.deletePost.rejected, (state, action) => {
       console.log("Error", action.payload);
       state.isError = true;
     });

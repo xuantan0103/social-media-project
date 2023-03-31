@@ -8,10 +8,14 @@ import Button from "../Button/Button";
 import Comment from "../Comment";
 import moment from "moment";
 import PostItem from "./PostItem";
+import { useDispatch } from "react-redux";
+import { deletePost } from "../../redux/action/postAction";
+import { LOCAL_HOST } from "../../api/constant";
 
 const cx = classNames.bind(styles);
 
-function Post({ id, post }) {
+function Post({ post, isEdit }) {
+  const dispatch = useDispatch();
   const [like, setLike] = useState(1);
   const [isLiked, setIsLiked] = useState(false);
 
@@ -19,10 +23,12 @@ function Post({ id, post }) {
     setLike(isLiked ? like - 1 : like + 1);
     setIsLiked(!isLiked);
   };
-
+  const handleDelete = () => {
+    dispatch(deletePost(post.id));
+  };
   return (
     <div className={cx("main-container")}>
-      <PostItem data={post} id={id} />
+      <PostItem data={post} id={post.id} />
       <div className={cx("container")}>
         <div className={cx("top")}>
           <div className={cx("top-left")}>
@@ -40,15 +46,18 @@ function Post({ id, post }) {
             <Button>
               <FontAwesomeIcon icon={faEllipsisVertical} />
             </Button>
-            <div className={cx("show-action")}>
+            <div className={cx(isEdit ? "show-action" : "show-action-enable")}>
               <Button
                 textLeft
                 data-bs-toggle="modal"
-                data-bs-target={`#updatePost${id}`}
+                data-bs-target={`#updatePost${post.id}`}
+                className={cx("enable-btn")}
               >
                 Edit
               </Button>
-              <Button textLeft>Delete</Button>
+              <Button textLeft onClick={handleDelete}>
+                Delete
+              </Button>
             </div>
           </div>
         </div>
@@ -56,8 +65,9 @@ function Post({ id, post }) {
           <span className={cx("content-text")}>
             {post?.attributes?.content}
           </span>
+
           <img
-            src={`${post?.attributes?.imageURL}`}
+            src={`${LOCAL_HOST}${post?.attributes?.images?.data[0]?.attributes?.url}`}
             className={cx("post-img")}
             alt=""
           />
