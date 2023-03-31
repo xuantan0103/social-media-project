@@ -18,7 +18,7 @@ function Home() {
       <NewPost />
       {state.post.isLoading && <h1>Loading..</h1>}
       {state?.post?.data?.map((item) => {
-        return <Post key={item.id} id={item.id} post={item} />;
+        return <Post key={item.id} post={item} />;
       })}
     </div>
   );

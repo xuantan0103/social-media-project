@@ -58,7 +58,6 @@ export const addNewPost = (post) => {
   );
 };
 export const updatePost = (postId, post) => {
-  console.log("postq", post);
   return axios.put(
     BASE_URL + `/posts/${postId}?populate=*`,
     { data: post },
@@ -69,6 +68,14 @@ export const updatePost = (postId, post) => {
       },
     }
   );
+};
+export const deletePost = (postId) => {
+  return axios.delete(BASE_URL + `/posts/${postId}?populate=*`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+    },
+  });
 };
 export const uploadPostImage = (postId, image) => {
   return axios.put(

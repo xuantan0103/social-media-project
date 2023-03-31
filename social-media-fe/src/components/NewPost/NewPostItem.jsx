@@ -18,34 +18,34 @@ function NewPostItem() {
   const dispatch = useDispatch();
   const [post, setPost] = useState({
     content: "",
-    imageURL: "",
+    images: [],
     audition: "Public",
     author: localStorage.getItem("username"),
     authorId: localStorage.getItem("id"),
     users_permissions_user: localStorage.getItem("id"),
   });
-  console.log("post", post);
   const [isShowAddImg, setIsShowAddImg] = useState(false);
   const [image, setImage] = useState();
   const handleShowAddImage = (value) => {
     value === true ? setIsShowAddImg(true) : setIsShowAddImg(false);
+  };
+  const handleClear = () => {
+    setPost({ ...post, imageURL: "" });
+    setImage();
   };
   const handlePreviewAvatar = (e) => {
     const file = e.target.files[0];
     file.preview = URL.createObjectURL(file);
     setImage(file);
   };
-
   const handleAddNewPost = () => {
     const addImage = async () => {
       let formData = new FormData();
       formData.append("files", image);
       await uploadImage(formData)
         .then((res) => {
-          dispatch(
-            addNewPost({ ...post, imageURL: `${LOCAL_HOST}${res.data[0].url}` })
-          );
-          console.log("img", post);
+          console.log("img", res?.data[0]?.id);
+          dispatch(addNewPost({ ...post, images: [res?.data[0]?.id] }));
         })
         .catch((err) => {
           console.log("err", err);
@@ -66,7 +66,7 @@ function NewPostItem() {
       addImage();
       setPost({
         content: "",
-        imageURL: "",
+        images: [],
         audition: "Public",
         author: localStorage.getItem("username"),
         authorId: localStorage.getItem("id"),
@@ -163,7 +163,14 @@ function NewPostItem() {
               </div>
             )}
             {image && (
-              <img src={image.preview} alt="" className={cx("post-image")} />
+              <div className={cx("image-wrapper")}>
+                <img src={image.preview} alt="" className={cx("post-image")} />
+                <FontAwesomeIcon
+                  icon={faCircleXmark}
+                  className={cx("clear")}
+                  onClick={() => handleClear()}
+                />
+              </div>
             )}
           </div>
           <div className={cx("modal-footer")}>

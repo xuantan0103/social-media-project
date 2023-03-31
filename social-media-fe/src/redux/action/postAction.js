@@ -36,9 +36,20 @@ export const addNewPost = createAsyncThunk(
 );
 export const updatePost = createAsyncThunk(
   "post/updatePost",
-  async ({ postId, post }, { rejectWithValue }) => {
+  async (post, { rejectWithValue }) => {
     try {
-      const { data } = await api.updatePost(postId, post);
+      const { data } = await api.updatePost(post.id, post.attributes);
+      return data.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+export const deletePost = createAsyncThunk(
+  "post/deletePost",
+  async (postId, { rejectWithValue }) => {
+    try {
+      const { data } = await api.deletePost(postId);
       return data.data;
     } catch (error) {
       return rejectWithValue(error.message);
