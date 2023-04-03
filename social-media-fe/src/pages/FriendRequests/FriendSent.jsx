@@ -52,20 +52,20 @@ function FriendSent({ friendsRequest }) {
       }
     };
 
-    const addFriendFunc = async (idUser) => {
+    const addFriendFunc = async (id) => {
       setLoadingRequest(true);
       await axios
-        .post("", { follow_users_ReceivedUser: idUser })
+        .post("", { follow_users_ReceivedUser: id })
         .then((res) => {
           setLoadingRequest(false);
           setStatusFollow("send_request");
         });
     };
 
-    const unMyRequestFriendFunc = async (idUser) => {
+    const unMyRequestFriendFunc = async (id) => {
       setLoadingRequest(true);
       await axios
-        .post("", { id: idUser, action: "unRequestFriend" })
+        .post("", { id: id, action: "unRequestFriend" })
         .then((res) => {
           setLoadingRequest(false);
           setStatusFollow("remove_request");

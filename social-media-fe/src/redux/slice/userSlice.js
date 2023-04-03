@@ -49,7 +49,7 @@ const userSlice = createSlice({
     builder.addCase(action.editUser.rejected, (state, action) => {
       state.isError = true;
     });
-  },
+},
 });
 
 export default userSlice.reducer;

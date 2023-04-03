@@ -1,50 +1,95 @@
 import React, { useState } from "react";
 import styles from "./Friend.scss";
 import classNames from "classnames/bind";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import UserImage from "./UserImage";
+import { useNavigate } from "react-router-dom";
+// import { friendSlice } from "../../redux/slice/friendSlice";
+import FlexBetween from "./FlexBetween";
+import { Box, IconButton, Typography, useTheme } from "@mui/material";
+import { FaUserMinus, FaUserPlus } from "react-icons/fa";
 
 const cx = classNames.bind(styles);
-export const Button = (props) => {
-  const [isShowaccept, setIsShowaccept] = useState(false);
-  const [isShowremove, setIsShowremove] = useState(false);
-  const requestAccept = (id) => {
-    setIsShowaccept(!isShowaccept);
-    props.addFriend(id);
-  };
-  const requestRemove = (id) => {
-    setIsShowremove(!isShowremove);
-    props.removeFriend(id);
+ const Button = (props, user) => {
+/** Contains top part of the post */
+const Friend = ({ id, relation, userPicturePath }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { _id } = useSelector((state) => state.user);
+  const token = useSelector((state) => state.token);
+  const friends = useSelector((state) => state.user.friends);
+
+  const { palette } = useTheme();
+  const primaryLight = palette.primary.light;
+  const primaryDark = palette.primary.dark;
+  const main = palette.neutral.main;
+  const medium = palette.neutral.medium;
+  
+  const friendSlice = friends.find((friend) => friend._id === id);
+  const isSelf = _id === id
+
+  const patchFriend = async () => {
+    const response = await fetch(
+      `http://localhost:3000/users/${_id}/${id}`,
+      {
+        method: "PATCH",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const data = await response.json();
+    dispatch(friendSlice({ friends: data }));
   };
 
   return (
-    <div className={cx("fr-card")}>
-      <div className={cx("fr-card")}>
-        <div className="card" style={{ width: "15rem" }}>
-          <img
-            className="card-img-top"
-            src="https://i.pinimg.com/564x/f3/5a/0b/f35a0b00f54cbd73ffd65f9b59a5b9af.jpg"
-            alt=""
-          />
-          <div className="card-body">
-            <h5 className="card-title">Phạm Xuân Tân</h5>
-            <p className="card-text">100 bạn chung</p>
-            <button
-              onClick={() => requestAccept(props.id)}
-              className="btn-accept"
+    <FlexBetween>
+      <FlexBetween gap="1rem">
+        {/**User profile photo */}
+        <UserImage image={userPicturePath} size="55px" />
+        <Box
+          onClick={() => {
+            navigate(`/profile/${id}`);
+            navigate(0); 
+          }}
+        >
+            {/**Name */}
+            <Typography
+                color={main}
+                variant="h5"
+                fontWeight="500"
+                sx={{
+                    "&:hover": {
+                    color: palette.primary.main,
+                    cursor: "pointer",
+                    },
+                }}
+                >
+                {}
+            </Typography>
+            {/**location */}
+            <Typography color={medium} fontSize="0.75rem">
+                {}
+            </Typography>
+        </Box>
+        {/**Friend button */}
+        </FlexBetween>
+            {!isSelf && (
+            <IconButton
+                onClick={() => patchFriend()}
+                sx={{ backgroundColor: primaryLight, p: "0.6rem" }}
             >
-              {isShowaccept
-                ? "Accepted Friend Request"
-                : "Accept Friend Request"}
-            </button>
-            <button
-              onClick={() => requestRemove(props.id)}
-              className="btn-remove"
-            >
-              {isShowremove ? "Removed Friend" : "Remove Friend "}
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-export default Button;
+                {friendSlice ? (
+                <FaUserMinus sx={{ color: primaryDark }} />
+                ) : (
+                <FaUserPlus sx={{ color: primaryDark }} />
+                )}
+            </IconButton>
+            )}
+        </FlexBetween>
+          );
+        };    
+      }      
+export default Button ;
