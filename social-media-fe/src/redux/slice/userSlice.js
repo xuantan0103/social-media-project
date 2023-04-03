@@ -5,18 +5,35 @@ const userSlice = createSlice({
   name: "user",
   initialState: {
     isLoading: false,
-    data: null,
+    currentUser: null,
+    otherUser: null,
     isError: false,
   },
 
-  /* getUserById */
+  /* getCurrentUser */
   extraReducers: (builder) => {
+    builder.addCase(action.getCurrentUser.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(action.getCurrentUser.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.currentUser = action.payload;
+      console.log("payload", action.payload);
+      console.log("state.currentUser", state.currentUser);
+    });
+    builder.addCase(action.getCurrentUser.rejected, (state, action) => {
+      state.isError = true;
+    });
+
+    /* getUserById */
     builder.addCase(action.getUserById.pending, (state, action) => {
       state.isLoading = true;
     });
     builder.addCase(action.getUserById.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.data = action.payload;
+      state.otherUser = action.payload;
+      console.log("payload", action.payload);
+      console.log("state.otherUser", state.otherUser);
     });
     builder.addCase(action.getUserById.rejected, (state, action) => {
       state.isError = true;

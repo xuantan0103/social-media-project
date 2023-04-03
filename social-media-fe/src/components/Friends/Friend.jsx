@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import styles from "./Friend.scss";
 import classNames from "classnames/bind";
 import { useDispatch } from "react-redux";

@@ -65,12 +65,13 @@ function Post({ post, isEdit }) {
           <span className={cx("content-text")}>
             {post?.attributes?.content}
           </span>
-
-          <img
-            src={`${LOCAL_HOST}${post?.attributes?.images?.data[0]?.attributes?.url}`}
-            className={cx("post-img")}
-            alt=""
-          />
+          {post?.attributes?.images?.data && (
+            <img
+              src={`${LOCAL_HOST}${post?.attributes?.images?.data[0]?.attributes?.url}`}
+              className={cx("post-img")}
+              alt=""
+            />
+          )}
         </div>
         <div className={cx("bottom")}>
           <div className={cx("bottom-left")}>

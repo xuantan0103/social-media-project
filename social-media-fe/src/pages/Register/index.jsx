@@ -85,6 +85,8 @@ function Register() {
           password: formValue.password,
           gender: formValue.gender,
           birthday: formValue.birthday,
+          cover_image: 1820,
+          avatar: 3,
         },
         {
           headers: {
