@@ -14,8 +14,11 @@
   "attributes": {
     "Relation": {
       "type": "relation",
-      "relation": "oneToMany",
+      "relation": "oneToOne",
       "target": "plugin::users-permissions.user"
+    },
+    "RelationID": {
+      "type": "biginteger"
     }
   }
 }
