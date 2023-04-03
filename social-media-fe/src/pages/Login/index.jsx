@@ -133,10 +133,7 @@ function Login() {
                 },
               ]}
             >
-              <Input
-                placeholder="example@test.com"
-                defaultValue="suongphan@gmail.com"
-              />
+              <Input placeholder="example@test.com" value="suong@gmail.com" />
             </Form.Item>
             <Form.Item
               label="PASSWORD"

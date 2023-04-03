@@ -10,6 +10,7 @@ import { uploadImage } from "../../api";
 import { addNewPost } from "../../redux/action/postAction";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import defaultAvatar from "../../assets/default-user-image.png";
 
 const cx = classNames.bind(styles);
 
@@ -99,11 +100,26 @@ function NewPostItem() {
           </div>
           <div className={cx("modal-body")}>
             <div className="d-flex align-items-center">
-              <img
-                src={`${LOCAL_HOST}${state?.user?.data?.avatar?.url}`}
-                alt=""
-                className={cx("profile-img") + " m-2"}
-              />
+              {state.user.isLoading ? (
+                <img
+                  src={defaultAvatar}
+                  alt="avatar"
+                  className={cx("profile-img") + " m-2"}
+                />
+              ) : state?.user?.data?.avatar?.url ? (
+                <img
+                  src={`${LOCAL_HOST}${state?.user?.data?.avatar?.url}`}
+                  alt="avatar"
+                  className={cx("profile-img") + " m-2"}
+                />
+              ) : (
+                <img
+                  src={defaultAvatar}
+                  alt="avatar"
+                  className={cx("profile-img") + " m-2"}
+                />
+              )}
+
               <div>
                 <div className={cx("username")}>
                   {state?.user?.data?.username}

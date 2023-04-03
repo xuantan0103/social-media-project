@@ -19,10 +19,14 @@ export const register = (data) => {
       // console.log("err", err);
     });
 };
+export const getCurrentUser = () => {
+  return axios.get(
+    BASE_URL + `/users/${localStorage.getItem("id")}?populate=*`
+  );
+};
 export const getUserById = (userId) => {
   return axios.get(BASE_URL + `/users/${userId}?populate=*`);
 };
-
 // User
 export const editUser = (data) => {
   return axios.put(BASE_URL + `/user/me`, data, {

@@ -51,7 +51,10 @@ function LeftBar({ collapse = false }) {
       <div>
         <div className={cx("sidebar-list")}>
           <ul>
-            <li className={cx("sidebar-item")}>
+            <li
+              className={cx("sidebar-item")}
+              onClick={() => navigate(`/profile/1`)}
+            >
               <FontAwesomeIcon icon={faFeed} className={cx("icon")} />
               <span className={collapse ? cx("hide") : cx("sidebar-text")}>
                 Feed

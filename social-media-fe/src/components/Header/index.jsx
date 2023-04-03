@@ -11,7 +11,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { faFacebookMessenger } from "@fortawesome/free-brands-svg-icons";
 import logo10 from "../../assets/logo10.png";
-
+import defaultAvatar from "../../assets/default-user-image.png";
 import Button from "../Button/Button";
 import { useNavigate } from "react-router-dom";
 import { removeToken } from "../../api/helpers";
@@ -20,6 +20,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { Spin } from "antd";
 import { getUserById } from "../../redux/action/userAction";
+import { LOCAL_HOST } from "../../api/constant";
 
 const cx = classNames.bind(styles);
 
@@ -86,12 +87,14 @@ function Header() {
         <Button circle className={cx("user-image")}>
           {state.user.isLoading ? (
             <Spin size="small" />
-          ) : (
+          ) : state?.user?.data?.avatar?.url ? (
             <img
-              src={`http://localhost:1337${state?.user?.data?.avatar?.url}`}
-              alt=""
+              src={`${LOCAL_HOST}${state?.user?.data?.avatar?.url}`}
+              alt="avatar"
               className={cx("avatar")}
             />
+          ) : (
+            <img src={defaultAvatar} alt="avatar" className={cx("avatar")} />
           )}
           <FontAwesomeIcon icon={faAngleDown} className={cx("user-icon")} />
           <div className={cx("user-action")}>

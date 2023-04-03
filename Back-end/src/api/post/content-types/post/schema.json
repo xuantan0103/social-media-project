@@ -29,7 +29,6 @@
       "type": "relation",
       "relation": "manyToOne",
       "target": "plugin::users-permissions.user",
-      "private": true,
       "inversedBy": "posts"
     },
     "author": {
@@ -48,9 +47,6 @@
         "videos",
         "audios"
       ]
-    },
-    "imageURL": {
-      "type": "string"
     }
   }
 }

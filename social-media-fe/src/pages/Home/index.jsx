@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import NewPost from "../../components/NewPost";
-import PostItem from "../../components/NewPost/NewPostItem";
 import Post from "../../components/Post";
 import { getAllPosts } from "../../redux/action/postAction";
 

@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFaceSmile, faImages } from "@fortawesome/free-regular-svg-icons";
 import { useSelector } from "react-redux";
 import { LOCAL_HOST } from "../../api/constant";
-
+import defaultAvatar from "../../assets/default-user-image.png";
 import NewPostItem from "./NewPostItem";
 
 const cx = classNames.bind(styles);
@@ -17,11 +17,19 @@ function NewPost() {
     <div className={cx("main-container")}>
       <div className={cx("container")}>
         <div className={cx("top")}>
-          <img
-            src={`${LOCAL_HOST}${state?.user?.data?.avatar?.url}`}
-            alt="profile-img"
-            className={cx("profile-img")}
-          />
+          {state?.user?.data?.avatar?.url ? (
+            <img
+              src={`${LOCAL_HOST}${state?.user?.data?.avatar?.url}`}
+              alt="profile-img"
+              className={cx("profile-img")}
+            />
+          ) : (
+            <img
+              src={defaultAvatar}
+              alt="profile-img"
+              className={cx("profile-img")}
+            />
+          )}
           <input
             className={cx("input-content")}
             placeholder="What's in your mind?"
