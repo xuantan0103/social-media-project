@@ -16,9 +16,6 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "plugin::users-permissions.user"
-    },
-    "RelationID": {
-      "type": "biginteger"
     }
   }
 }
