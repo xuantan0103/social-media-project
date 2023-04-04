@@ -33,7 +33,7 @@ function Post({ post, isEdit }) {
         <div className={cx("top")}>
           <div className={cx("top-left")}>
             <img
-              src="https://1.bp.blogspot.com/-W1swAyDEpKM/X0AamDSp0vI/AAAAAAAAdUw/NQQiPzGIiUsoTcufNKKW3NPCEvC1WWQtACLcBGAsYHQ/s1600/flower%2Bimages%2Bfor%2Bwhatsapp%2Bprofile%2B%252831%2529.jpg"
+              src={`${LOCAL_HOST}${post?.attributes?.users_permissions_user?.data?.attributes?.avatar?.url}`}
               alt=""
               className={cx("profile-img")}
             />

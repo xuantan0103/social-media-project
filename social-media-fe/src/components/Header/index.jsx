@@ -19,7 +19,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { Spin } from "antd";
-import { getUserById } from "../../redux/action/userAction";
+import { getCurrentUser } from "../../redux/action/userAction";
 import { LOCAL_HOST } from "../../api/constant";
 
 const cx = classNames.bind(styles);
@@ -36,7 +36,7 @@ function Header() {
     }
   }, [authToken]);
   useEffect(() => {
-    dispatch(getUserById(localStorage.getItem("id")));
+    dispatch(getCurrentUser());
   }, []);
   const handleLogout = () => {
     removeToken();
@@ -87,14 +87,14 @@ function Header() {
         <Button circle className={cx("user-image")}>
           {state.user.isLoading ? (
             <Spin size="small" />
-          ) : state?.user?.data?.avatar?.url ? (
+          ) : state?.user?.currentUser?.avatar?.url ? (
             <img
-              src={`${LOCAL_HOST}${state?.user?.data?.avatar?.url}`}
+              src={`${LOCAL_HOST}${state?.user?.currentUser?.avatar?.url}`}
               alt="avatar"
               className={cx("avatar")}
             />
           ) : (
-            <img src={defaultAvatar} alt="avatar" className={cx("avatar")} />
+            <Spin size="small" />
           )}
           <FontAwesomeIcon icon={faAngleDown} className={cx("user-icon")} />
           <div className={cx("user-action")}>

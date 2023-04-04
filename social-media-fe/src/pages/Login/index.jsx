@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { API } from "../../api/constant";
 import { setIdUser, setToken, setUsername } from "../../api/helpers";
+import { useDispatch } from "react-redux";
+
 const cx = classNames.bind(styles);
 const initFormValue = {
   email: "suongphan@gmail.com",
@@ -13,6 +15,7 @@ const initFormValue = {
 };
 
 function Login() {
+  const dispatch = useDispatch();
   const isEmptyValue = (value) => {
     return !value || value.trim().length < 1;
   };
@@ -80,11 +83,9 @@ function Login() {
       } else {
         // set the token
         setToken(data.jwt);
-        console.log(data.user.id);
         // set the user
         setIdUser(data.user.id);
         setUsername(data.user.username);
-
         message.success(`Welcome back ${data.user.username}!`);
         navigate("/", { replace: true });
       }
