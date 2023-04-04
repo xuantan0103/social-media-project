@@ -18,8 +18,6 @@ const userSlice = createSlice({
     builder.addCase(action.getCurrentUser.fulfilled, (state, action) => {
       state.isLoading = false;
       state.currentUser = action.payload;
-      console.log("payload", action.payload);
-      console.log("state.currentUser", state.currentUser);
     });
     builder.addCase(action.getCurrentUser.rejected, (state, action) => {
       state.isError = true;
@@ -49,7 +47,7 @@ const userSlice = createSlice({
     builder.addCase(action.editUser.rejected, (state, action) => {
       state.isError = true;
     });
-},
+  },
 });
 
 export default userSlice.reducer;

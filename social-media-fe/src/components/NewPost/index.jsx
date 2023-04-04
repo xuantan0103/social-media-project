@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { LOCAL_HOST } from "../../api/constant";
 import defaultAvatar from "../../assets/default-user-image.png";
 import NewPostItem from "./NewPostItem";
+import { Spin } from "antd";
 
 const cx = classNames.bind(styles);
 
@@ -17,18 +18,14 @@ function NewPost() {
     <div className={cx("main-container")}>
       <div className={cx("container")}>
         <div className={cx("top")}>
-          {state?.user?.data?.avatar?.url ? (
+          {state?.user?.currentUser?.avatar?.url ? (
             <img
-              src={`${LOCAL_HOST}${state?.user?.data?.avatar?.url}`}
+              src={`${LOCAL_HOST}${state?.user?.currentUser?.avatar?.url}`}
               alt="profile-img"
               className={cx("profile-img")}
             />
           ) : (
-            <img
-              src={defaultAvatar}
-              alt="profile-img"
-              className={cx("profile-img")}
-            />
+            <Spin size="small" />
           )}
           <input
             className={cx("input-content")}
@@ -62,7 +59,6 @@ function NewPost() {
           </div>
           <Button
             primary
-            type="button"
             className={cx("number-comment")}
             data-bs-toggle="modal"
             data-bs-target="#newPostModal"

@@ -20,6 +20,17 @@
     top: 150px;
     border: 3px solid white;
   }
+  .other-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    position: absolute;
+    left: 10px;
+    margin: auto;
+    top: 200px;
+    border: 3px solid white;
+  }
   .edit-avatar {
     position: absolute;
     width: 20px;
@@ -68,9 +79,25 @@
 }
 
 .username {
-  font-size: 24px;
+  font-size: 30px;
   text-align: center;
   margin-top: 50px;
+}
+.add-friend {
+  margin: 15px 0px 0px 170px;
+  display: flex;
+  justify-content: space-between;
+  .other-username {
+    font-size: 30px;
+    text-align: start;
+  }
+  .add-btn {
+    background-color: #fff;
+    color: #000;
+    &:hover {
+      opacity: 1;
+    }
+  }
 }
 .icon-pen {
   font-size: 15px;

@@ -3,7 +3,12 @@ import classNames from "classnames/bind";
 import NewPost from "../../components/NewPost";
 import Post from "../../components/Post";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCamera, faPen, faXmark } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCamera,
+  faPen,
+  faUserPlus,
+  faXmark,
+} from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import { faImage } from "@fortawesome/free-regular-svg-icons";
 import Button from "../../components/Button/Button";
@@ -20,14 +25,13 @@ import defaultCover from "../../assets/default-cover.png";
 import defaultAvatar from "../../assets/default-user-image.png";
 import { LOCAL_HOST } from "../../api/constant";
 import { uploadImage } from "../../api";
+import { Spin } from "antd";
 
 const cx = classNames.bind(styles);
 
 function Profile() {
   const location = useLocation();
   const paths = location.pathname.split("/").splice(1);
-  console.log(location);
-  console.log(paths);
   const state = useSelector((state) => state);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -74,19 +78,8 @@ function Profile() {
   return (
     <>
       <div className={cx("profile-container")}>
-        {/* {state.user.isLoading ? (
-          <img src={defaultCover} alt="cover" className={cx("cover-img")} />
-        ) : state?.user?.data?.cover_image?.url ? (
-          <img
-            src={`${LOCAL_HOST}${state?.user?.data?.cover_image?.url}`}
-            alt="cover"
-            className={cx("cover-img")}
-          />
-        ) : (
-          <img src={defaultCover} alt="cover" className={cx("cover-img")} />
-        )} */}
         {state.user.isLoading ? (
-          <img src={defaultCover} alt="cover" className={cx("cover-img")} />
+          <Spin size="small" className={cx("cover-img") + " align-middle"} />
         ) : paths[1] === localStorage.getItem("id") ? (
           <img
             src={`${LOCAL_HOST}${state?.user?.currentUser?.cover_image?.url}`}
@@ -101,7 +94,7 @@ function Profile() {
           />
         )}
         {state.user.isLoading ? (
-          <img src={defaultAvatar} alt="avatar" className={cx("user-img")} />
+          <Spin size="small" className={cx("user-img")} />
         ) : paths[1] === localStorage.getItem("id") ? (
           <img
             src={`${LOCAL_HOST}${state?.user?.currentUser?.avatar?.url}`}
@@ -112,7 +105,7 @@ function Profile() {
           <img
             src={`${LOCAL_HOST}${state?.user?.otherUser?.avatar?.url}`}
             alt="avatar"
-            className={cx("user-img")}
+            className={cx("other-img")}
           />
         )}
 
@@ -120,27 +113,26 @@ function Profile() {
           <div>
             <h4 className={cx("username")}>
               {state?.user?.currentUser?.username}
-              {paths[1] === localStorage.getItem("id") && (
-                <FontAwesomeIcon
-                  icon={faPen}
-                  className={cx("icon-pen") + " ps-1"}
-                  onClick={() => navigate("/editprofile")}
-                />
-              )}
+              <FontAwesomeIcon
+                icon={faPen}
+                className={cx("icon-pen") + " ps-1"}
+                onClick={() => navigate("/editprofile")}
+              />
             </h4>
           </div>
         ) : (
-          <div>
-            <h4 className={cx("username")}>
-              {state?.user?.data?.username}
-              {paths[1] === localStorage.getItem("id") && (
-                <FontAwesomeIcon
-                  icon={faPen}
-                  className={cx("icon-pen") + " ps-1"}
-                  onClick={() => navigate("/editprofile")}
-                />
-              )}
+          <div className={cx("add-friend")}>
+            <h4 className={cx("other-username")}>
+              {state?.user?.otherUser?.username}
             </h4>
+            <Button
+              primary
+              small
+              className={cx("add-btn")}
+              leftIcon={<FontAwesomeIcon icon={faUserPlus} color="#000" />}
+            >
+              Add Friend
+            </Button>
           </div>
         )}
         {/* <div>
@@ -326,7 +318,11 @@ function Profile() {
         {paths[1] === localStorage.getItem("id") && <NewPost />}
         {state.post.isLoading && <h1>Loading..</h1>}
         {state?.post?.data?.map((item) => {
-          return <Post key={item.id} post={item} isEdit />;
+          return paths[1] === localStorage.getItem("id") ? (
+            <Post key={item.id} post={item} isEdit />
+          ) : (
+            <Post key={item.id} post={item} />
+          );
         })}
       </div>
     </>

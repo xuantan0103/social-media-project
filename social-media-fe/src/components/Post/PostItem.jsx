@@ -189,7 +189,6 @@ function PostItem({ id, data }) {
                 />
               </div>
             )}
-            {console.log("len", post.images.length)}
             {post.images.length && (
               <div className={cx("image-wrapper")}>
                 <img

@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import NewPost from "../../components/NewPost";
 import Post from "../../components/Post";
 import { getAllPosts } from "../../redux/action/postAction";
+import { Spin } from "antd";
 
 function Home() {
   const dispatch = useDispatch();
@@ -15,7 +16,7 @@ function Home() {
   return (
     <div className="mt-4">
       <NewPost />
-      {state.post.isLoading && <h1>Loading..</h1>}
+      {state.post.isLoading && <Spin size="small" />}
       {state?.post?.data?.map((item) => {
         return <Post key={item.id} post={item} />;
       })}
