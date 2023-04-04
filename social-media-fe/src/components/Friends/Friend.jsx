@@ -2,35 +2,26 @@ import styles from "./Friend.scss";
 import classNames from "classnames/bind";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import UserImage from "./UserImage";
 import { useNavigate } from "react-router-dom";
-// import { friendSlice } from "../../redux/slice/friendSlice";
-import FlexBetween from "./FlexBetween";
-import { Box, IconButton, Typography, useTheme } from "@mui/material";
-import { FaUserMinus, FaUserPlus } from "react-icons/fa";
+import { removeFriend } from "../../api/friend";
 
 const cx = classNames.bind(styles);
- const Button = (props, user) => {
+
 /** Contains top part of the post */
-const Friend = ({ id, relation, userPicturePath }) => {
+const Friend = ({ id, friend, userPicturePath }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { _id } = useSelector((state) => state.user);
   const token = useSelector((state) => state.token);
   const friends = useSelector((state) => state.user.friends);
 
-  const { palette } = useTheme();
-  const primaryLight = palette.primary.light;
-  const primaryDark = palette.primary.dark;
-  const main = palette.neutral.main;
-  const medium = palette.neutral.medium;
-  
-  const friendSlice = friends.find((friend) => friend._id === id);
+  const friendSlice = '';
+  // const friendSlice = friends.find((friend) => friend._id === id);
   const isSelf = _id === id
 
   const patchFriend = async () => {
     const response = await fetch(
-      `http://localhost:3000/users/${_id}/${id}`,
+      `api/friend/${_id}/${id}`,
       {
         method: "PATCH",
         headers: {
@@ -40,55 +31,40 @@ const Friend = ({ id, relation, userPicturePath }) => {
       }
     );
     const data = await response.json();
+    console.log(data)
     dispatch(friendSlice({ friends: data }));
   };
+  // document.querySelector('.click').addEventListener('', (e) => {
+  //   // Do whatever you want
+  //   e.target.textContent = '';
+  // });
+  const UserImage = ({ image }) => {
+    return (
+        <img className="card-img-top" src="http://localhost:1337/uploads/8e3442464f2b9575cc3a_bc2523be90.jpg?updated_at=2023-03-24T08:13:04.950Z" alt="" />
+
+    ) 
+} 
 
   return (
-    <FlexBetween>
-      <FlexBetween gap="1rem">
-        {/**User profile photo */}
-        <UserImage image={userPicturePath} size="55px" />
-        <Box
-          onClick={() => {
-            navigate(`/profile/${id}`);
-            navigate(0); 
-          }}
-        >
-            {/**Name */}
-            <Typography
-                color={main}
-                variant="h5"
-                fontWeight="500"
-                sx={{
-                    "&:hover": {
-                    color: palette.primary.main,
-                    cursor: "pointer",
-                    },
-                }}
-                >
-                {}
-            </Typography>
-            {/**location */}
-            <Typography color={medium} fontSize="0.75rem">
-                {}
-            </Typography>
-        </Box>
-        {/**Friend button */}
-        </FlexBetween>
-            {!isSelf && (
-            <IconButton
-                onClick={() => patchFriend()}
-                sx={{ backgroundColor: primaryLight, p: "0.6rem" }}
-            >
-                {friendSlice ? (
-                <FaUserMinus sx={{ color: primaryDark }} />
-                ) : (
-                <FaUserPlus sx={{ color: primaryDark }} />
-                )}
-            </IconButton>
-            )}
-        </FlexBetween>
-          );
-        };    
-      }      
-export default Button ;
+    <div className={cx("fr-card")}>
+      <div className={cx("fr-card")}>
+        <div className="card" style={{ width: "15rem", height: "80%rem" }}>
+          <UserImage className="card-img-top" image={userPicturePath} size="40px" onClick={() => {
+            navigate(`http:localhost3000/profile/${id}`);
+          }} />
+
+          <div className="card-body">
+            <h5 className="card-title"> Tân 1 Cú</h5>
+            <p className="card-text">50 bạn chung</p>
+            <button onClick={() => patchFriend()} className="btn-accept" >Accept Friend</button>
+            <button onClick={() => removeFriend()} className="btn-remove" >Remove Friend</button>
+            {/* <button onClick={() => patchFriend()} className="btn-accept" >{addEventListener ? "Accepted Friend" : "Accept Friend"}</button> */}
+            {/* <button onClick={() => patchFriend()} className="btn-remove">{addEventListener? "Removed Friend" : "Remove Friend"}</button> */}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Friend;

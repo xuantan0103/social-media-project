@@ -1,4 +1,8 @@
-import User from "../models/User.js";
+import User from './User.js';
+// import {Dispatch} from 'redux'
+import {toast} from 'react-toastify';
+import { API } from "./constant.js";
+import axios from 'axios';
 
 /* READ */
 export const getUser = async (req, res) => {
@@ -62,5 +66,49 @@ export const addRemoveFriend = async (req, res) => {
 
     } catch (error) {
         res.status(404).json({ message: error.message })
+    }
+}
+//ACCEPT FRIEND
+export const acceptFriendRequest = (id, username, profileId , senderProfileId) => {
+    return async (dispatch) => {
+        try {
+            dispatch(setCanClickRequestButton(false));
+
+            await axios.post(`${API}/friendrequests/${senderProfileId}/${id}/${profileId}`, null, {withCredentials: true});
+
+            dispatch({payload: {senderProfileId}});
+
+            const res = await axios.get(`${API}/profile/friends/${id}`, {withCredentials: true});
+
+            dispatch({ payload: {friends: res.data}});
+        } catch (err) {
+            toast.error("Request couldn't be accepted")
+        }finally{
+            dispatch(setCanClickRequestButton(true));
+        }
+    }
+}
+//
+export const setCanClickRequestButton = (canClickRequestButton) => {
+    return { payload: {canClickRequestButton}}
+}
+//REMOVE FRIEND
+export const removeFriend = (id, profileId, friendshipId) => {
+    return async (dispatch) => {
+        try {
+            dispatch(setCanClickRequestButton(false));
+
+            await axios.delete(`${API}/profile/friend/${friendshipId}/${id}/${profileId}`, {withCredentials: true});
+
+            dispatch({ payload: {friendshipId}})
+
+            const res = await axios.get(`${API}/profile/friends/${id}/${profileId}`, {withCredentials: true});
+
+            dispatch({ payload: {friends: res.data}});
+        } catch (err) {
+            toast.error("Friend couldn't be removed");
+        }finally{
+            dispatch(setCanClickRequestButton(true));
+        }
     }
 }
