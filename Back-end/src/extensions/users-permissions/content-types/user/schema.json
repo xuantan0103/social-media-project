@@ -95,12 +95,6 @@
         "audios"
       ]
     },
-    "posts": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::post.post",
-      "mappedBy": "users_permissions_user"
-    },
     "fullname": {
       "type": "string"
     },
@@ -109,6 +103,30 @@
     },
     "phone": {
       "type": "integer"
+    },
+    "friends": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::friend.friend",
+      "mappedBy": "friend"
+    },
+    "request_sents": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::friend-request.friend-request",
+      "mappedBy": "sender"
+    },
+    "request_received": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::friend-request.friend-request",
+      "mappedBy": "receiver"
+    },
+    "posts": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::post.post",
+      "mappedBy": "user"
     }
   }
 }

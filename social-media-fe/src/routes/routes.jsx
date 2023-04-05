@@ -6,39 +6,28 @@ import FriendLayout from "../components/Layout/FriendLayout";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Home from "../pages/Home";
-
-import routes from "../config/routes";
 import Profile from "../pages/Profile";
 import FriendRequests from "../pages/FriendRequests/FriendRequest";
 import FriendSent from "../pages/FriendRequests/FriendSent";
 import EditProfile from "../pages/EditProfile/EditUer";
-import Friends from "../components/Friends/Friend";
-import Friendsuggestion from "../components/Friends/Friendsuggestion";
 import Friendyoumayknow from "../pages/FriendRequests/Friendyoumayknow";
+
+import routes from "../config/routes";
+import Friends from "../pages/Friends/Friend";
 
 const publicRoutes = [
   { path: routes.login, component: Login },
   { path: routes.register, component: Register },
   {
+    path: routes.friends,
+    component: Friends,
+    layout: FriendLayout,
+  },
+  {
     path: routes.friendrequests,
     component: FriendRequests,
     layout: FriendLayout,
   },
-
-  {
-    path: routes.sentrequests,
-    component: FriendSent,
-    layout: DefaultLayout,
-  },
-
-  { path: routes.friends, component: Friends, layout: FriendLayout },
-
-  {
-    path: routes.friendsuggestion,
-    component: Friendsuggestion,
-    layout: FriendLayout,
-  },
-
   {
     path: routes.friendyoumayknow,
     component: Friendyoumayknow,

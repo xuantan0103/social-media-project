@@ -25,17 +25,11 @@
       ],
       "default": "Public"
     },
-    "users_permissions_user": {
+    "user": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "plugin::users-permissions.user",
       "inversedBy": "posts"
-    },
-    "author": {
-      "type": "string"
-    },
-    "authorId": {
-      "type": "integer"
     },
     "images": {
       "type": "media",

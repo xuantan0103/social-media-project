@@ -3,7 +3,7 @@ import * as api from "../../api";
 
 export const getCurrentUser = createAsyncThunk(
   "user/getCurrentUser",
-  async (userId, { rejectWithValue }) => {
+  async (_, { rejectWithValue }) => {
     try {
       const data = await api.getCurrentUser();
       return data.data;
@@ -28,12 +28,9 @@ export const editUser = createAsyncThunk(
   async (user, { rejectWithValue }) => {
     try {
       const data = await api.editUser(user);
-      console.log("edit", data);
       return data.data;
     } catch (error) {
       return rejectWithValue(error.message);
     }
   }
 );
-
-

@@ -22,9 +22,7 @@ function NewPostItem() {
     content: "",
     images: [],
     audition: "Public",
-    author: localStorage.getItem("username"),
-    authorId: localStorage.getItem("id"),
-    users_permissions_user: localStorage.getItem("id"),
+    user: localStorage.getItem("id"),
   });
   const [isShowAddImg, setIsShowAddImg] = useState(false);
   const [image, setImage] = useState();
@@ -59,9 +57,7 @@ function NewPostItem() {
         content: "",
         imageURL: "",
         audition: "Public",
-        author: localStorage.getItem("username"),
-        authorId: localStorage.getItem("id"),
-        users_permissions_user: localStorage.getItem("id"),
+        user: localStorage.getItem("id"),
       });
       setImage();
     } else {
@@ -70,14 +66,11 @@ function NewPostItem() {
         content: "",
         images: [],
         audition: "Public",
-        author: localStorage.getItem("username"),
-        authorId: localStorage.getItem("id"),
-        users_permissions_user: localStorage.getItem("id"),
+        user: localStorage.getItem("id"),
       });
       setImage();
     }
   };
-
   return (
     <div
       className="modal fade"
@@ -105,14 +98,14 @@ function NewPostItem() {
                 <Spin size="small" className={cx("profile-img") + " m-2"} />
               ) : (
                 <img
-                  src={`${LOCAL_HOST}${state?.user?.data?.avatar?.url}`}
+                  src={`${LOCAL_HOST}${state?.user?.currentUser?.avatar?.url}`}
                   alt="avatar"
                   className={cx("profile-img") + " m-2"}
                 />
               )}
               <div>
                 <div className={cx("username")}>
-                  {state?.user?.data?.username}
+                  {state?.user?.currentUser?.username}
                 </div>
                 <select
                   className={cx("select-wrapper") + " form-select"}

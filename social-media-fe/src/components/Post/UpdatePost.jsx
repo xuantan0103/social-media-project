@@ -15,6 +15,7 @@ import { Spin } from "antd";
 const cx = classNames.bind(styles);
 
 function PostItem({ id, data }) {
+  console.log(data?.attributes);
   const state = useSelector((state) => state);
   const dispatch = useDispatch();
   const [post, setPost] = useState(data?.attributes);
@@ -24,7 +25,7 @@ function PostItem({ id, data }) {
     value === true ? setIsShowAddImg(true) : setIsShowAddImg(false);
   };
   const handleClear = () => {
-    setPost({ ...post, imageURL: "" });
+    setPost({ ...post, images: null });
     setImage();
   };
   const handleClose = () => {
@@ -57,9 +58,7 @@ function PostItem({ id, data }) {
         content: "",
         images: [],
         audition: "Public",
-        author: localStorage.getItem("username"),
-        authorId: localStorage.getItem("id"),
-        users_permissions_user: localStorage.getItem("id"),
+        user: localStorage.getItem("id"),
       });
       setImage();
     } else {
@@ -69,9 +68,7 @@ function PostItem({ id, data }) {
         content: "",
         images: [],
         audition: "Public",
-        author: localStorage.getItem("username"),
-        authorId: localStorage.getItem("id"),
-        users_permissions_user: localStorage.getItem("id"),
+        user: localStorage.getItem("id"),
       });
       setImage();
     }
@@ -105,14 +102,14 @@ function PostItem({ id, data }) {
                 <Spin size="small" />
               ) : (
                 <img
-                  src={`${LOCAL_HOST}${state?.user?.data?.avatar?.url}`}
+                  src={`${LOCAL_HOST}${post?.user?.data?.attributes?.avatar?.data?.attributes?.url}`}
                   alt="avatar"
                   className={cx("profile-img")}
                 />
               )}
               <div>
                 <div className={cx("username")}>
-                  {state?.user?.data?.username}
+                  {post?.user?.data?.attributes?.username}
                 </div>
                 <select
                   className={cx("select-wrapper") + " form-select"}
@@ -137,7 +134,7 @@ function PostItem({ id, data }) {
               value={post?.content}
             ></textarea>
 
-            {isShowAddImg && !image && !post.images.length && (
+            {isShowAddImg && !image && !post?.images?.data?.length && (
               <div
                 className={
                   cx("add-image") +
@@ -178,10 +175,10 @@ function PostItem({ id, data }) {
                 />
               </div>
             )}
-            {post?.images?.length && (
+            {post?.images?.data?.length && (
               <div className={cx("image-wrapper")}>
                 <img
-                  src={post?.images[0]?.data?.attributes?.url}
+                  src={`${LOCAL_HOST}${post?.images?.data[0]?.attributes?.url}`}
                   alt=""
                   className={cx("post-image")}
                 />
