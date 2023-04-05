@@ -46,7 +46,7 @@ function EditProfile() {
           <form onSubmit={handleSubmit}>
             <div className="form-profile">
               <div>
-                <FontAwesomeIcon icon={faUser} color="black" />
+                <FontAwesomeIcon icon={faUser} color="blue" />
                 <label htmlFor="fullname">Full Name</label>
                 <input
                   type="text"
@@ -62,7 +62,7 @@ function EditProfile() {
                 />
               </div>
               <div>
-                <FontAwesomeIcon icon={faEnvelope} color="black" />
+                <FontAwesomeIcon icon={faEnvelope} color="#D375EB" />
                 <label htmlFor="email">Email</label>
                 <input
                   type="email"
@@ -78,7 +78,7 @@ function EditProfile() {
                 />
               </div>
               <div>
-                <FontAwesomeIcon icon={faCakeCandles} color="black" />
+                <FontAwesomeIcon icon={faCakeCandles} color="#D7736D" />
                 <label htmlFor="email">Day of birth</label>
                 <input
                   type="date"
@@ -111,7 +111,7 @@ function EditProfile() {
                 />
               </div>
               <div>
-                <FontAwesomeIcon icon={faLocationDot} color="black" />
+                <FontAwesomeIcon icon={faLocationDot} color="#D6281A" />
                 <label htmlFor="address">Address</label>
                 <input
                   type="text"
