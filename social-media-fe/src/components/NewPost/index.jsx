@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFaceSmile, faImages } from "@fortawesome/free-regular-svg-icons";
 import { useSelector } from "react-redux";
 import { LOCAL_HOST } from "../../api/constant";
-import defaultAvatar from "../../assets/default-user-image.png";
 import NewPostItem from "./NewPostItem";
 import { Spin } from "antd";
 
