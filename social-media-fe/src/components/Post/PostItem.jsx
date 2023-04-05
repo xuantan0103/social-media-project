@@ -10,7 +10,7 @@ import { uploadImage } from "../../api";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { updatePost } from "../../redux/action/postAction";
-import defaultAvatar from "../../assets/default-user-image.png";
+import { Spin } from "antd";
 
 const cx = classNames.bind(styles);
 
@@ -102,25 +102,14 @@ function PostItem({ id, data }) {
           <div className={cx("modal-body")}>
             <div className="d-flex align-items-center">
               {state.user.isLoading ? (
-                <img
-                  src={defaultAvatar}
-                  alt="avatar"
-                  className={cx("profile-img") + " m-2"}
-                />
-              ) : state?.user?.data?.avatar?.url ? (
+                <Spin size="small" />
+              ) : (
                 <img
                   src={`${LOCAL_HOST}${state?.user?.data?.avatar?.url}`}
                   alt="avatar"
                   className={cx("profile-img")}
                 />
-              ) : (
-                <img
-                  src={defaultAvatar}
-                  alt="avatar"
-                  className={cx("profile-img") + " m-2"}
-                />
               )}
-
               <div>
                 <div className={cx("username")}>
                   {state?.user?.data?.username}
@@ -189,7 +178,7 @@ function PostItem({ id, data }) {
                 />
               </div>
             )}
-            {post.images.length && (
+            {post?.images?.length && (
               <div className={cx("image-wrapper")}>
                 <img
                   src={post?.images[0]?.data?.attributes?.url}

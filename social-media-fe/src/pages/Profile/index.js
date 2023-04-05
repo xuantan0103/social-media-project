@@ -316,7 +316,7 @@ function Profile() {
       </div>
       <div className="mt-5">
         {paths[1] === localStorage.getItem("id") && <NewPost />}
-        {state.post.isLoading && <h1>Loading..</h1>}
+        {state.post.isLoading && <Spin size="small" />}
         {state?.post?.data?.map((item) => {
           return paths[1] === localStorage.getItem("id") ? (
             <Post key={item.id} post={item} isEdit />

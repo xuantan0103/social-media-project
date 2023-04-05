@@ -33,7 +33,7 @@ function Post({ post, isEdit }) {
         <div className={cx("top")}>
           <div className={cx("top-left")}>
             <img
-              src={`${LOCAL_HOST}${post?.attributes?.users_permissions_user?.data?.attributes?.avatar?.url}`}
+              src={`${LOCAL_HOST}${post?.attributes?.users_permissions_user?.data?.attributes?.avatar?.data?.attributes?.url}`}
               alt=""
               className={cx("profile-img")}
             />

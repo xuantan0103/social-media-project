@@ -39,19 +39,24 @@ export const editUser = (data) => {
 
 // Post
 export const getAllPosts = () => {
-  return axios.get(BASE_URL + `/posts?populate=*`);
+  return axios.get(
+    BASE_URL + `/posts?&populate[users_permissions_user][populate]=*`
+  );
 };
 export const getPostById = (id) => {
-  return axios.get(BASE_URL + `/posts/${id}?populate=*`);
+  return axios.get(
+    BASE_URL + `/posts/${id}?&populate[users_permissions_user][populate]=*`
+  );
 };
 export const getPostByUserId = (userId) => {
   return axios.get(
-    BASE_URL + `/posts?filters[authorId][$eq]=${userId}&populate=*`
+    BASE_URL +
+      `/posts?filters[authorId][$eq]=${userId}&&populate[users_permissions_user][populate]=*`
   );
 };
 export const addNewPost = (post) => {
   return axios.post(
-    BASE_URL + "/posts?populate=*",
+    BASE_URL + "/posts?&populate[users_permissions_user][populate]=*",
     { data: post },
     {
       headers: {
@@ -63,7 +68,7 @@ export const addNewPost = (post) => {
 };
 export const updatePost = (postId, post) => {
   return axios.put(
-    BASE_URL + `/posts/${postId}?populate=*`,
+    BASE_URL + `/posts/${postId}?&populate[users_permissions_user][populate]=*`,
     { data: post },
     {
       headers: {
@@ -74,12 +79,15 @@ export const updatePost = (postId, post) => {
   );
 };
 export const deletePost = (postId) => {
-  return axios.delete(BASE_URL + `/posts/${postId}?populate=*`, {
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${localStorage.getItem("authToken")}`,
-    },
-  });
+  return axios.delete(
+    BASE_URL + `/posts/${postId}?&populate[users_permissions_user][populate]=*`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+      },
+    }
+  );
 };
 export const uploadPostImage = (postId, image) => {
   return axios.put(
