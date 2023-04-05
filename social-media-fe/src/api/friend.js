@@ -69,16 +69,16 @@ export const addRemoveFriend = async (req, res) => {
     }
 }
 //ACCEPT FRIEND
-export const acceptFriendRequest = (id, username, profileId , senderProfileId) => {
+export const acceptFriendRequest = (id, username , senderProfileId) => {
     return async (dispatch) => {
         try {
             dispatch(setCanClickRequestButton(false));
 
-            await axios.post(`${API}/friendrequests/${senderProfileId}/${id}/${profileId}`, null, {withCredentials: true});
+            await axios.post(`${API}/friendrequests/${senderProfileId}/${id}/${username}`, null, {withCredentials: true});
 
             dispatch({payload: {senderProfileId}});
 
-            const res = await axios.get(`${API}/profile/friends/${id}`, {withCredentials: true});
+            const res = await axios.get(`${API}/profile/${id}`, {withCredentials: true});
 
             dispatch({ payload: {friends: res.data}});
         } catch (err) {
@@ -93,14 +93,14 @@ export const setCanClickRequestButton = (canClickRequestButton) => {
     return { payload: {canClickRequestButton}}
 }
 //REMOVE FRIEND
-export const removeFriend = (id, profileId, friendshipId) => {
+export const removeFriend = (id, profileId, friendId) => {
     return async (dispatch) => {
         try {
             dispatch(setCanClickRequestButton(false));
 
-            await axios.delete(`${API}/profile/friend/${friendshipId}/${id}/${profileId}`, {withCredentials: true});
+            await axios.delete(`${API}/profile/friend/${friendId}/${id}/${profileId}`, {withCredentials: true});
 
-            dispatch({ payload: {friendshipId}})
+            dispatch({ payload: {friendId}})
 
             const res = await axios.get(`${API}/profile/friends/${id}/${profileId}`, {withCredentials: true});
 
