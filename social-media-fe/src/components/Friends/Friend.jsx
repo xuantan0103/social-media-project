@@ -8,12 +8,12 @@ import { removeFriend } from "../../api/friend";
 const cx = classNames.bind(styles);
 
 /** Contains top part of the post */
-const Friend = ({ id, friend, userPicturePath }) => {
+const Friend = ({ id, friends, userPicturePath }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { _id } = useSelector((state) => state.user);
   const token = useSelector((state) => state.token);
-  const friends = useSelector((state) => state.user.friends);
+  const friend = useSelector((state) => state.user.friends);
 
   const friendSlice = '';
   // const friendSlice = friends.find((friend) => friend._id === id);
@@ -21,7 +21,7 @@ const Friend = ({ id, friend, userPicturePath }) => {
 
   const patchFriend = async () => {
     const response = await fetch(
-      `api/friend/${_id}/${id}`,
+      `api/user/${_id}/${id}`,
       {
         method: "PATCH",
         headers: {
@@ -40,7 +40,7 @@ const Friend = ({ id, friend, userPicturePath }) => {
   // });
   const UserImage = ({ image }) => {
     return (
-        <img className="card-img-top" src="http://localhost:1337/uploads/8e3442464f2b9575cc3a_bc2523be90.jpg?updated_at=2023-03-24T08:13:04.950Z" alt="" />
+        <img className="card-img-top" src="" alt="" />
 
     ) 
 } 
@@ -54,7 +54,7 @@ const Friend = ({ id, friend, userPicturePath }) => {
           }} />
 
           <div className="card-body">
-            <h5 className="card-title"> Tân 1 Cú</h5>
+            <h5 className="card-title"> {friend?.username}</h5>
             <p className="card-text">50 bạn chung</p>
             <button onClick={() => patchFriend()} className="btn-accept" >Accept Friend</button>
             <button onClick={() => removeFriend()} className="btn-remove" >Remove Friend</button>
