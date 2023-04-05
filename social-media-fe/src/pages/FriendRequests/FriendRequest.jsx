@@ -22,8 +22,8 @@ function FriendRequest({ friendsRequest }) {
           </div>
         </div>
       </div>
-    )
-  };
+    );
+  }
 }
 
 export default FriendRequest;

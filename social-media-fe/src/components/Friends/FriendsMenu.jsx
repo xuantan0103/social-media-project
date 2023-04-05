@@ -28,11 +28,17 @@ function FriendsMenu() {
               <FontAwesomeIcon icon={faUser} color="black" />
               <span className={cx("friend-text")}>Friend Request</span>
             </li>
-            <li className={cx("friend-item")} onClick={() => navigate("/friendyoumayknow")}>
+            <li
+              className={cx("friend-item")}
+              onClick={() => navigate("/friendyoumayknow")}
+            >
               <FontAwesomeIcon icon={faUserPlus} color="black" />
               <span className={cx("friend-text")}>Suggestions</span>
             </li>
-            <li className={cx("friend-item")} onClick={() => navigate("/")}>
+            <li
+              className={cx("friend-item")}
+              onClick={() => navigate("/friends")}
+            >
               <FontAwesomeIcon icon={faUserGroup} color="black" />
               <span className={cx("friend-text")}>All friends</span>
             </li>

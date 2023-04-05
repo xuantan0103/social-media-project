@@ -36,7 +36,7 @@ function Profile() {
   const dispatch = useDispatch();
   useEffect(() => {
     if (paths[1] === localStorage.getItem("id")) {
-      dispatch(getCurrentUser(localStorage.getItem("id")));
+      dispatch(getCurrentUser());
       dispatch(getPostByUserId(localStorage.getItem("id")));
     } else {
       dispatch(getUserById(paths[1]));

@@ -7,7 +7,7 @@ import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import Button from "../Button/Button";
 import Comment from "../Comment";
 import moment from "moment";
-import PostItem from "./PostItem";
+import UpdatePost from "./UpdatePost";
 import { useDispatch } from "react-redux";
 import { deletePost } from "../../redux/action/postAction";
 import { LOCAL_HOST } from "../../api/constant";
@@ -28,16 +28,18 @@ function Post({ post, isEdit }) {
   };
   return (
     <div className={cx("main-container")}>
-      <PostItem data={post} id={post.id} />
+      <UpdatePost data={post} id={post.id} />
       <div className={cx("container")}>
         <div className={cx("top")}>
           <div className={cx("top-left")}>
             <img
-              src={`${LOCAL_HOST}${post?.attributes?.users_permissions_user?.data?.attributes?.avatar?.data?.attributes?.url}`}
+              src={`${LOCAL_HOST}${post?.attributes?.user?.data?.attributes?.avatar?.data?.attributes?.url}`}
               alt=""
               className={cx("profile-img")}
             />
-            <span className={cx("username")}>{post?.attributes?.author}</span>
+            <span className={cx("username")}>
+              {post?.attributes?.user?.data?.attributes?.username}
+            </span>
             <span className={cx("date")}>
               {moment(post?.attributes?.createdAt).utc().format("DD/MM/YYYY")}
             </span>

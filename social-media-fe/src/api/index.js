@@ -40,23 +40,26 @@ export const editUser = (data) => {
 // Post
 export const getAllPosts = () => {
   return axios.get(
-    BASE_URL + `/posts?&populate[users_permissions_user][populate]=*`
+    BASE_URL +
+      `/posts?&populate[user][populate][avatar]=*&populate[images][populate]=*`
   );
 };
 export const getPostById = (id) => {
   return axios.get(
-    BASE_URL + `/posts/${id}?&populate[users_permissions_user][populate]=*`
+    BASE_URL +
+      `/posts/${id}?&populate[user][populate][avatar]=*&populate[images][populate]=*`
   );
 };
 export const getPostByUserId = (userId) => {
   return axios.get(
     BASE_URL +
-      `/posts?filters[authorId][$eq]=${userId}&&populate[users_permissions_user][populate]=*`
+      `/posts?filters[user][id][$eq]=${userId}&populate[user][populate][avatar]=*&populate[images][populate]=*`
   );
 };
 export const addNewPost = (post) => {
   return axios.post(
-    BASE_URL + "/posts?&populate[users_permissions_user][populate]=*",
+    BASE_URL +
+      "/posts?populate[user][populate][avatar]=*&populate[images][populate]=*",
     { data: post },
     {
       headers: {
@@ -68,7 +71,8 @@ export const addNewPost = (post) => {
 };
 export const updatePost = (postId, post) => {
   return axios.put(
-    BASE_URL + `/posts/${postId}?&populate[users_permissions_user][populate]=*`,
+    BASE_URL +
+      `/posts/${postId}?&populate[user][populate][avatar]=*&populate[images][populate]=*`,
     { data: post },
     {
       headers: {
@@ -80,7 +84,8 @@ export const updatePost = (postId, post) => {
 };
 export const deletePost = (postId) => {
   return axios.delete(
-    BASE_URL + `/posts/${postId}?&populate[users_permissions_user][populate]=*`,
+    BASE_URL +
+      `/posts/${postId}?&populate[user][populate][avatar]=*&populate[images][populate]=*`,
     {
       headers: {
         "Content-Type": "application/json",
