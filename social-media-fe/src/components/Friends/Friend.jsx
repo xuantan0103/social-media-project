@@ -40,10 +40,10 @@ const Friend = ({ id, friends, userPicturePath }) => {
   // });
   const UserImage = ({ image }) => {
     return (
-        <img className="card-img-top" src="" alt="" />
+      <img className="card-img-top" src="" alt="" />
 
-    ) 
-} 
+    )
+  }
 
   return (
     <div className={cx("fr-card")}>

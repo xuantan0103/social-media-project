@@ -42,6 +42,7 @@ function Header() {
     removeToken();
     setAuthToken(localStorage.getItem("authToken"));
   };
+  
   return (
     <div
       className={
@@ -68,19 +69,19 @@ function Header() {
       <div className={cx("action") + " col-lg-2 d-flex justify-content-start"}>
         <Button circle>
           <div className={cx("icon-bell")}>
-            <FontAwesomeIcon icon={faBell} />
+            <FontAwesomeIcon icon={faBell} color="#D66438"/>
             <div className={cx("number-tag")}>9</div>
           </div>
         </Button>
         <Button circle>
           <div className={cx("icon-bell")}>
-            <FontAwesomeIcon icon={faUserGroup} />
+            <FontAwesomeIcon icon={faUserGroup} color="#5E78D6" />
             <div className={cx("number-tag")}>9</div>
           </div>
         </Button>
         <Button circle>
           <div className={cx("icon-bell")}>
-            <FontAwesomeIcon icon={faFacebookMessenger} />
+            <FontAwesomeIcon icon={faFacebookMessenger} color="#D476EB"/>
             <div className={cx("number-tag")}>9+</div>
           </div>
         </Button>
@@ -103,7 +104,7 @@ function Header() {
                 navigate(`/profile/${localStorage.getItem("id")}`);
               }}
               textLeft
-              leftIcon={<FontAwesomeIcon icon={faUser} />}
+              leftIcon={<FontAwesomeIcon icon={faUser} color="blue"/>}
             >
               View your profile
             </Button>
