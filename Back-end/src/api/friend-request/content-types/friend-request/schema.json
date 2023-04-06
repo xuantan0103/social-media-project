@@ -12,18 +12,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "sender": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "plugin::users-permissions.user",
-      "inversedBy": "request_sents"
-    },
-    "receiver": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "plugin::users-permissions.user",
-      "inversedBy": "request_received"
-    },
     "status": {
       "type": "enumeration",
       "enum": [
@@ -31,6 +19,18 @@
         "accepted",
         "rejected"
       ]
+    },
+    "sender": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "sent_requests"
+    },
+    "receiver": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "received_requests"
     }
   }
 }

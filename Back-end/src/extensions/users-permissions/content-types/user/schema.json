@@ -110,13 +110,13 @@
       "target": "api::friend.friend",
       "mappedBy": "friend"
     },
-    "request_sents": {
+    "sent_requests": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::friend-request.friend-request",
       "mappedBy": "sender"
     },
-    "request_received": {
+    "received_requests": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::friend-request.friend-request",

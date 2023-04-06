@@ -3,20 +3,22 @@
 :root {
   --default-header-background-color: #fff;
   --white: #fff;
-  --gray: #f1f1f2;
+  --gray: #9cadbc;
+  --light-gray: #f1f1f2;
   --light-blue: #f0f8ff;
+  --blue: #009ff5;
+
+  --default-background-color: #f0f8ff;
+  --default-comment-color: #f1f1f2;
+  --default-color: #ecf3ff;
+  --default-text-color: #1a1a1a;
+  --default-danger-color: #fff3db;
+
   --font-size-base: 14px;
   --default-header-height: 50px;
   --default-search-width: 250px;
   --default-search-height: 40px;
   --default-image-height: 50px;
-  --default-background-color: #f0f8ff;
-  --default-comment-color: #f1f1f2;
-  --default-color: #ecf3ff;
-  --default-dark-color: #6474e5;
-  --default-text-color: #1a1a1a;
-  --default-danger-color: #fff3db;
-
   --default-font-size: 18px;
   --default-light-height-dark: 1.4;
 }

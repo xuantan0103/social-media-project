@@ -15,7 +15,6 @@ import { Spin } from "antd";
 const cx = classNames.bind(styles);
 
 function PostItem({ id, data }) {
-  console.log(data?.attributes);
   const state = useSelector((state) => state);
   const dispatch = useDispatch();
   const [post, setPost] = useState(data?.attributes);

@@ -33,12 +33,15 @@
     right: 0;
   }
   .menu {
+    max-width: 200px;
+    min-width: 200px;
     padding-left: 20px;
     position: fixed;
     top: var(--default-header-height);
     left: 55px;
   }
   .content-wrapper {
-    margin: 0px 100px;
+    padding: 0px 0px 0px 255px;
+    min-width: 300px;
   }
 }

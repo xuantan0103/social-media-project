@@ -1,14 +1,16 @@
 .fr-card {
   border-radius: 7px !important;
   border-color: #e1e7ec;
+  margin: 0px 10px 10px 0px;
 }
 .btn-remove {
-  background-color: #d3d3d3;
+  background-color: var(--gray);
+  border-radius: 4px;
   width: 100%;
 }
 .btn-accept {
   border-radius: 4px;
-  background-color: #5997f3;
+  background-color: var(--blue);
   width: 100%;
   margin-bottom: 5px;
 }
