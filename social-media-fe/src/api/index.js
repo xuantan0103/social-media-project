@@ -41,13 +41,13 @@ export const editUser = (data) => {
 export const getAllPosts = () => {
   return axios.get(
     BASE_URL +
-      `/posts?&populate[user][populate][avatar]=*&populate[images][populate]=*`
+      `/posts?populate[user][populate][avatar]=*&populate[images][populate]=*`
   );
 };
 export const getPostById = (id) => {
   return axios.get(
     BASE_URL +
-      `/posts/${id}?&populate[user][populate][avatar]=*&populate[images][populate]=*`
+      `/posts/${id}?populate[user][populate][avatar]=*&populate[images][populate]=*`
   );
 };
 export const getPostByUserId = (userId) => {
@@ -72,7 +72,7 @@ export const addNewPost = (post) => {
 export const updatePost = (postId, post) => {
   return axios.put(
     BASE_URL +
-      `/posts/${postId}?&populate[user][populate][avatar]=*&populate[images][populate]=*`,
+      `/posts/${postId}?populate[user][populate][avatar]=*&populate[images][populate]=*`,
     { data: post },
     {
       headers: {
@@ -85,7 +85,7 @@ export const updatePost = (postId, post) => {
 export const deletePost = (postId) => {
   return axios.delete(
     BASE_URL +
-      `/posts/${postId}?&populate[user][populate][avatar]=*&populate[images][populate]=*`,
+      `/posts/${postId}?populate[user][populate][avatar]=*&populate[images][populate]=*`,
     {
       headers: {
         "Content-Type": "application/json",
@@ -120,6 +120,19 @@ export const getImage = (id) => {
       "Content-Type": "multipart/form-data",
     },
   });
+};
+
+// Friend Request
+export const getFriendRequestByUserId = (userId) => {
+  return axios.get(
+    `${LOCAL_HOST}/api/friend-requests?filters[receiver][id][$eq]=2&populate[sender][populate][avatar]=*&populate[receiver][populate][avatar]=*`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+      },
+    }
+  );
 };
 
 //////////////////

@@ -16,13 +16,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { getPostByUserId } from "../../redux/action/postAction";
-import {
-  editUser,
-  getCurrentUser,
-  getUserById,
-} from "../../redux/action/userAction";
-import defaultCover from "../../assets/default-cover.png";
-import defaultAvatar from "../../assets/default-user-image.png";
+import { editUser, getUserById } from "../../redux/action/userAction";
 import { LOCAL_HOST } from "../../api/constant";
 import { uploadImage } from "../../api";
 import { Spin } from "antd";
@@ -35,12 +29,12 @@ function Profile() {
   const state = useSelector((state) => state);
   const dispatch = useDispatch();
   useEffect(() => {
-    if (paths[1] === localStorage.getItem("id")) {
-      dispatch(getCurrentUser());
-      dispatch(getPostByUserId(localStorage.getItem("id")));
-    } else {
+    if (paths[1] !== localStorage.getItem("id")) {
       dispatch(getUserById(paths[1]));
       dispatch(getPostByUserId(paths[1]));
+    } else {
+      dispatch(getUserById(localStorage.getItem("id")));
+      dispatch(getPostByUserId(localStorage.getItem("id")));
     }
   }, [location]);
   const navigate = useNavigate();

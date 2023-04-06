@@ -57,7 +57,11 @@ function Post({ post, isEdit }) {
               >
                 Edit
               </Button>
-              <Button textLeft onClick={handleDelete}>
+              <Button
+                textLeft
+                className={cx("enable-btn")}
+                onClick={handleDelete}
+              >
                 Delete
               </Button>
             </div>

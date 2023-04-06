@@ -8,7 +8,6 @@ import Register from "../pages/Register";
 import Home from "../pages/Home";
 import Profile from "../pages/Profile";
 import FriendRequests from "../pages/FriendRequests/FriendRequest";
-import FriendSent from "../pages/FriendRequests/FriendSent";
 import EditProfile from "../pages/EditProfile/EditUer";
 import Friendyoumayknow from "../pages/FriendRequests/Friendyoumayknow";
 
