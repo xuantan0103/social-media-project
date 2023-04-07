@@ -1,7 +1,17 @@
 .fr-card {
-  border-radius: 7px !important;
-  border-color: #e1e7ec;
+  border: var(--gray);
+  border-radius: 7px;
   margin: 0px 10px 10px 0px;
+  min-height: 398px;
+  max-height: 398px;
+}
+.image {
+  width: 100%;
+  height: 220px;
+  cursor: pointer;
+}
+.username {
+  cursor: pointer;
 }
 .btn-remove {
   background-color: var(--gray);

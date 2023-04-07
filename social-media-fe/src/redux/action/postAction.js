@@ -3,7 +3,7 @@ import * as api from "../../api";
 
 export const getAllPosts = createAsyncThunk(
   "post/getAllPosts",
-  async (page, { rejectWithValue }) => {
+  async (_, { rejectWithValue }) => {
     try {
       const { data } = await api.getAllPosts();
       return data.data;

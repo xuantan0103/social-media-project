@@ -41,7 +41,11 @@
     left: 55px;
   }
   .content-wrapper {
-    padding: 0px 0px 0px 255px;
-    min-width: 300px;
+    padding: 0px 100px;
+  }
+  .wrapper {
+    margin: 0px 0px 0px 255px;
+    min-width: 100px;
+    width: calc(100% - 255px);
   }
 }

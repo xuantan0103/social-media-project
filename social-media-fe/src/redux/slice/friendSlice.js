@@ -22,7 +22,7 @@ const friendSlice = createSlice({
       (state, action) => {
         state.isLoading = false;
         state.friendRequest = action.payload;
-        console.log("fr", state.friendRequest);
+        console.log("get", state.friendRequest);
       }
     );
     builder.addCase(
@@ -32,6 +32,25 @@ const friendSlice = createSlice({
         state.isError = true;
       }
     );
+
+    /* updateStatus */
+    builder.addCase(action.updateStatus.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(action.updateStatus.fulfilled, (state, action) => {
+      state.isLoading = false;
+      const index = state.friendRequest.findIndex(
+        (request) => request.id === action.payload.id
+      );
+      state.friendRequest[index] = {
+        ...state.friendRequest[index],
+        ...action.payload,
+      };
+    });
+    builder.addCase(action.updateStatus.rejected, (state, action) => {
+      console.log("Error", action.payload);
+      state.isError = true;
+    });
   },
 });
 

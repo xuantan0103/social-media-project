@@ -104,12 +104,6 @@
     "phone": {
       "type": "integer"
     },
-    "friends": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::friend.friend",
-      "mappedBy": "friend"
-    },
     "sent_requests": {
       "type": "relation",
       "relation": "oneToMany",
@@ -127,6 +121,12 @@
       "relation": "oneToMany",
       "target": "api::post.post",
       "mappedBy": "user"
+    },
+    "friends": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::friend.friend",
+      "mappedBy": "friend"
     }
   }
 }

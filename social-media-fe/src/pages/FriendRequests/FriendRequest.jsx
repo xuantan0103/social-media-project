@@ -12,48 +12,24 @@ function FriendRequest() {
   const state = useSelector((state) => state);
   useEffect(() => {
     dispatch(getFriendRequestByUserId(localStorage.getItem("id")));
+    console.log(state?.friend?.friendRequest);
   }, []);
   return (
-    <div className={cx("noti-all")}>
-      <div className={cx("noti-container")}>
-        <div className={cx("friend-requests-title") + " px-4"}>
-          <h4>Your friend request</h4>
-        </div>
-        <div className="py-4 px-4">
-          {/* <CardFriend /> */}
-          <div className="row row-9 ">
-            {/* {state?.friend?.friendRequest.map((item) => {
-              return (
-                <div className="col">
+    <div className={cx("noti-container")}>
+      <div className={cx("friend-requests-title") + " px-4"}>
+        <h4>Your friend request</h4>
+      </div>
+      <div className="py-4 px-4">
+        <div className="row ">                            
+          {state?.friend?.friendRequest.map((item) => {
+            return (
+              <div className="col-md-auto">
+                {item?.attributes?.status === "pending" && (
                   <CardFriend item={item} />
-                </div>
-              );
-            })} */}
-            <div className="col">
-              <CardFriend />
-            </div>
-            <div className="col">
-              <CardFriend />
-            </div>
-            <div className="col">
-              <CardFriend />
-            </div>
-            <div className="col">
-              <CardFriend />
-            </div>
-            <div className="col">
-              <CardFriend />
-            </div>
-            <div className="col">
-              <CardFriend />
-            </div>
-            <div className="col">
-              <CardFriend />
-            </div>
-            <div className="col">
-              <CardFriend />
-            </div>
-          </div>
+                )}
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>
