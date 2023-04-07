@@ -134,7 +134,18 @@ export const getFriendRequestByUserId = (userId) => {
     }
   );
 };
-
+export const updateStatus = (id, status) => {
+  return axios.put(
+    `${LOCAL_HOST}/api/friend-requests/${id}?filters[receiver][id][$eq]=2&populate[sender][populate][avatar]=*&populate[receiver][populate][avatar]=*`,
+    { data: { status: status } },
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+      },
+    }
+  );
+};
 //////////////////
 const serverError = {
   name: "Internal-Error",

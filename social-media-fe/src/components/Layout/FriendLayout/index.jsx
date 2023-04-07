@@ -30,8 +30,8 @@ function FriendLayout({ children }) {
           >
             <FriendsMenu />
           </div>
-          <div className=" justify-content-center">
-            <div className={cx("content-wrapper")}>{children}</div>
+          <div className={cx("wrapper") + " justify-content-center"}>
+            <div className="">{children}</div>
           </div>
         </div>
       </div>

@@ -12,3 +12,15 @@ export const getFriendRequestByUserId = createAsyncThunk(
     }
   }
 );
+
+export const updateStatus = createAsyncThunk(
+  "friend/updateStatus",
+  async (status, { rejectWithValue }) => {
+    try {
+      const data = await api.updateStatus(status.id, status.status);
+      return data.data.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);

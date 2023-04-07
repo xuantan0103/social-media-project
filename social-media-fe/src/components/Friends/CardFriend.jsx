@@ -3,32 +3,56 @@ import classNames from "classnames/bind";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { LOCAL_HOST } from "../../api/constant";
+import { updateStatus } from "../../redux/action/friendAction";
 
 const cx = classNames.bind(styles);
 
 function CardFriend({ item }) {
-  console.log("item", item);
+  const dispatch = useDispatch();
+  const handleUpdatePost = (status) => {
+    dispatch(updateStatus({ id: item?.id, status: status }));
+  };
   const navigate = useNavigate();
   return (
     <div className={cx("fr-card")}>
-      <div className={cx("fr-card")}>
-        <div className="card" style={{ width: "15rem", height: "80%rem" }}>
-          <img
-            className="card-img-top"
-            src="http://localhost:1337/uploads/tai_xuong_268b1c72dc.png"
-            alt=""
-            size="40px"
-            onClick={() => {
-              navigate(`${LOCAL_HOST}/profile/${1}`);
-            }}
-          />
+      <div className="card" style={{ width: "15rem", height: "395px" }}>
+        <img
+          className={cx("image") + " card-img-top"}
+          src={`${LOCAL_HOST}${item?.attributes?.sender?.data?.attributes?.avatar?.data?.attributes?.url}`}
+          alt=""
+          size="40px"
+          onClick={() => {
+            navigate(`/profile/${item?.attributes?.sender?.data?.id}`);
+          }}
+        />
 
-          <div className="card-body">
-            <h5 className="card-title"> {"Suong"}</h5>
-            <p className="card-text">50 bạn chung</p>
-            <button className={cx("btn-accept")}>Accept Friend</button>
-            <button className={cx("btn-remove")}>Remove Friend</button>
-          </div>
+        <div className="card-body">
+          <h5
+            className={cx("username") + " card-title"}
+            onClick={() => {
+              navigate(`/profile/${item?.attributes?.sender?.data?.id}`);
+            }}
+          >
+            {item?.attributes?.sender?.data?.attributes?.username}
+          </h5>
+          <p className="card-text">50 bạn chung</p>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+          <button
+            className={cx("btn-accept")}
+            onClick={() => {
+              handleUpdatePost("accepted");
+            }}
+          >
+            Accept
+          </button>
+          <button
+            className={cx("btn-remove")}
+            onClick={() => {
+              handleUpdatePost("rejected");
+            }}
+          >
+            Remove
+          </button>
         </div>
       </div>
     </div>
