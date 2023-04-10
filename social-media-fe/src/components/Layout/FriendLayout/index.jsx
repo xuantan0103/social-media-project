@@ -2,7 +2,7 @@ import Header from "../../Header";
 import styles from "../DefaultLayout/DefaultLayout.module.scss";
 import classNames from "classnames/bind";
 import LeftBar from "../../LeftBar";
-import FriendsMenu from "../../Friends/FriendsMenu";
+import FriendsMenu from "./FriendsMenu";
 
 const cx = classNames.bind(styles);
 

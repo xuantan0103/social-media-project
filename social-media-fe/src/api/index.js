@@ -134,10 +134,45 @@ export const getFriendRequestByUserId = (userId) => {
     }
   );
 };
+export const getFriendsByUserId = (userId) => {
+  return axios.get(
+    `${LOCAL_HOST}/api/friends?filters[user][id][$eq]=${userId}&populate[friend][populate][avatar]=*`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+      },
+    }
+  );
+};
+export const deleteFriend = (id) => {
+  return axios.delete(
+    `${LOCAL_HOST}/api/friends/${id}?populate[friend][populate][avatar]=*`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+      },
+    }
+  );
+};
 export const updateStatus = (id, status) => {
   return axios.put(
     `${LOCAL_HOST}/api/friend-requests/${id}?filters[receiver][id][$eq]=2&populate[sender][populate][avatar]=*&populate[receiver][populate][avatar]=*`,
     { data: { status: status } },
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+      },
+    }
+  );
+};
+export const addFriend = (data) => {
+  console.log("log", data);
+  return axios.post(
+    `${LOCAL_HOST}/api/friends/?populate[friend][populate][avatar]=*`,
+    { data: data },
     {
       headers: {
         "Content-Type": "application/json",

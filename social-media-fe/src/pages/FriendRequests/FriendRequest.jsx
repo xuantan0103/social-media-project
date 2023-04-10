@@ -12,20 +12,19 @@ function FriendRequest() {
   const state = useSelector((state) => state);
   useEffect(() => {
     dispatch(getFriendRequestByUserId(localStorage.getItem("id")));
-    console.log(state?.friend?.friendRequest);
   }, []);
   return (
     <div className={cx("noti-container")}>
       <div className={cx("friend-requests-title") + " px-4"}>
-        <h4>Your friend request</h4>
+        <h4>Your Friend Requests</h4>
       </div>
       <div className="py-4 px-4">
-        <div className="row ">                            
+        <div className="row ">
           {state?.friend?.friendRequest.map((item) => {
             return (
-              <div className="col-md-auto">
+              <div className="col-md-auto" key={item?.id}>
                 {item?.attributes?.status === "pending" && (
-                  <CardFriend item={item} />
+                  <CardFriend item={item} key={item?.id} />
                 )}
               </div>
             );

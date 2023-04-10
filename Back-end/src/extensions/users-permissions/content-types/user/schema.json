@@ -122,11 +122,11 @@
       "target": "api::post.post",
       "mappedBy": "user"
     },
-    "friends": {
+    "friendsList": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::friend.friend",
-      "mappedBy": "friend"
+      "mappedBy": "user"
     }
   }
 }
