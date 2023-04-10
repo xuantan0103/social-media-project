@@ -62,7 +62,7 @@ function LeftBar({ collapse = false }) {
             </li>
             <li
               className={cx("sidebar-item")}
-              onClick={() => navigate("/friendrequests")}
+              onClick={() => navigate("/friends")}
             >
               <FontAwesomeIcon
                 icon={faUserGroup}
@@ -71,6 +71,19 @@ function LeftBar({ collapse = false }) {
               />
               <span className={collapse ? cx("hide") : cx("sidebar-text")}>
                 Friends
+              </span>
+            </li>
+            <li
+              className={cx("sidebar-item")}
+              onClick={() => navigate("/friendrequests")}
+            >
+              <FontAwesomeIcon
+                icon={faUserGroup}
+                color="#40E0D0"
+                className={cx("icon")}
+              />
+              <span className={collapse ? cx("hide") : cx("sidebar-text")}>
+                Friend Requests
               </span>
             </li>
             <li className={cx("sidebar-item")}>

@@ -12,13 +12,13 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "friend": {
+    "user": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "plugin::users-permissions.user",
-      "inversedBy": "friends"
+      "inversedBy": "friendsList"
     },
-    "source_user": {
+    "friend": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "plugin::users-permissions.user"
