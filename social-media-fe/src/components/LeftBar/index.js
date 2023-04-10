@@ -13,6 +13,7 @@ import {
   faUser,
   faCalendarDay,
   faPeopleGroup,
+  faClock,
 } from "@fortawesome/free-solid-svg-icons";
 
 const cx = classNames.bind(styles);
@@ -75,15 +76,15 @@ function LeftBar({ collapse = false }) {
             </li>
             <li
               className={cx("sidebar-item")}
-              onClick={() => navigate("/friendrequests")}
+              onClick={() => navigate("")}
             >
               <FontAwesomeIcon
-                icon={faUserGroup}
-                color="#40E0D0"
+                icon={faClock}
+                color="#008A5A"
                 className={cx("icon")}
               />
               <span className={collapse ? cx("hide") : cx("sidebar-text")}>
-                Friend Requests
+              Celebrate
               </span>
             </li>
             <li className={cx("sidebar-item")}>
