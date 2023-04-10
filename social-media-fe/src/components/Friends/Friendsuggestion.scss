@@ -1,13 +1,21 @@
 .fr-card {
-    border-radius: 7px !important;
-    border-color: #e1e7ec;
-}
-.btn-addfr {
-    background-color: #5997f3;
+    border: var(--gray);
+    border-radius: 7px;
+    margin: 0px 10px 10px 0px;
+    min-height: 398px;
+    max-height: 398px;
+  }
+
+  .image {
     width: 100%;
-    margin-bottom: 8px;
-    border-radius: 4px;
-}
+    height: 220px;
+    cursor: pointer;
+  }
+
+  .username {
+    cursor: pointer;
+  }
+
 .btn-sent {
     background-color: #87CEFA;
     width: 100%;
@@ -19,3 +27,15 @@
     width: 100%;
     border-radius: 4px;
 }
+
+button.btn-addfr {
+    background-color: #5997f3;
+    width: 100%;
+    margin-bottom: 8px;
+    border-radius: 4px;
+}
+
+button.btn-removed {
+    background-color: #d3d3d3;
+    width: 100%;
+  }

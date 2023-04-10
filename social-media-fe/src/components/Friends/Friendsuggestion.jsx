@@ -1,35 +1,62 @@
-import React from "react";
-import styles from "./Friendsuggestion.scss";
+import styles from "../Friends/Friendsuggestion.scss"
 import classNames from "classnames/bind";
-import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { LOCAL_HOST } from "../../api/constant";
+import { updateStatus } from "../../redux/action/friendAction";
 
 const cx = classNames.bind(styles);
-export const Button = (props,User) => {
-  const [isShowaddfr, setIsShowaddfr] = useState(false);
-  const [isShowremove, setIsShowremove] = useState(false);
-const requestAdd = (id) => {
-  setIsShowaddfr(!isShowaddfr)
-  props.addFriend(id)
-}
-const requestRemove = (id) => {
-  setIsShowremove(!isShowremove)
-  props.removeFriend(id)
-}
+
+function FriendSuggestion({ item }) {
+  const dispatch = useDispatch();
+  const handleUpdatePost = (status) => {
+    dispatch(updateStatus({ id: item?.id, status: status }));
+  };
+  const navigate = useNavigate();
   return (
     <div className={cx("fr-card")}>
-      <div className={cx("fr-card")}>
-        <div className="card" style={{ width: "15rem", height:"100%rem" }}>
-          <img className="card-img-top" src="https://i.pinimg.com/564x/44/05/b4/4405b4960b10edd8df4125c26768f852.jpg" alt="" />
-          <div className="card-body">
-            <h5 className="card-title">{User.username}</h5>
-            <p className="card-text">50 bạn chung</p>
-            <button onClick={() => requestAdd(props.id)} className="btn-addfr">{isShowaddfr ? "Send Friend Request" : "Add Friend"}</button>
-            <button onClick={() => requestRemove(props.id)} className="btn-remove">{isShowremove ? "Removed Friend" : "Remove Friend"}</button>
+      <div className="card" style={{ width: "15rem", height: "360px" }}>
+        <img
+          className={cx("image") + " card-img-top"}
+          src={`${LOCAL_HOST}${item?.attributes?.sender?.data?.attributes?.avatar?.data?.attributes?.url}`}
+          alt=""
+          size="40px"
+          onClick={() => {
+            navigate(`/profile/${item?.attributes?.sender?.data?.id}`);
+          }}
+        />
 
-            </div>
-          </div>
+        <div className="card-body">
+          <h5
+            className={cx("username") + " card-title"}
+            onClick={() => {
+              navigate(`/profile/${item?.attributes?.sender?.data?.id}`);
+            }}
+          >
+            {item?.attributes?.sender?.data?.attributes?.username}
+          </h5>
+          <p className="card-text">50 bạn chung</p>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+          <button
+            className={cx("btn-addfr")}
+            onClick={() => {
+              handleUpdatePost("Invitation sent");
+            }}
+          >
+            AddFriend
+          </button>
+          <button
+            className={cx("btn-remove")}
+            onClick={() => {
+              handleUpdatePost("rejected");
+            }}
+          >
+            Remove
+          </button>
         </div>
       </div>
+    </div>
   );
 }
-export default Button;
+
+export default FriendSuggestion;

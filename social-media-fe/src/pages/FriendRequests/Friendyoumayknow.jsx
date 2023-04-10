@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../FriendRequests/Friendyoumayknow.scss";
-import Friends from "../../components/Friends/Friendsuggestion";
+import CardFriend from "../../components/Friends/CardFriend";
+import FriendSuggestion from "../../components/Friends/Friendsuggestion";
 
 function Friendyoumayknow({ friendyoumayknow }) {
   const list = [];
@@ -17,7 +18,7 @@ function Friendyoumayknow({ friendyoumayknow }) {
             </Link>
           </div>
           <div className="py-2">
-            <Friends />
+            <FriendSuggestion />
           </div>
         </div>
       </div>
