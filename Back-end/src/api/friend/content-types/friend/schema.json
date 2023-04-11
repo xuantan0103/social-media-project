@@ -22,6 +22,10 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "plugin::users-permissions.user"
+    },
+    "friend_id": {
+      "type": "integer",
+      "required": true
     }
   }
 }

@@ -18,8 +18,10 @@ import { useSelector } from "react-redux";
 import { getPostByUserId } from "../../redux/action/postAction";
 import { editUser, getUserById } from "../../redux/action/userAction";
 import { LOCAL_HOST } from "../../api/constant";
-import { uploadImage } from "../../api";
+import { getCurrentUser, uploadImage } from "../../api";
 import { Spin } from "antd";
+import { checkRelationship } from "../../redux/slice/userSlice";
+import { sendFriendRequest } from "../../redux/action/friendAction";
 
 const cx = classNames.bind(styles);
 
@@ -28,15 +30,6 @@ function Profile() {
   const paths = location.pathname.split("/").splice(1);
   const state = useSelector((state) => state);
   const dispatch = useDispatch();
-  useEffect(() => {
-    if (paths[1] !== localStorage.getItem("id")) {
-      dispatch(getUserById(paths[1]));
-      dispatch(getPostByUserId(paths[1]));
-    } else {
-      dispatch(getUserById(localStorage.getItem("id")));
-      dispatch(getPostByUserId(localStorage.getItem("id")));
-    }
-  }, [location]);
   const navigate = useNavigate();
   const [avatar, setAvatar] = useState();
   const handlePreviewAvatar = (e) => {
@@ -58,7 +51,6 @@ function Profile() {
         : formData.append("files", cover);
       await uploadImage(formData)
         .then((res) => {
-          console.log("img", res?.data[0]?.id);
           type === "avatar"
             ? dispatch(editUser({ avatar: res?.data[0]?.id }))
             : dispatch(editUser({ cover_image: res?.data[0]?.id }));
@@ -69,6 +61,31 @@ function Profile() {
     };
     addImage();
   };
+  const handleSendRequest = () => {
+    dispatch(
+      sendFriendRequest({
+        status: "pending",
+        sender: localStorage.getItem("id"),
+        receiver: paths[1],
+        sender_id: localStorage.getItem("id"),
+        receiver_id: paths[1],
+      })
+    );
+  };
+  useEffect(() => {
+    const getUser = async () => {
+      if (paths[1] !== localStorage.getItem("id")) {
+        await dispatch(getUserById(paths[1]));
+        await dispatch(getPostByUserId(paths[1]));
+        dispatch(checkRelationship());
+      } else {
+        await dispatch(getCurrentUser());
+        await dispatch(getPostByUserId(localStorage.getItem("id")));
+        dispatch(checkRelationship());
+      }
+    };
+    getUser();
+  }, [location]);
   return (
     <>
       <div className={cx("profile-container")}>
@@ -119,28 +136,16 @@ function Profile() {
             <h4 className={cx("other-username")}>
               {state?.user?.otherUser?.username}
             </h4>
-            <Button
-              primary
-              small
-              className={cx("add-btn")}
-              leftIcon={<FontAwesomeIcon icon={faUserPlus} color="#000" />}
-            >
-              Add Friend
-            </Button>
+            {state.user.relationship && (
+              <Button primary>{state.user.relationship}</Button>
+            )}
+            {!state.user.relationship && (
+              <Button primary onClick={() => handleSendRequest()}>
+                Add friend
+              </Button>
+            )}
           </div>
         )}
-        {/* <div>
-          <h4 className={cx("username")}>
-            {state?.user?.data?.username}
-            {paths[1] === localStorage.getItem("id") && (
-              <FontAwesomeIcon
-                icon={faPen}
-                className={cx("icon-pen") + " ps-1"}
-                onClick={() => navigate("/editprofile")}
-              />
-            )}
-          </h4>
-        </div> */}
         {paths[1] === localStorage.getItem("id") && (
           <FontAwesomeIcon
             icon={faCamera}

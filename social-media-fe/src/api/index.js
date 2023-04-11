@@ -36,7 +36,14 @@ export const editUser = (data) => {
     },
   });
 };
-
+export const getAllUser = () => {
+  return axios.get(BASE_URL + `/users`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+    },
+  });
+};
 // Post
 export const getAllPosts = () => {
   return axios.get(
@@ -172,6 +179,19 @@ export const addFriend = (data) => {
   console.log("log", data);
   return axios.post(
     `${LOCAL_HOST}/api/friends/?populate[friend][populate][avatar]=*`,
+    { data: data },
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+      },
+    }
+  );
+};
+export const sendFriendRequest = (data) => {
+  console.log("log", data);
+  return axios.post(
+    `${LOCAL_HOST}/api/friend-requests?populate=*`,
     { data: data },
     {
       headers: {
