@@ -23,6 +23,17 @@ export const getUserById = createAsyncThunk(
     }
   }
 );
+export const getAllUser = createAsyncThunk(
+  "user/getAllUser",
+  async (_, { rejectWithValue }) => {
+    try {
+      const data = await api.getAllUser();
+      return data.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
 export const editUser = createAsyncThunk(
   "user/editUser",
   async (user, { rejectWithValue }) => {

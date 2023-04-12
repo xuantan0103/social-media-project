@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import "../FriendRequests/Friendyoumayknow.scss";
 import FriendSuggestion from "../../components/Friends/Friendsuggestion";
-import { getAllUser } from "../../api";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllUser } from "../../redux/action/userAction";
 
 function Friendyoumayknow() {
-  const [listUser, setListuser] = useState();
+  const state = useSelector((state) => state);
+  const dispatch = useDispatch();
   useEffect(() => {
-    const data = getAllUser();
-    console.log(data.data);
-    setListuser(data.data);
+    dispatch(getAllUser());
   }, []);
-
+  console.log(state.user.allUser);
   return (
     <div className="noti-all ">
       <div className="noti-container">
@@ -19,15 +19,13 @@ function Friendyoumayknow() {
         </div>
         <div className="py-4 px-4">
           <div className="row ">
-            {/* {state?.friend?.friendRequest.map((item) => {
-                return (
-                  <div className="col-md-auto" key={item?.id}>
-                    {item?.attributes?.status === "pending" && ( */}
-            <FriendSuggestion />
-            {/* )}
-                  </div>
-                );
-              })} */}
+            {state?.user?.allUser?.map((item) => {
+              return (
+                <div className="col-md-auto" key={item?.id}>
+                  <FriendSuggestion item={item} />
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
