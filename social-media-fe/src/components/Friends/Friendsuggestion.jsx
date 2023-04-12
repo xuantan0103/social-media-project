@@ -1,4 +1,4 @@
-import styles from "../Friends/Friendsuggestion.scss"
+import styles from "../Friends/Friendsuggestion.scss";
 import classNames from "classnames/bind";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -15,14 +15,14 @@ function FriendSuggestion({ item }) {
   const navigate = useNavigate();
   return (
     <div className={cx("fr-card")}>
-      <div className="card" style={{ width: "15rem", height: "360px" }}>
+      <div className="card" style={{ width: "15rem", height: "fit-content" }}>
         <img
           className={cx("image") + " card-img-top"}
-          src={`${LOCAL_HOST}${item?.attributes?.sender?.data?.attributes?.avatar?.data?.attributes?.url}`}
+          src={`${LOCAL_HOST}${item?.avatar?.url}`}
           alt=""
           size="40px"
           onClick={() => {
-            navigate(`/profile/${item?.attributes?.sender?.data?.id}`);
+            navigate(`/profile/${item?.id}`);
           }}
         />
 
@@ -30,28 +30,20 @@ function FriendSuggestion({ item }) {
           <h5
             className={cx("username") + " card-title"}
             onClick={() => {
-              navigate(`/profile/${item?.attributes?.sender?.data?.id}`);
+              navigate(`/profile/${item?.id}`);
             }}
           >
-            {item?.attributes?.sender?.data?.attributes?.username}
+            {item?.username}
           </h5>
           <p className="card-text">50 bạn chung</p>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+
           <button
             className={cx("btn-addfr")}
             onClick={() => {
-              handleUpdatePost("Invitation sent");
+              navigate(`/profile/${item?.id}`);
             }}
           >
-            AddFriend
-          </button>
-          <button
-            className={cx("btn-remove")}
-            onClick={() => {
-              handleUpdatePost("rejected");
-            }}
-          >
-            Remove
+            View Profile
           </button>
         </div>
       </div>
