@@ -134,14 +134,14 @@ function Login() {
                 },
               ]}
             >
-              <Input placeholder="example@test.com" value="suong@gmail.com" />
+              <Input placeholder="example@test.com" value="" />
             </Form.Item>
             <Form.Item
               label="PASSWORD"
               name="password"
               rules={[{ required: true, type: "password" }]}
             >
-              <Input.Password placeholder="Password" defaultValue="123456" />
+              <Input.Password placeholder="Password" defaultValue="" />
             </Form.Item>
             <Form.Item>
               <Button
