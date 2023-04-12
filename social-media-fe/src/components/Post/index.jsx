@@ -11,10 +11,12 @@ import UpdatePost from "./UpdatePost";
 import { useDispatch } from "react-redux";
 import { deletePost } from "../../redux/action/postAction";
 import { LOCAL_HOST } from "../../api/constant";
+import { useNavigate } from "react-router-dom";
 
 const cx = classNames.bind(styles);
 
 function Post({ post, isEdit }) {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [like, setLike] = useState(1);
   const [isLiked, setIsLiked] = useState(false);
@@ -36,8 +38,16 @@ function Post({ post, isEdit }) {
               src={`${LOCAL_HOST}${post?.attributes?.user?.data?.attributes?.avatar?.data?.attributes?.url}`}
               alt=""
               className={cx("profile-img")}
+              onClick={() =>
+                navigate(`/profile/${post?.attributes?.user?.data?.id}`)
+              }
             />
-            <span className={cx("username")}>
+            <span
+              className={cx("username")}
+              onClick={() =>
+                navigate(`/profile/${post?.attributes?.user?.data?.id}`)
+              }
+            >
               {post?.attributes?.user?.data?.attributes?.username}
             </span>
             <span className={cx("date")}>

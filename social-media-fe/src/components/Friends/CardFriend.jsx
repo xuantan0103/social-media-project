@@ -16,23 +16,20 @@ function CardFriend({ item, friend }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleUpdateFriend = (status) => {
-    console.log(
-      "id",
-      item?.attributes?.receiver?.data?.id,
-      item?.attributes?.sender?.data?.id
-    );
     dispatch(updateStatus({ id: item?.id, status: status }));
     if (status === "accepted") {
       dispatch(
         addFriend({
           friend: item?.attributes?.receiver?.data?.id,
           user: item?.attributes?.sender?.data?.id,
+          friend_id: item?.attributes?.receiver?.data?.id,
         })
-      );
+      ); 
       dispatch(
         addFriend({
           friend: item?.attributes?.sender?.data?.id,
           user: item?.attributes?.receiver?.data?.id,
+          friend_id: item?.attributes?.sender?.data?.id,
         })
       );
     }

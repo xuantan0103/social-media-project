@@ -51,6 +51,16 @@ export const addFriend = createAsyncThunk(
     try {
       const data = await api.addFriend(friend);
       console.log(data.data);
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+export const sendFriendRequest = createAsyncThunk(
+  "friend/sendFriendRequest",
+  async (friend, { rejectWithValue }) => {
+    try {
+      const data = await api.sendFriendRequest(friend);
       return data.data.data;
     } catch (error) {
       return rejectWithValue(error.message);

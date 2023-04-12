@@ -31,6 +31,14 @@
       "relation": "manyToOne",
       "target": "plugin::users-permissions.user",
       "inversedBy": "received_requests"
+    },
+    "sender_id": {
+      "type": "integer",
+      "required": true
+    },
+    "receiver_id": {
+      "type": "integer",
+      "required": true
     }
   }
 }

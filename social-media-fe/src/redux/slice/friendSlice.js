@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import * as action from "../action/friendAction";
+import userSlice from "./userSlice";
 
 const friendSlice = createSlice({
   name: "friend",
@@ -9,6 +10,7 @@ const friendSlice = createSlice({
     friendRequest: [],
     isError: false,
   },
+
   extraReducers: (builder) => {
     /* getFriendRequestByUserId */
     builder.addCase(
@@ -22,6 +24,7 @@ const friendSlice = createSlice({
       (state, action) => {
         state.isLoading = false;
         state.friendRequest = action.payload;
+        console.log("fr", state.friendRequest);
       }
     );
     builder.addCase(
@@ -91,6 +94,23 @@ const friendSlice = createSlice({
       state.friend.push(action.payload);
     });
     builder.addCase(action.addFriend.rejected, (state, action) => {
+      console.log("Error", action.payload);
+      state.isError = true;
+    });
+
+    /* sendFriendRequest */
+    builder.addCase(action.sendFriendRequest.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(action.sendFriendRequest.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.friendRequest.push(action.payload);
+      console.log(action.payload);
+      const user = userSlice(undefined, { type: "NO_OP" }); // get state of sliceA
+      // state.otherStateValue = stateA.someStateValue * action.payload;
+      // user.currentUser?.sent_requests.push(action.payload);
+    });
+    builder.addCase(action.sendFriendRequest.rejected, (state, action) => {
       console.log("Error", action.payload);
       state.isError = true;
     });
