@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import * as action from "../action/userAction";
-import friendSlice from "./friendSlice";
 
 const userSlice = createSlice({
   name: "user",
@@ -9,6 +8,7 @@ const userSlice = createSlice({
     currentUser: null,
     otherUser: null,
     relationship: "",
+    allUser: [],
     isError: false,
   },
   reducers: {
@@ -47,6 +47,18 @@ const userSlice = createSlice({
       state.currentUser = action.payload;
     });
     builder.addCase(action.getCurrentUser.rejected, (state, action) => {
+      state.isError = true;
+    });
+
+    /* getAllUser */
+    builder.addCase(action.getAllUser.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(action.getAllUser.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.allUser = action.payload;
+    });
+    builder.addCase(action.getAllUser.rejected, (state, action) => {
       state.isError = true;
     });
 
