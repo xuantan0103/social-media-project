@@ -24,7 +24,6 @@ const friendSlice = createSlice({
       (state, action) => {
         state.isLoading = false;
         state.friendRequest = action.payload;
-        console.log("fr", state.friendRequest);
       }
     );
     builder.addCase(
@@ -61,7 +60,6 @@ const friendSlice = createSlice({
     builder.addCase(action.getFriendsByUserId.fulfilled, (state, action) => {
       state.isLoading = false;
       state.friend = action.payload;
-      console.log("friend", state.friend);
     });
     builder.addCase(action.getFriendsByUserId.rejected, (state, action) => {
       console.log("Error", action.payload);
