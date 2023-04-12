@@ -28,12 +28,14 @@
   height: 32px;
   border-radius: 50%;
   object-fit: cover;
+  cursor: pointer;
 }
 
 .username {
   font-size: 15px;
   font-weight: 500;
   margin: 0 10px;
+  cursor: pointer;
 }
 
 .date {

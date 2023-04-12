@@ -24,7 +24,7 @@ function CardFriend({ item, friend }) {
           user: item?.attributes?.sender?.data?.id,
           friend_id: item?.attributes?.receiver?.data?.id,
         })
-      ); 
+      );
       dispatch(
         addFriend({
           friend: item?.attributes?.sender?.data?.id,

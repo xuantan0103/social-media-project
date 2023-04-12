@@ -16,9 +16,13 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { getPostByUserId } from "../../redux/action/postAction";
-import { editUser, getUserById } from "../../redux/action/userAction";
+import {
+  editUser,
+  getCurrentUser,
+  getUserById,
+} from "../../redux/action/userAction";
 import { LOCAL_HOST } from "../../api/constant";
-import { getCurrentUser, uploadImage } from "../../api";
+import { uploadImage } from "../../api";
 import { Spin } from "antd";
 import { checkRelationship } from "../../redux/slice/userSlice";
 import { sendFriendRequest } from "../../redux/action/friendAction";
@@ -80,12 +84,13 @@ function Profile() {
         dispatch(checkRelationship());
       } else {
         await dispatch(getCurrentUser());
-        await dispatch(getPostByUserId(localStorage.getItem("id")));
+        await dispatch(getPostByUserId(paths[1]));
         dispatch(checkRelationship());
       }
     };
     getUser();
   }, [location]);
+  console.log(state.post.data);
   return (
     <>
       <div className={cx("profile-container")}>
