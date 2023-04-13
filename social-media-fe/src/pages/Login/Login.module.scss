@@ -61,7 +61,7 @@
     height: 50px;
     width: 100%;
     font-size: 14px;
-    box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px white;
+    box-shadow: inset 6px 6px 6px #cbced1, inset -3px -3px 3px white;
   }
 
   Button {
@@ -87,7 +87,7 @@
     right: 4px;
     text-decoration: none;
     color: rgba(8, 15, 31, 0.97);
-    background: #00C6B1;
+    background: var(--light-blue);
     border-radius: 10px;
     padding: 2px;
   }
@@ -100,7 +100,7 @@
   border-radius: 10px;
   padding: 40px;
   box-sizing: border-box;
-  background: #00C6B1;
+  background: var(--light-blue);
   box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white;
 }
 

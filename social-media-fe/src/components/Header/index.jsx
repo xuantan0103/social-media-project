@@ -69,7 +69,7 @@ function Header() {
       <div className={cx("action") + " col-lg-2 d-flex justify-content-start"}>
         <Button circle>
           <div className={cx("icon-bell")}>
-            <FontAwesomeIcon icon={faBell} color="#D66438" />
+            <FontAwesomeIcon icon={faBell} color="#E99A27" />
             <div className={cx("number-tag")}>9</div>
           </div>
         </Button>
