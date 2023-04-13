@@ -21,9 +21,12 @@ function Friendyoumayknow() {
           <div className="row ">
             {state?.user?.allUser?.map((item) => {
               return (
-                <div className="col-md-auto" key={item?.id}>
-                  <FriendSuggestion item={item} />
-                </div>
+                item.id.toString() !==
+                  localStorage.getItem("id").toString() && (
+                  <div className="col-md-auto" key={item?.id}>
+                    <FriendSuggestion item={item} />
+                  </div>
+                )
               );
             })}
           </div>
