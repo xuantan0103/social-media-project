@@ -16,13 +16,17 @@ function DefaultLayout({ children }) {
       </div>
       <div className={cx("content")}>
         <div className="d-flex justify-content-center ">
-          <div className={cx("left-bar") + " justify-content-left  pt-4"}>
+          <div
+            className={
+              cx("left-bar") + " justify-content-left pt-4 col-lg-2 "
+            }
+          >
             <LeftBar />
           </div>
-          <div className="col-lg-8 ">
+          <div className="col-lg-8 col-sm-12">
             <div className={cx("content-wrapper")}>{children}</div>
           </div>
-          <div className={cx("right-bar") + " col-lg-2 pt-4"}>
+          <div className={cx("right-bar") + " col-lg-2 pt-4 "}>
             <RightBar />
           </div>
         </div>
