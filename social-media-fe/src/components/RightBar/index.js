@@ -42,7 +42,39 @@ function RightBar() {
   }, []);
   return (
     <>
-      {state?.friend?.friendRequest && (
+      {state?.friend?.friendRequest.length === 0 && (
+        <div className={cx("sidebar")}>
+          <h5
+            className={cx("request")}
+            onClick={() => navigate("/friendrequests")}
+          >
+            Friend Requests
+          </h5>
+          <h6
+            className={cx("request") + " ps-2"}
+            onClick={() => navigate("/friendrequests")}
+          >
+            No request here
+          </h6>
+        </div>
+      )}
+      {state?.friend?.friend.length === 0 && (
+        <div className={cx("sidebar")}>
+          <h5
+            className={cx("request") + " mt-3"}
+            onClick={() => navigate("/friends")}
+          >
+            Contacts
+          </h5>
+          <h6
+            className={cx("request") + " mt-3 ps-2"}
+            onClick={() => navigate("/friends")}
+          >
+            No contacts here
+          </h6>
+        </div>
+      )}
+      {state?.friend?.friendRequest.length > 0 && (
         <div className={cx("sidebar")}>
           <h5
             className={cx("request")}
@@ -59,7 +91,7 @@ function RightBar() {
           })}
         </div>
       )}
-      {state?.friend?.friend && (
+      {state?.friend?.friend.length > 0 && (
         <div className={cx("sidebar")}>
           <h5
             className={cx("request") + " mt-3"}

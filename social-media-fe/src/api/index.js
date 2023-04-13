@@ -132,7 +132,7 @@ export const getImage = (id) => {
 // Friend Request
 export const getFriendRequestByUserId = (userId) => {
   return axios.get(
-    `${LOCAL_HOST}/api/friend-requests?filters[receiver][id][$eq]=2&populate[sender][populate][avatar]=*&populate[receiver][populate][avatar]=*`,
+    `${LOCAL_HOST}/api/friend-requests?filters[receiver][id][$eq]=${userId}&populate[sender][populate][avatar]=*&populate[receiver][populate][avatar]=*`,
     {
       headers: {
         "Content-Type": "application/json",

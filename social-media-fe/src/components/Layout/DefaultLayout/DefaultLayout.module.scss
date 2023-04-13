@@ -1,5 +1,6 @@
 .container {
   margin: 0;
+  min-width: 1000px;
   .header {
     position: fixed;
     top: 0;
@@ -47,5 +48,19 @@
     margin: 0px 0px 0px 255px;
     min-width: 100px;
     width: calc(100% - 255px);
+  }
+}
+@media screen and (max-width: 1000px) {
+  .content-wrapper {
+    padding: 0px 50px;
+  }
+  .right-bar {
+    display: none;
+  }
+  .left-bar {
+    padding-left: 20px;
+    position: fixed;
+    top: var(--default-header-height);
+    left: 0;
   }
 }

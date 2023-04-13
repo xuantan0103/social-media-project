@@ -74,17 +74,14 @@ function LeftBar({ collapse = false }) {
                 Friends
               </span>
             </li>
-            <li
-              className={cx("sidebar-item")}
-              onClick={() => navigate("")}
-            >
+            <li className={cx("sidebar-item")} onClick={() => navigate("")}>
               <FontAwesomeIcon
                 icon={faClock}
                 color="#008A5A"
                 className={cx("icon")}
               />
               <span className={collapse ? cx("hide") : cx("sidebar-text")}>
-              Celebrate
+                Celebrate
               </span>
             </li>
             <li className={cx("sidebar-item")}>
