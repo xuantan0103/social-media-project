@@ -12,8 +12,19 @@ import { useNavigate } from "react-router-dom";
 const cx = classNames.bind(styles);
 
 function User({ user, friend }) {
+  console.log("user", user);
+  const navigate = useNavigate();
   return (
-    <div className={cx("container")}>
+    <div
+      className={cx("container")}
+      onClick={() =>
+        navigate(
+          friend
+            ? `/profile/${user?.attributes?.friend_id}`
+            : `/profile/${user?.attributes?.sender_id}`
+        )
+      }
+    >
       <img
         src={
           friend

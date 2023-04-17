@@ -90,7 +90,6 @@ function Profile() {
     };
     getUser();
   }, [location]);
-  console.log(state.post.data);
   return (
     <>
       <div className={cx("profile-container")}>
