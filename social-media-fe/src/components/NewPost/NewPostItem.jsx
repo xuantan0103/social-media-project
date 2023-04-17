@@ -20,7 +20,7 @@ function NewPostItem() {
   const dispatch = useDispatch();
   const [post, setPost] = useState({
     content: "",
-    images: [],
+    images: "",
     audition: "Public",
     user: localStorage.getItem("id"),
   });
@@ -30,7 +30,7 @@ function NewPostItem() {
     value === true ? setIsShowAddImg(true) : setIsShowAddImg(false);
   };
   const handleClear = () => {
-    setPost({ ...post, imageURL: "" });
+    setPost({ ...post, images: "" });
     setImage();
   };
   const handlePreviewAvatar = (e) => {
@@ -55,7 +55,7 @@ function NewPostItem() {
       dispatch(addNewPost(post));
       setPost({
         content: "",
-        imageURL: "",
+        images: "",
         audition: "Public",
         user: localStorage.getItem("id"),
       });
@@ -64,7 +64,7 @@ function NewPostItem() {
       addImage();
       setPost({
         content: "",
-        images: [],
+        images: "",
         audition: "Public",
         user: localStorage.getItem("id"),
       });

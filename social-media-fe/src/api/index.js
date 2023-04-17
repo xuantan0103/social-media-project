@@ -48,19 +48,19 @@ export const getAllUser = () => {
 export const getAllPosts = () => {
   return axios.get(
     BASE_URL +
-      `/posts?populate[user][populate][avatar]=*&populate[images][populate]=*`
+      `/posts?sort=createdAt%3Adesc&populate[user][populate][avatar]=*&populate[images][populate]=*`
   );
 };
 export const getPostById = (id) => {
   return axios.get(
     BASE_URL +
-      `/posts/${id}?populate[user][populate][avatar]=*&populate[images][populate]=*`
+      `/posts/${id}?sort=createdAt%3Adesc&populate[user][populate][avatar]=*&populate[images][populate]=*`
   );
 };
 export const getPostByUserId = (userId) => {
   return axios.get(
     BASE_URL +
-      `/posts?filters[user][id][$eq]=${userId}&populate[user][populate][avatar]=*&populate[images][populate]=*`
+      `/posts?filters[user][id][$eq]=${userId}&sort=createdAt%3Adesc&populate[user][populate][avatar]=*&populate[images][populate]=*`
   );
 };
 export const addNewPost = (post) => {
