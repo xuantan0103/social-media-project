@@ -102,11 +102,10 @@ const friendSlice = createSlice({
     });
     builder.addCase(action.sendFriendRequest.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.friendRequest.push(action.payload);
-      console.log(action.payload);
-      const user = userSlice(undefined, { type: "NO_OP" }); // get state of sliceA
-      // state.otherStateValue = stateA.someStateValue * action.payload;
-      // user.currentUser?.sent_requests.push(action.payload);
+      console.log("a", action.payload);
+      const user = userSlice(undefined, { type: "NO_OP" }); // get state of slice
+      user.currentUser?.sent_requests.push(action.payload);
+      // user.relationship = "Request Sent";
     });
     builder.addCase(action.sendFriendRequest.rejected, (state, action) => {
       console.log("Error", action.payload);

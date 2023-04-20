@@ -12,7 +12,6 @@ import { useNavigate } from "react-router-dom";
 const cx = classNames.bind(styles);
 
 function User({ user, friend }) {
-  console.log("user", user);
   const navigate = useNavigate();
   return (
     <div
