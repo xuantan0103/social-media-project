@@ -77,18 +77,21 @@ function Profile() {
     );
   };
   useEffect(() => {
+    console.log("otherUser", state.user.otherUser);
+    console.log("currentUser", state.user.currentUser);
     const getUser = async () => {
       if (paths[1] !== localStorage.getItem("id")) {
         await dispatch(getUserById(paths[1]));
         await dispatch(getPostByUserId(paths[1]));
-        dispatch(checkRelationship());
+        await dispatch(checkRelationship());
       } else {
         await dispatch(getCurrentUser());
         await dispatch(getPostByUserId(paths[1]));
-        dispatch(checkRelationship());
+        await dispatch(checkRelationship());
       }
     };
     getUser();
+    dispatch(checkRelationship());
   }, [location]);
   return (
     <>
@@ -140,12 +143,12 @@ function Profile() {
             <h4 className={cx("other-username")}>
               {state?.user?.otherUser?.username}
             </h4>
-            {state.user.relationship && (
+            {state.user.relationship !== "Add Friend" && (
               <Button primary>{state.user.relationship}</Button>
             )}
-            {!state.user.relationship && (
+            {state.user.relationship === "Add Friend" && (
               <Button primary onClick={() => handleSendRequest()}>
-                Add friend
+                {state.user.relationship}
               </Button>
             )}
           </div>

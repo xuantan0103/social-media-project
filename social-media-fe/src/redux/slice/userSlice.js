@@ -14,25 +14,26 @@ const userSlice = createSlice({
   reducers: {
     checkRelationship: (state, action) => {
       // bạn bè
-      const status3 = state?.currentUser?.friendsList.find(
+      const status1 = state?.currentUser?.friendsList.find(
         (item) => item?.friend_id === state?.otherUser?.id
       );
       // đã gửi lời mời
-      const status1 = state?.currentUser?.sent_requests.find(
+      const status2 = state?.currentUser?.sent_requests.find(
         (item) => item?.receiver_id === state.otherUser?.id
       );
       // xác nhận
-      const status2 = state?.currentUser?.received_requests.find(
+      const status3 = state?.currentUser?.received_requests.find(
         (item) => item?.sender_id === state.otherUser?.id
       );
+      state.relationship = "Add Friend";
 
-      if (status3) {
+      if (status1) {
         state.relationship = "Friend";
       }
-      if (status1) {
+      if (status2) {
         state.relationship = "Request Sent";
       }
-      if (status2) {
+      if (status3) {
         state.relationship = "Accept";
       }
     },
